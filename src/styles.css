@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*******  Margin  *******/
+.mrtp-2 {
+  margin-top: 2em;
+}
+.mrtp-1 {
+  margin-top: 1em;
+}
+
+/*******  Cursor  *******/
+.cur-p {
+  cursor: pointer;
+}
+
+/*******  Display  *******/
+.disp-ib {
+  display: inline-block;
+}
+
+.disp-b {
+  display: block;
+}
+
+.disp-i {
+  display: inline;
+}
+
+/*******  Colors  *******/
+.col-txt-info {
+  color: #17a2b8;
+}
+
+/*******  Navbar  *******/
+.brand-name {
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
