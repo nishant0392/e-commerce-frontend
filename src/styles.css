@@ -26,6 +26,15 @@
   display: inline;
 }
 
+/*******  Position  *******/
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 /*******  Colors  *******/
 .col-txt-info {
   color: #17a2b8;
