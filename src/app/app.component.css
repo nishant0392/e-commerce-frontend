@@ -73,6 +73,14 @@ body {
   background-color: #ebf0f5;
 }
 
+footer {
+  text-align: center;
+  order: 1px solid #17a2b8;
+  background-color: #212121;
+  color: whitesmoke;
+  margin-top: 5px; 
+}
+
 
 
 

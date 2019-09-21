@@ -1,0 +1,22 @@
+.items-banner-header {
+	padding: .6em 1.5em;
+	border: 1px solid #d2d2f1;
+	background-color: #fff;
+}
+
+.item {
+	display: block;
+	text-align: center;
+	padding: 15px 10px 10px 10px !important;
+}
+
+.item-image {
+	width: 50%;
+	margin: 0em auto;
+}
+
+.item-description p {
+	line-height: 1.5; 
+	margin: 0px;
+}
+

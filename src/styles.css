@@ -40,6 +40,20 @@
   color: #17a2b8;
 }
 
+/*******   Text   *******/
+.txt-dec-ul {
+  text-decoration: underline;
+}
+
+.txt-dec-lt {
+  text-decoration: line-through;
+}
+
+.txt-dec-none {
+  text-decoration: none;
+}
+
+
 /*******  Navbar  *******/
 .brand-name {
   font-weight: bold;
