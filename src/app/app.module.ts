@@ -1,24 +1,30 @@
+// Modules here 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+
+import { ProductsManagementModule } from './products-management/products-management.module';
+
+
+// Components here
 import { AppComponent } from './app.component';
-import { BannersComponent } from './banners/banners.component';
-import { DisplayItemsComponent } from './display-items/display-items.component';
-import { MediumBannersComponent } from './medium-banners/medium-banners.component';
+
+
+// Services here
+import { ProductManagementService } from './services/product-management.service';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BannersComponent,
-    DisplayItemsComponent,
-    MediumBannersComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ProductsManagementModule
   ],
-  providers: [],
+  providers: [ProductManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
