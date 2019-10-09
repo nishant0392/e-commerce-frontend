@@ -342,7 +342,7 @@ export class DisplayProductComponent implements OnInit {
 
     // prepare counterForPages
     // create an array [1,2,...,countOfItemsPerPage] for Items per page
-    this.counterForPages = <Array<number>>Array(this.countOfPages).fill(0).map((val, idx) => idx+1);
+    this.counterForPages = <Array<number>>Array(this.countOfPages).fill(0).map((val, idx) => idx + 1);
     console.log('counterForPages', this.counterForPages)
   }
 
@@ -373,6 +373,7 @@ export class DisplayProductComponent implements OnInit {
       this.show[arr[i]] = true;
   }
 
+  
   toggleCategories() {
     if (this.isCollapsed)
       this.chev_arrow = this.chev_down_arrow;
@@ -383,6 +384,7 @@ export class DisplayProductComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
+
   toggleCollapse(indexOfSection) {
     if (this.show[indexOfSection])
       this.chev_arrow_show = this.chev_up_arrow;
@@ -392,6 +394,7 @@ export class DisplayProductComponent implements OnInit {
 
     this.show[indexOfSection] = !this.show[indexOfSection];
   }
+
 
   /**
      *  Display items using Pagination
@@ -407,28 +410,61 @@ export class DisplayProductComponent implements OnInit {
 
     console.log('No. of Pages:', this.countOfPages)
 
-    // create an array [0,1,2,...,countOfPages-2] for no. of pages (excluding last page)
-   // this.counterForPages = <Array<number>>Array(countOfSlides - 1).fill(0).map((val, idx) => idx);
-   // console.log('counterFor Slides', this.counterForSlides)
-
   }
 
-  /* Pagination functions */
+
+  /* **** Pagination functions **** */
+
   goToSelectedPage(pageNum) {
     this.selectedPage = pageNum;
     console.log('selected page no:', pageNum)
+
+    this.fillCounterForPagination();
   }
+
 
   goToPrevPage() {
     this.selectedPage--;
     console.log('previous page no:', this.selectedPage)
+
+    this.fillCounterForPagination();
   }
+
 
   goToNextPage() {
     this.selectedPage++;
     console.log('next page no:', this.selectedPage)
+
+    this.fillCounterForPagination();
   }
 
 
+  fillCounterForPagination() {
+
+    /* if it's not the last page
+       update the array to [countOfItemsPerPage * (selectedPage-1),...] for Items per page */
+    if (this.selectedPage < this.countOfPages) {
+      let initialCount = this.countOfItemsPerPage * (this.selectedPage - 1);
+      for (let i = 0; i < this.countOfItemsPerPage; i++) {
+        this.counterForItemsPerPage[i] = initialCount + i;
+      }
+    }
+
+    // if it's the last page
+    if (this.selectedPage === this.countOfPages) {
+
+      let initialCountLast = this.countOfItemsPerPage * (this.selectedPage - 1);
+      let newLen = this.countOfItems - initialCountLast;
+      this.counterForItemsPerPage.length = (newLen > 0) ? newLen : 0;
+
+      for (let i = initialCountLast, j = 0; i < this.countOfItems; i++) {
+        this.counterForItemsPerPage[j++] = i;
+      }
+
+    }
+
+    console.log('counterForItemsPerPage', this.counterForItemsPerPage)
+
+  } // END fillCounterForPagination()
 
 }
