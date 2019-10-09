@@ -1,0 +1,248 @@
+<!--  *****************    Product Details    *****************  -->
+
+<div class="product-details">
+    <!-- ================  START: Sidebar  =================== -->
+    <div class="sidebar">
+        <h5 class="sidebar-header">Filters</h5>
+
+        <section class="categories">
+
+            <p>CATEGORIES</p>
+            <ul><i (click)="toggleCategories()" [ngClass]="chev_arrow"></i>&nbsp;&nbsp;{{category}}
+                <div *ngIf="!isCollapsed">
+                    <li *ngFor="let sub_category of sub_categories">{{sub_category}}</li>
+                </div>
+            </ul>
+
+        </section>
+
+        <section class="price">
+
+            <p>PRICE <span class="clear-filter">CLEAR</span></p>
+
+            <div class="custom-slider">
+                <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+                <p>Min value: <input type="number" [(ngModel)]="minValue"></p>
+                <p>Max value: <input type="number" [(ngModel)]="maxValue"></p>
+            </div>
+        </section>
+
+        <section class="availability">
+
+            <p>AVAILABILITY</p>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    Exclude out of stock
+                </label>
+            </div>
+
+        </section>
+
+        <section class="RAM">
+
+            <p>RAM
+                <span [ngClass]="show[0] ? chev_up_arrow : chev_down_arrow" class="collapse-filter"
+                    (click)="toggleCollapse(0)"></span>
+            </p>
+            <div class="checkbox" *ngIf="show[0]">
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    6 GB &amp; Above
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    4 GB
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    3 GB
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    2 GB
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    1 GB
+                </label>
+            </div>
+
+        </section>
+
+        <section class="BRAND">
+
+            <p>BRAND
+                <span [ngClass]="show[1] ? chev_up_arrow : chev_down_arrow" class="collapse-filter"
+                    (click)="toggleCollapse(1)"></span>
+            </p>
+            <div class="checkbox" *ngIf="show[1]">
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    Mi
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    RealMe
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    Samsung
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    Oppo
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    Apple
+                </label>
+            </div>
+
+        </section>
+
+        <section class="customer-ratings">
+
+            <p>CUSTOMER RATINGS
+                <span [ngClass]="show[2] ? chev_up_arrow : chev_down_arrow" class="collapse-filter"
+                    (click)="toggleCollapse(2)"></span>
+            </p>
+            <div class="checkbox" *ngIf="show[2]">
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    4<i class="fas fa-star icon-rating"></i> &amp; above
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    3<i class="fas fa-star icon-rating"></i> &amp; above
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    2<i class="fas fa-star icon-rating"></i> &amp; above
+                </label><br>
+                <label>
+                    <input type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                    1<i class="fas fa-star icon-rating"></i> &amp; above
+                </label><br>
+
+            </div>
+
+        </section>
+
+        <section id="buying-guide">
+            <p>Need help ? </p>
+            <p class="helpme">Help me decide <i class="fas fa-chevron-right icon-chevron-right"></i></p>
+            <img src="../../../assets/images/buying-guide-illustration_48642c.png" />
+        </section>
+    </div>
+
+
+
+
+    <!-- ================  END: Sidebar  ====================== -->
+
+
+   <!-- =====================================  START: Content  ===================================== -->
+    <div class="product-content">
+        <div class="prod-header">
+            <p>
+                <span class="prod-category">Mi Mobiles </span>
+                <span class="products-per-page text-muted">
+                    <small>(Showing 1-24 products of {{countOfItems}} products)</small></span>
+            </p>
+
+            <ul class="sort">
+                <li><strong>Sort By</strong></li>
+                <li>Popularity</li>
+                <li>Price -- Low to High</li>
+                <li>Price -- High to Low</li>
+                <li>Newest First</li>
+            </ul><br>
+        </div>
+
+        <div class="items">
+            <div class="item" *ngFor="let i of counterForItemsPerPage">
+                <div class="item-image">
+                    <img src="../../../assets/images/{{Items[i].image}}" />
+                    <div class="checkbox mt-4">
+                        <label>
+                            <input type="checkbox" value="">
+                            <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                            Add to Compare
+                        </label><br>
+                    </div>
+                </div>
+                <div class="item-description">
+                    <h5>{{Items[i].title}}</h5>
+                    <p><span class="item-ratings">{{Items[i].rating.stars}}<i class="fas fa-star icon-rating"></i></span>
+                        <span class="text-muted ml-2">{{ Items[i].rating.ratingsCount | number }} Ratings &amp;
+                            {{ Items[i].rating.reviewsCount | number }} Reviews</span></p>
+
+                    <ul>
+                        <li *ngFor="let feature of Items[i].features">{{feature}}</li>
+                    </ul>
+                </div>
+                <div class="item-cost">
+                    <h3>₹{{Items[i].price | number}} <img src="../../../assets/images/fa_8b4b59.png" height="22px" /></h3>
+
+                    <p><small class="txt-dec-lt mr-2">₹{{Items[i].MRP | number}}</small><small
+                            style="color: green;">{{Items[i].discount}}% off</small></p>
+
+                    <p *ngIf="Items[i].noCostEMI">No Cost EMI</p>
+                    <p *ngIf="Items[i].exchangePrice">Upto <b>₹{{Items[i].exchangePrice | number}}</b> Off on Exchange</p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- **********************  START: Pagination  ********************** -->
+
+        <div class="pagination">
+            <div class="page-no">
+                <p>Page {{selectedPage}} of {{countOfPages}}</p>
+            </div>
+            <div class="pages">
+
+                <a (click)="goToPrevPage()" *ngIf="selectedPage > 1" 
+                    style="color: #2196f3"
+                >
+                    PREVIOUS
+                </a>
+
+                <a 
+                (click)="goToSelectedPage(page)" 
+                *ngFor="let page of counterForPages"
+                [class.active]="selectedPage === page"
+                >
+                    {{page}}
+                </a>
+
+                <a (click)="goToNextPage()" *ngIf="selectedPage < countOfPages"
+                    style="color: #2196f3"
+                >
+                   NEXT
+               </a>
+            </div>
+        </div>
+
+         <!-- **********************  END: Pagination  ********************** -->
+
+    </div>
+
+    <!-- =====================================  END: Content  ===================================== -->
+</div>

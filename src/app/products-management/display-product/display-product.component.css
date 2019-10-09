@@ -1,0 +1,264 @@
+.product-details {
+  box-sizing: border-box;
+  display: flex;
+  min-height: 85vh;
+  align-items: flex-start; 
+}
+
+.sidebar {
+  background-color: #fff;
+  flex: 1;
+  margin-right: 8px;
+}
+
+.product-content {
+  background-color: #fff;
+  flex: 4;
+}
+
+.sidebar-header {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.6em 0.7em;
+}
+
+section {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.6em 1em;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.categories p {
+  font-size: 0.7rem;
+}
+
+.categories ul {
+  padding: 0;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.categories li {
+  cursor: pointer;
+  margin-left: 2.2em;
+  font-weight: 400;
+  line-height: 2;
+}
+
+.icon-chevron-down + .icon-chevron-left {
+  font-size: 0.8em;
+}
+
+section p {
+  font-size: 0.8rem;
+}
+
+.clear-filter {
+  color: rgb(105, 105, 197);
+  display: block;
+  float: right;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.collapse-filter {
+  float: right;
+  position: relative;
+  top: .2em;
+  cursor: pointer;
+}
+
+/* checkbox */
+.checkbox {
+  font-weight: 400;
+}
+.checkbox label:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.checkbox .cr {
+  position: relative;
+  display: block;
+  border: 1px solid #a9a9a9;
+  border-radius: 0.1em;
+  width: 1.4em;
+  height: 1.3em;
+  float: left;
+  margin: 0 0.5em;
+}
+
+.checkbox .cr .cr-icon {
+  position: absolute;
+  font-size: 1.6em;
+  color: #2196f3;
+  line-height: 0;
+  top: 50%;
+  left: 0%;
+}
+
+.checkbox label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+  opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+  opacity: 1;
+}
+
+.icon-rating {
+  position: relative;
+  font-size: .6rem;
+  padding: 0 2px; 
+  bottom: .1em;
+}
+
+#buying-guide {
+  text-align: center;
+  background-color: #ebf0f5;
+  padding-top: 25px;
+  font-weight: 400;
+  line-height: .4;
+}
+
+#buying-guide .helpme {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #2196f3;
+
+}
+
+#buying-guide .icon-chevron-right {
+  font-size: 10px;
+  position: relative;
+  bottom: 2px;
+}
+
+/* Product content */
+
+.sort {
+  list-style-type: none;
+  padding: 0;
+  font-size: .9rem;
+}
+
+.sort li { 
+  float: left;
+  padding-right: 1.5em;
+}
+
+.prod-header {
+  padding: 5px 10px;
+}
+
+.items {
+  border-top: 1px solid#d2d2f1;
+}
+
+.items .item {
+  display: flex;
+  border-bottom: 1px solid #d2d2f1;
+  padding: 15px;
+}
+
+.items .item-image {
+  flex: 1;
+  text-align: center;
+}
+
+.items .item-image img {
+  height: 220px;
+  padding-top: 5px;
+}
+
+.items .item-image .checkbox {
+  text-align: left;
+}
+
+.items .item-description {
+  flex: 2;
+  padding: 0px 10px;
+}
+
+.items .item-description span {
+  font-size: .9em;
+}
+
+.items .item-description .item-ratings {
+  padding: 3px 5px;
+  background-color: green;
+  color: white;
+  border-radius: 2px;
+}
+
+.items .item-description ul{
+  flex: 2;
+  list-style: none;
+  font-size: .9em;
+  padding: 1em .5em;
+}
+
+.items .item-description ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: lightgrey; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+}
+
+.items .item-cost {
+  flex: 1;
+  padding: 0px 15px;
+  line-height: .5;
+}
+
+.items .item-cost img {
+  margin-left: 1em;
+  height: 22px;
+  position: relative;
+  bottom: 3px;
+}
+
+.pagination {
+  display: flex;
+  height: 75px;
+  align-items: center;
+  border-top: 1px solid#d2d2f1;
+}
+
+.pagination .pages {
+  display: inline-block;
+  flex: 3;
+}
+
+.pagination .page-no {
+  flex: 1;
+  font-size: .9em;
+}
+
+.pagination .page-no p {
+  margin: auto 0 auto 15px;
+}
+
+.pagination .pages a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pagination .pages a.active {
+  background-color: #2196f3;
+  border-radius: 50%;
+  color: white;
+}
+
+.pagination .pages a:hover:not(.active) {
+  border-radius: 50%;
+  background-color: #ddd;
+}
+

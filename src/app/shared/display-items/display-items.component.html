@@ -1,0 +1,65 @@
+<!-- =============================    START: Display Items (slide show)   ============================= -->
+<div class="items-banner-header">
+    <h3 class="disp-ib">You May Like</h3>
+    <button class="btn btn-primary disp-b float-right">VIEW ALL</button>
+</div>
+
+<div id="{{'banners' + counterForSliders}}" class="carousel slide mb-2 bg-white" data-ride="carousel" data-interval="false" data-wrap="false">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item" [ngClass]="first ? 'active' : '' "
+            *ngFor="let cntr of counterForSlides; let first = first;">
+
+            <div class="row">
+                <div class="col p-0 item" *ngFor="let i of counterForItemsPerSlide">
+                    <a href="#">
+                        <img class="d-block item-image"
+                            src="../assets/images/{{Items[cntr * counterForItemsPerSlide.length + i].imgName}}"
+                            alt="banner"
+                            [height]="itemImageDefaultHeight || Items[cntr * counterForItemsPerSlide.length + i].height">
+                    </a>
+                    <div class="item-description text-center p-2">
+                        <p>Realme 3 Pro (Lightning Purple, 64 GB)</p>
+                        <p><strong>₹12,999</strong><span class="txt-dec-lt text-muted ml-2">₹15,999</span></p>
+                        <p class="text-muted"><small>Hurry Up!</small></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="carousel-item">
+            <div class="row">
+                <div class="col p-0 item" *ngFor="let i of counterForItemsInLastSlide">
+                    <a href="#">
+                        <img class="d-block item-image"
+                            src="../assets/images/{{Items[i].imgName}}"
+                            alt="banner"
+                            [height]="itemImageDefaultHeight || Items[i].height">
+                    </a>
+                    <div class="item-description text-center p-2">
+                        <p>Realme 3 Pro (Lightning Purple, 64 GB)</p>
+                        <p><strong>₹12,999</strong><span class="txt-dec-lt text-muted ml-2">₹15,999</span></p>
+                        <p class="text-muted"><small>Hurry Up!</small></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <a class="carousel-control-prev" href="{{'#banners' + counterForSliders}}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="{{'#banners' + counterForSliders}}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+
+<!-- =============================    END: Display Items (slide show)   ============================= -->
