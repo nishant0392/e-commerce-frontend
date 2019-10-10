@@ -165,6 +165,10 @@ section p {
   padding: 15px;
 }
 
+.items .item:hover .item-title {
+  color: #2196f3;
+}
+
 .items .item-image {
   flex: 1;
   text-align: center;
@@ -261,4 +265,5 @@ section p {
   border-radius: 50%;
   background-color: #ddd;
 }
+
 
