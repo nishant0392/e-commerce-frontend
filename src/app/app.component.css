@@ -166,6 +166,7 @@ a {
   width: 100%;
   display: flex;
   color: white;
+  min-height: 78vh;
 }
 
 .sidebar {
@@ -200,17 +201,19 @@ a {
 .myModal-custom-content .main input {
   padding: 3px 5px;
   border: none;
-  color: grey;
+  color: black;
   outline: none;
 }
 
-.myModal-custom-content .main input[type="text"] {
+.myModal-custom-content .main input[type="text"],
+.myModal-custom-content .main input[type="number"] {
   border-bottom: 1px solid lightgrey;
   margin: 2em 0 2.5em 0;
   width: 100%;
 }
 
-.myModal-custom-content .main input[type="text"]:focus {
+.myModal-custom-content .main input[type="text"]:focus,
+.myModal-custom-content .main input[type="number"]:focus {
   border-bottom: 1px solid  #0d63ee;
 }
 
@@ -242,13 +245,13 @@ a {
   border-radius: 2px !important;
 }
 
-#login {
+#login, #signup-continue {
   margin-top: 2.5em;
   background-color: #fb641b;
   color: #fff;
 }
 
-#request-otp {
+#request-otp, #signup-exst-user {
   background-color: #fff;
   color: #0d63ee; 
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
@@ -271,3 +274,17 @@ a {
   margin-top: 5em;
   text-align: center;
 } 
+
+.signup-otp-pass input[type="password"] {
+  width: 100% !important;
+  border-bottom: 1px solid lightgrey !important;
+}
+
+.signup-otp-pass input[type="password"]:focus {
+  border-bottom: 1px solid  #0d63ee !important;
+}
+
+.error-msg {
+  color: indianred; 
+  font-weight: bold;
+}

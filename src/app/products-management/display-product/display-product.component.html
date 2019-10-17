@@ -1,6 +1,6 @@
-<!--  *****************    Product Details    *****************  -->
+<!--  *************    Product List (Eg, Mobiles -> Mi -> All Mi Mobiles List )    **************  -->
 
-<div class="product-details">
+<div class="product-list">
     <!-- ================  START: Sidebar  =================== -->
     <div class="sidebar">
         <h5 class="sidebar-header">Filters</h5>
@@ -176,7 +176,7 @@
         </div>
 
         <div class="items">
-            <div class="item" *ngFor="let i of counterForItemsPerPage">
+            <div class="item" *ngFor="let i of counterForItemsPerPage" (click)="goToProductDetails(i)" >
                 <div class="item-image">
                     <img src="../../../assets/images/{{Items[i].image}}" />
                     <div class="checkbox mt-4">

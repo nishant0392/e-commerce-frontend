@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-product',
@@ -41,7 +42,7 @@ export class DisplayProductComponent implements OnInit {
   public counterForItems: number[];
   public counterForItemsPerPage: number[];
 
-  constructor() {
+  constructor(private router: Router) {
 
     // Set count for no. of items to display per page
     this.countOfItemsPerPage = 5;
@@ -54,7 +55,9 @@ export class DisplayProductComponent implements OnInit {
     ];
     this.Items = [
       {
+        pid: 'MOBF1',
         title: 'RedMi Note 7S (Sapphire Blue, 64 GB)',
+        urlTitle: 'redmi-note-7s-sapphire-blue-64-gb',
         image: 'mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd.jpeg',
         rating: {
           stars: 4.4,
@@ -79,7 +82,9 @@ export class DisplayProductComponent implements OnInit {
       },
 
       {
+        pid: 'MOBF2',
         title: 'Redmi Note 7 Pro (Neptune Blue, 64 GB)',
+        urlTitle: 'redmi-note-7s-pro-neptune-blue-64-gb',
         image: 'mi-redmi-note-7-pro-na-original-imafe4bbyfppbnuu.jpeg',
         rating: {
           stars: 4.5,
@@ -104,7 +109,9 @@ export class DisplayProductComponent implements OnInit {
       },
 
       {
+        pid: 'MOBF3',
         title: 'Redmi Note 7 Pro (Nebula Red, 64 GB)',
+        urlTitle: 'redmi-note-7-pro-nebula-red-64-gb',
         image: 'mi-redmi-note-7-pro-na-original-imafe4bbyfppbnuu.jpeg',
         rating: {
           stars: 4.5,
@@ -129,7 +136,9 @@ export class DisplayProductComponent implements OnInit {
       },
 
       {
+        pid: 'MOBF4',
         title: 'Redmi 7A (Matte Blue, 32 GB)',
+        urlTitle: 'redmi-7a-matte-blue-32-gb',
         image: 'mi-redmi-7a-mzb8008in-original-imafg27hramfktfs.jpeg',
         rating: {
           stars: 4.4,
@@ -152,7 +161,9 @@ export class DisplayProductComponent implements OnInit {
       },
 
       {
+        pid: 'MOBF5',
         title: 'Redmi Note 5 (Gold, 64 GB)',
+        urlTitle: 'redmi-note-5-gold-64-gb',
         image: 'mi-redmi-note-7-pro-na-original-imafe4bbyfppbnuu.jpeg',
         rating: {
           stars: 4.4,
@@ -373,7 +384,7 @@ export class DisplayProductComponent implements OnInit {
       this.show[arr[i]] = true;
   }
 
-  
+
   toggleCategories() {
     if (this.isCollapsed)
       this.chev_arrow = this.chev_down_arrow;
@@ -467,4 +478,23 @@ export class DisplayProductComponent implements OnInit {
 
   } // END fillCounterForPagination()
 
+
+  /**
+   * Navigates to product details page.
+   * @param indexOfSelectedItem Index of the selected Item.
+   */
+  goToProductDetails(indexOfSelectedItem) {
+
+    let product = this.Items[indexOfSelectedItem];
+    console.log('selected item:', product)
+
+    this.router.navigate([`/${product.urlTitle}/p/${product.pid}`])
+      .then((resolveVal) => {
+        if (resolveVal) {
+          console.log("Navigation is successful!");
+        } else {
+          console.log("Navigation has failed!");
+        }
+      })
+  }
 }

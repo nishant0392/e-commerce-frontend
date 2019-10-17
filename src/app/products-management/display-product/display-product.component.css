@@ -1,4 +1,4 @@
-.product-details {
+.product-list {
   box-sizing: border-box;
   display: flex;
   min-height: 85vh;
@@ -163,6 +163,7 @@ section p {
   display: flex;
   border-bottom: 1px solid #d2d2f1;
   padding: 15px;
+  cursor: pointer;
 }
 
 .items .item:hover .item-title {

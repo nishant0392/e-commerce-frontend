@@ -1,9 +1,12 @@
 <!-- =============================   START: Main Navigation bar   ============================= -->
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top p-0 main-nav">
+
     <a class="navbar-brand" href="#">
         <i class="fas fa-store-alt icon-store" aria-hidden="true"></i>
-        <span class="brand-name txt-shadow"> N-Kart</span></a>
+        <span class="brand-name txt-shadow"> N-Kart</span>
+    </a>
+
     <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2 nav-search-box" type="search"
             placeholder="Search for products, brands and more..." aria-label="Search" />
@@ -11,6 +14,7 @@
             <i class="fa fa-search icon-search" aria-hidden="true"></i>
         </button>
     </form>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,7 +24,7 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#myModal">Login &amp; Signup</a>
+                <a class="nav-link" data-toggle="modal" data-target="#myModal-signup">Login &amp; Signup</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -660,9 +664,10 @@
 </nav>
 
 
-<!-- ************   START: The Modal **************** -->
-<!-- Modal content -->
-<div id="myModal" class="modal">
+<!-- ************   START: The Modals here **************** -->
+
+<!-- START: Modal content for Login -->
+<div id="myModal-login" class="modal">
     <div class="modal-content">
 
         <div class="myModal-custom-content">
@@ -677,11 +682,12 @@
                <div class="close-modal">
                     <i class="fas fa-times icon-close" data-dismiss="modal"></i>
                </div>
+
                 <input type="text" placeholder="Enter Email / Mobile Number" />
 
                 <div class="pass" [ngClass]="isFocused ? 'underline' : ''">
                     
-                    <input type="password" placeholder="Enter Password" 
+                    <input type="password" placeholder="Enter Password"
                     (focus)="isFocused = true" (focusout)="isFocused = false"/>
 
                     <a href='/forgot_password'>Forgot ?</a>
@@ -691,12 +697,71 @@
                 <p id="or">OR</p>
                 <button type="input" id="request-otp">Request OTP</button>
 
-                <a href="/signup" id="signup">New to Flipkart? Create an account</a>
+                <a class="cur-p" id="signup" data-toggle="modal" data-dismiss="modal"
+                data-target="#myModal-signup">New to Flipkart? Create an account</a>
             </div>
         </div>
     </div>
 </div>
-<!-- ************   END: The Modal **************** -->
+<!-- END: Modal content for Login -->
+
+<!-- START: Modal content for Signup -->
+<div id="myModal-signup" class="modal">
+        <div class="modal-content">
+    
+            <div class="myModal-custom-content">
+    
+                <div class="sidebar">
+                    <h3><strong>Signup</strong></h3>
+                    <p class="mt-4">We do not share your personal details with anyone.</p>
+                    <div class="login-img"></div>
+                </div>
+    
+                <div class="main">
+                   <div class="close-modal">
+                        <i class="fas fa-times icon-close" data-dismiss="modal"></i>
+                   </div>
+
+                    <input #mobNo type="number" placeholder="Enter Mobile Number" 
+                    style="margin: 0;" [ngStyle]="addRedBorder()"/>
+                    <small class="error-msg" *ngIf="errorMsg_Mobno">
+                        Please enter a valid Mobile number
+                    </small>
+                  
+                    <div class="signup-otp-pass text-dark mt-4" *ngIf="isMobNoValid">
+                        <p>
+                            OTP sent to Mobile
+                            <span style="float: right; color: #0d63ee;">Resend?</span>
+                        </p>
+
+                        <input type="number" placeholder="Enter OTP" />
+                        <small class="error-msg" *ngIf="incorrect_OTP">
+                                This OTP is incorrect. You have 9 attempt(s) left.
+                        </small>
+
+                        <input type="password" placeholder="Set Password" class="mb-2 mt-2" />
+                        <small class="error-msg" *ngIf="invalid_Password">
+                                Please enter a valid Password.
+                        </small>
+                    </div>
+    
+                    <button type="input" id="signup-continue" (click)="verifyMobileNo(mobNo.value)">
+                            <span *ngIf="!isMobNoValid">Continue</span>
+                            <span *ngIf="isMobNoValid">Signup</span>
+                    </button><br/><br/>
+                
+                    <button type="input" id="signup-exst-user"
+                    data-toggle="modal" data-dismiss="modal" data-target="#myModal-login"
+                    >Existing User? Log in</button>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- END: Modal content for Signup -->
+
+<!-- ************   END: The Modals here  **************** -->
+
 
 <!-- *****************************************    START: CONTENT    ***************************************** -->
 
