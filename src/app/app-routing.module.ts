@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './products-management/home/home.component';
 import { DisplayProductComponent } from './products-management/display-product/display-product.component';
 import { ProductDetailsComponent } from './products-management/product-details/product-details.component';
+import { CarouselComponent } from './shared/carousel/carousel.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },

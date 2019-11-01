@@ -1,13 +1,32 @@
 
-/* Auto-fill for country code in SignUp Form */
-function autoFill() {
-  var element = document.getElementById("country-select");
-  var text = element.options[element.selectedIndex].value;
-  document.getElementById("country-code").value = text;
+
+/**
+ * Function to scroll to top of the page.
+ */
+function scrollToTop() {
+  console.log('kkh')
+  scrollToTopBtn.classList.remove('visible');
+
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behaviour: 'smooth'
+    })
+  }, 250);
+
 }
 
+var scrollToTopBtn = document.getElementsByClassName('scroll-to-top')[0];
 
+if (scrollToTopBtn) {
+  window.addEventListener('scroll', function () {
 
+    if (window.pageYOffset > 500) {
+      scrollToTopBtn.classList.add('visible');
+    }
 
-
-
+    else {
+      scrollToTopBtn.classList.remove('visible');
+    }
+  })
+}
