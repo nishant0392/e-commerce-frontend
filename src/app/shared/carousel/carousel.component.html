@@ -1,0 +1,43 @@
+<!-- ****************   START: Carousel with subitems(vertical)   ********************* -->
+
+<div #myCarousel class="carousel-wrapper">
+    <div class="carousel" [ngStyle]="setWidthAndHeight('carousel')">
+
+        <!--  Carousel items  -->
+        <div class="carousel__item" *ngFor="let slideIndex of slidesCounter">
+
+            <div class="carousel__subitem" 
+                 *ngFor="let j of subitemsCounter"
+                 [ngStyle]="setWidthAndHeight('carousel_subitem_div')">
+
+                <img class="subitem"
+                     [ngStyle]="setWidthAndHeight('carousel_img')"
+                     src="{{ carouselOptions.relativePath + carouselItems[slideIndex * slidesCounter.length + j].img }}"
+                />
+            </div>
+
+        </div>
+
+        <div class="carousel__item">
+
+            <div class="carousel__subitem" 
+                 *ngFor="let i of counterForItemsInLastSlide"
+                 [ngStyle]="setWidthAndHeight('carousel_subitem_div')">
+
+                <img class="subitem"
+                     [ngStyle]="setWidthAndHeight('carousel_img')"
+                     src="{{ carouselOptions.relativePath + carouselItems[i].img }}" />
+            </div>
+
+        </div>
+
+
+        <!--  Carousel next/prev buttons  -->
+        <div class="carousel__button--next"></div>
+        <div class="carousel__button--prev"></div>
+
+    </div>
+</div>
+
+
+<!-- ****************   END: Carousel   ********************* -->

@@ -1,0 +1,35 @@
+<!-- **************  Product Details Component (Details of a particular product item)  ************** -->
+
+<div class="product-details">
+
+    <div class="product-image-wrapper">
+
+        <div class="product-image">
+
+            <div class="image-select-bar">
+
+                <carousel [carouselOptions]="carouselOptions" [carouselItems]="carouselItems"
+                    (hoverOverSubitemEvent)="onHoverOverSubitem($event)">
+                </carousel>
+
+            </div>
+
+            <div class="selected-image">
+                <img src="{{ selectedImage }}" />
+            </div>
+
+        </div>
+
+        <div class="purchase-btn">
+            <button type="button" class="add-to-cart">
+                <i class="fa fa-shopping-cart"></i>ADD TO CART</button>
+            <button type="button" class="buy-now">
+                <i class="fa fa-bolt"></i>BUY NOW</button>
+        </div>
+    </div>
+
+    <div class="details">
+        Nishant
+    </div>
+
+</div>

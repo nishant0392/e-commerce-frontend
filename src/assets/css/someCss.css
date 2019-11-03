@@ -1,0 +1,87 @@
+/****  Scroll to Top Button    ****/
+
+.scroll-to-top {
+    width: 140px;
+    padding: 8px 0px;
+    background-color: #fff;
+    color: #2874f0;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    margin: 0px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 3px 16px 0 rgba(0,0,0,.11); 
+    cursor: pointer;
+    z-index: -10;
+    position: fixed;
+    left: 45%;
+    visibility: hidden;
+  }
+
+  .scroll-to-top .icon-chevron-up {
+    font-size: 11px;
+    margin-right: 6px;
+    position: relative;
+    bottom: 2px; 
+  }
+
+  .scroll-to-top.visible {
+    visibility: visible;
+    transform: translateY(175%);
+    transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  }
+
+  .header {
+    width: 100%;
+    position: fixed;
+    background-color: #17a2b8;
+    top: 0;
+  }
+
+  .header h1 {
+    text-align: center;
+  }
+
+  .scrollable {
+    display: flex;
+  }
+
+  .sidediv, .content, .more {
+    padding: 10px 15px;
+    z-index: -20;
+  }
+
+  .sidediv {
+    background-color: palegreen;
+    flex: 2;
+    height: 92vh;
+    position: sticky;
+    left: 0;
+    top: 60px;
+  }
+
+  .content { 
+    background-color: #ff00ff;
+    flex: 3;
+    margin-top: 60px;
+    position: sticky;
+    right: 0;
+    top: 100px;
+  }
+
+  .content p {
+    color: #000;
+    margin-bottom: 50px;
+  }
+
+  .more p {
+    color: brown;
+    margin-bottom: 60px;
+  }
+
+
+  .nowGo {
+    position: relative;
+    top: 10px;
+  }
