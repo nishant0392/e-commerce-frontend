@@ -2,6 +2,7 @@
 
 <div class="product-details">
 
+    <!--  ----------------    START: Product Image    ------------------  -->
     <div class="product-image-wrapper">
 
         <div class="product-image">
@@ -27,9 +28,84 @@
                 <i class="fa fa-bolt"></i>BUY NOW</button>
         </div>
     </div>
+    <!--  ----------------    END: Product Image    ------------------  -->
 
     <div class="details">
-        Nishant
+        <div class="custom-breadcrumb">
+
+            <small class="text-muted">
+                Home > Mobiles & Accessories > Mobiles > Mi Mobiles > Redmi Note ...
+            </small>
+
+            <div class="share">
+                <i class="fa fa-share icon-share"></i>Share
+            </div>
+
+            <div class="compare">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="">
+                        <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                        Compare
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="item">
+            <div class="item-description">
+                <h5 class="item-title">{{Item.title}}</h5>
+                <p><span class="item-ratings">{{Item.rating.stars}}<i class="fas fa-star icon-rating"></i></span>
+                    <span class="text-muted ml-2">{{ Item.rating.ratingsCount | number }} Ratings &amp;
+                        {{ Item.rating.reviewsCount | number }} Reviews</span>
+                    <img *ngIf="Item.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="ml-3" />
+                </p>
+            </div>
+
+            <div class="item-cost">
+
+                <p class="discount">Extra ₹{{Item.MRP - Item.price}} discount</p>
+
+                <h3><strong>₹{{Item.price | number}}</strong>
+                    <span class="text-muted mrp">₹{{Item.MRP | number}}</span>
+                    <span class="discount-percent">{{Item.discount}}% off</span>
+                    <span class="fa fa-info-circle icon-info"></span>
+                </h3>
+
+                <!--  ***  start: "OFFERS section"   ***  -->
+                <div class="offers mt-3">
+                    <h6><strong>Available offers</strong></h6>
+                    <ul class="text-dark">
+                        <li *ngFor="let i of offersToDisplay_counter">
+                            <div *ngIf="offers[i]">
+                                <i [ngClass]="addBullet(offers[i].type)"></i>
+                                <span class="category" *ngIf="offers[i].category">{{offers[i].category}}</span>
+                                <span>{{offers[i].offer}}</span>
+                                <span><a href="">{{offers[i].info}}</a></span>
+                                <span class="fa fa-chevron-right icon-chevron-right"
+                                    *ngIf="addRightArrow(offers[i].type)"></span>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <p class="view-more" *ngIf="remainingOffersToDisplay" (click)="setFinalCounterForOffers()">
+                        View {{remainingOffersToDisplay}} more
+                        <span *ngIf="remainingOffersToDisplay === 1"> offer</span>
+                        <span *ngIf="remainingOffersToDisplay > 1">offers</span>
+                    </p>
+                </div>
+                <!--  ***  end: "OFFERS section"   ***  -->
+
+            </div>
+
+        </div>
+
+
     </div>
 
+</div>
+
+
+<div class="more">
 </div>

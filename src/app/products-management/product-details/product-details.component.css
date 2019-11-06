@@ -8,6 +8,9 @@
 
 .product-image-wrapper {
   flex: 1;
+  /** (1) Make left content(flex-item) sticky (for scrollable part) **/
+  position: sticky;
+  top: 60px;
 }
 
 .product-image {
@@ -58,10 +61,124 @@
   background-color: #fb641b;
 }
 
+.compare, .share {
+  float: right;
+  font-size: .9em;
+}
+
+.icon-share {
+  margin-right: 10px;
+  color: #a9a9a9;
+}
+
+.share {
+  margin-left: 2em;
+}
+
 .details {
   flex: 1.5;
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   border: 1px solid #f0f0f0;
+  /** (2) Make right content(flex-item) sticky (for scrollable part) **/
+  position: sticky;
+  top: 100px;
+  min-height: 100vh;
+}
+
+/* Item details */
+.item .item-description {
+  flex: 2;
+  padding-top: 6px;
+}
+
+.item .item-description p {
+  margin-bottom: .7rem;
+}
+
+.item .item-description span {
+  font-size: .85em;
+}
+
+.item .item-description .item-ratings {
+  padding: 3px 5px;
+  background-color: green;
+  color: white;
+  border-radius: 2px;
+}
+
+.item .item-description ul{
+  flex: 2;
+  list-style: none;
+  font-size: .9em;
+  padding: 1em .5em;
+}
+
+.item .item-description ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: lightgrey; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+}
+
+.item .item-cost .discount {
+  font-size: .9em;
+  color: green;
+}
+
+.item .item-cost p {
+  margin-bottom: 0.2rem;
+}
+
+.item .item-cost .mrp, .discount-percent {
+  vertical-align: middle;
+  font-size: .6em;
+  margin: 0 10px;
+}
+
+.item .item-cost .mrp {
+  text-decoration: line-through;
+}
+
+.item .item-cost .discount-percent {
+  color: green;
+}
+
+/**  Offers section  **/
+.offers ul {
+  list-style: none;
+  padding: 0;
+  color: #343a40;
+  line-height: 2;
+}
+
+.offers i {
+  color: rgb(20, 185, 20);
+  margin-right: 10px; 
+}
+
+.offers a {
+  text-decoration: none;
+}
+
+.offers .icon-chevron-right {
+  color: #2874f0;
+  font-size: .7rem; 
+  position: relative;
+  bottom: 1px;
+}
+
+.offers .category {
+  font-weight: 600;
+}
+
+.offers span {
+  margin-right: 5px;
+}
+
+.offers .view-more {
+  color: #2874f0;
+  cursor: pointer;
 }
 
 
@@ -165,12 +282,55 @@
   margin-bottom: 50px;
 }
 
-.more p {
+.more {
   color: brown;
-  margin-bottom: 60px;
+  margin-bottom: 600px;
 }
 
 .nowGo {
   position: relative;
   top: 10px;
+}
+
+
+/* Checkbox */
+.checkbox {
+  font-weight: 400;
+}
+.checkbox label:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.checkbox .cr {
+  position: relative;
+  display: block;
+  border: 1px solid #a9a9a9;
+  border-radius: 0.1em;
+  width: 1em;
+  height: 1em;
+  float: left;
+  margin: 0.2em 0.4em;
+}
+
+.checkbox .cr .cr-icon {
+  position: absolute;
+  font-size: 1.1em;
+  color: #2874f0;
+  line-height: 0;
+  top: 50%;
+  left: 0%;
+}
+
+.checkbox label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+  opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+  opacity: 1;
 }

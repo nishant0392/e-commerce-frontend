@@ -110,13 +110,6 @@ section p {
   opacity: 1;
 }
 
-.icon-rating {
-  position: relative;
-  font-size: .6rem;
-  padding: 0 2px; 
-  bottom: .1em;
-}
-
 #buying-guide {
   text-align: center;
   background-color: #ebf0f5;
