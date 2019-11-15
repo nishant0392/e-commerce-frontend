@@ -145,6 +145,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   }  // END addEventListenerToSubitems()
 
+  
   public onHoverOverSubitem(DOM_element) {
 
     let subitem = DOM_element.getElementsByClassName('subitem')[0];

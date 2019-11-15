@@ -7,13 +7,14 @@
         <span class="brand-name txt-shadow"> N-Kart</span>
     </a>
 
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2 nav-search-box" type="search"
-            placeholder="Search for products, brands and more..." aria-label="Search" />
-        <button type="button" class="btn-search btn">
-            <i class="fa fa-search icon-search" aria-hidden="true"></i>
-        </button>
-    </form>
+    <div class="search-form">
+        <input #searchInput 
+         class="form-control" type="input" 
+         placeholder="Search for products, brands and more..." 
+         (keyup.enter)="search(searchInput.value)"
+        />
+        <i class="fa fa-search icon-search" aria-hidden="true" (click)="search(searchInput.value)"></i>
+    </div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

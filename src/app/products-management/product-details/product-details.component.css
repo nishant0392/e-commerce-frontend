@@ -182,6 +182,12 @@
 }
 
 
+/* Properties Section */
+.properties {
+  margin-top: 15px;
+}
+
+
 /****    Media Queries  ****/
 @media screen and (max-width: 768px) {
 

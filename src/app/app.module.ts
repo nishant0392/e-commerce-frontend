@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ProductsManagementModule } from './products-management/products-management.module';
+import { ViewModule } from './view/view.module';
 
 
 // Components here
@@ -15,6 +16,8 @@ import { AppComponent } from './app.component';
 // Services here
 import { UserManagementService } from './services/user-management.service';
 import { ProductManagementService } from './services/product-management.service';
+import { DataProviderService } from './services/data-provider.service';
+
 
 
 @NgModule({
@@ -25,9 +28,10 @@ import { ProductManagementService } from './services/product-management.service'
     BrowserModule,
     AppRoutingModule,
     ProductsManagementModule,
+    ViewModule,
     HttpClientModule
   ],
-  providers: [UserManagementService, ProductManagementService],
+  providers: [UserManagementService, ProductManagementService, DataProviderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

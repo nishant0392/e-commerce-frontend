@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserManagementService } from './services/user-management.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit {
   public isMobNoValid: boolean = false;
   public errorMsg_Mobno: boolean = false;
 
-  constructor(private userService: UserManagementService) {
+  constructor(private userService: UserManagementService,
+    private router: Router) {
 
   }
   
@@ -22,6 +24,16 @@ export class AppComponent implements OnInit {
    */
 
   ngOnInit() {}
+
+  /**
+   * Searches for the query.
+   * @param {string} query Search query 
+   */
+  search(query) {
+    console.log('Search Query:', query)
+    return false;
+    this.router.navigate(['/assets/images/Nishant.JPG'])
+  }
 
   verifyMobileNo(mobileNo: number) {
 

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { Ng5SliderModule } from 'ng5-slider';
+import { ViewModule } from '../view/view.module';
 
 
 /** -------  Components here   ------- **/
@@ -15,7 +16,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
   declarations: [DisplayProductComponent, HomeComponent, ProductDetailsComponent],
   imports: [
     SharedModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    ViewModule
   ]
 })
 export class ProductsManagementModule { }

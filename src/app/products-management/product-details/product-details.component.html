@@ -30,6 +30,9 @@
     </div>
     <!--  ----------------    END: Product Image    ------------------  -->
 
+
+    <!--  ----------------    START: Product Description    ------------------  -->
+
     <div class="details">
         <div class="custom-breadcrumb">
 
@@ -72,40 +75,56 @@
                     <span class="discount-percent">{{Item.discount}}% off</span>
                     <span class="fa fa-info-circle icon-info"></span>
                 </h3>
-
-                <!--  ***  start: "OFFERS section"   ***  -->
-                <div class="offers mt-3">
-                    <h6><strong>Available offers</strong></h6>
-                    <ul class="text-dark">
-                        <li *ngFor="let i of offersToDisplay_counter">
-                            <div *ngIf="offers[i]">
-                                <i [ngClass]="addBullet(offers[i].type)"></i>
-                                <span class="category" *ngIf="offers[i].category">{{offers[i].category}}</span>
-                                <span>{{offers[i].offer}}</span>
-                                <span><a href="">{{offers[i].info}}</a></span>
-                                <span class="fa fa-chevron-right icon-chevron-right"
-                                    *ngIf="addRightArrow(offers[i].type)"></span>
-                            </div>
-                        </li>
-
-                    </ul>
-                    <p class="view-more" *ngIf="remainingOffersToDisplay" (click)="setFinalCounterForOffers()">
-                        View {{remainingOffersToDisplay}} more
-                        <span *ngIf="remainingOffersToDisplay === 1"> offer</span>
-                        <span *ngIf="remainingOffersToDisplay > 1">offers</span>
-                    </p>
-                </div>
-                <!--  ***  end: "OFFERS section"   ***  -->
-
             </div>
+
+
+            <!--  ***  start: "OFFERS section"   ***  -->
+            <div class="offers mt-3">
+                <h6><strong>Available offers</strong></h6>
+                <ul class="text-dark">
+                    <li *ngFor="let i of offersToDisplay_counter">
+                        <div *ngIf="offers[i]">
+                            <i [ngClass]="addBullet(offers[i].type)"></i>
+                            <span class="category" *ngIf="offers[i].category">{{offers[i].category}}</span>
+                            <span>{{offers[i].offer}}</span>
+                            <span><a href="">{{offers[i].info}}</a></span>
+                            <span class="fa fa-chevron-right icon-chevron-right"
+                                *ngIf="addRightArrow(offers[i].type)"></span>
+                        </div>
+                    </li>
+
+                </ul>
+                <a class="view-more" *ngIf="remainingOffersToDisplay" (click)="setFinalCounterForOffers()">
+                    View {{remainingOffersToDisplay}} more
+                    <span *ngIf="remainingOffersToDisplay === 1"> offer</span>
+                    <span *ngIf="remainingOffersToDisplay > 1">offers</span>
+                </a>
+            </div>
+            <!--  ***  end: "OFFERS section"   ***  -->
+
+
+            <!--  ***  start: "PROPERTIES section"   ***  -->
+            <div class="properties">
+                <main-view 
+                [item_properties]="item_properties" 
+                [listOfProperties]="listOfProperties"
+                [options_galleryView]="options_galleryView"
+                [options_boxView]="options_boxView"
+                [options_bulletsView]="options_bulletsView"
+                >
+                </main-view>
+            </div>
+            <!--  ***    end: "PROPERTIES section"   ***  -->
 
         </div>
 
 
     </div>
+    <!--  ----------------    END: Product Description    ------------------  -->
 
 </div>
 
 
 <div class="more">
+
 </div>
