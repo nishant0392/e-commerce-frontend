@@ -1,0 +1,19 @@
+<!--  ****  start: "BOX View"  ****  -->
+
+<div class="box-view">
+
+        <div class="items-container">
+    
+            <div class="item" 
+            *ngFor="let item of Items" 
+            [ngStyle]="addWidthAndHeight()" 
+            (click)="loadItem(item)"
+            >
+                <span>{{ item }}</span>
+            </div>
+    
+        </div>
+    
+    </div>
+     
+    <!--  ****   end: "BOX View"   ****  -->

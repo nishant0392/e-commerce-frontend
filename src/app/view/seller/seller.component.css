@@ -1,0 +1,35 @@
+.seller .items-container ul {
+    list-style-type: none;
+    padding-left: 1em;
+    padding-top: 1em;
+    font-size: 14px;
+    position: relative;
+  }
+  
+  .seller .items-container ul li {
+      margin-bottom: 5px;
+  }
+  
+  .seller .items-container ul li::before {
+    content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: grey; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+  }
+  
+  .seller .items-container a {
+      text-decoration: none;
+  }
+
+  .seller .item-ratings {
+    margin-left: 10px;  
+    padding: 3px 5px;
+    background-color: #2874f0;
+    color: white;
+    font-size: 12px;
+    border-radius: 10px;
+  }

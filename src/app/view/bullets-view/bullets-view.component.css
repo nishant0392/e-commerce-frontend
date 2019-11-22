@@ -1,0 +1,27 @@
+.bullets-view .items-container ul {
+  list-style-type: none;
+  padding-left: 1em;
+  font-size: 14px;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.bullets-view .items-container ul li {
+    margin-bottom: 5px;
+}
+
+.bullets-view .items-container ul li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: grey; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  font-size: 16px;
+  position: absolute;
+  left: 0;
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+}
+
+.bullets-view .items-container a {
+    text-decoration: none;
+    padding-left: .9em;
+}

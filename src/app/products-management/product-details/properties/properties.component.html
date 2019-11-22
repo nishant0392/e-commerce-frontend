@@ -1,0 +1,56 @@
+<!--  ****  start: "PROPERTIES View"  ****  -->
+
+<div class="properties-view">
+    <div class="properties">
+
+        <div class="item-property" 
+        *ngFor="let property of listOfProperties"
+        [ngClass]="addCustomWidth(property | viewType)"
+        >
+
+            <div class="left-div">
+                <span>{{ property }}</span>
+            </div>
+
+            <div class="right-div" [ngSwitch]="property | viewType">
+
+                <bullets-view 
+                  *ngSwitchCase="'BULLETSVIEW'" 
+                  [Item]="item_properties[property]">
+                </bullets-view>
+
+                <box-view 
+                  *ngSwitchCase="'BOXVIEW'" 
+                  [Items]="item_properties[property].items"
+                  [options]="options_boxView">
+                </box-view>
+
+                <delivery
+                  *ngSwitchCase="'DELIVERYVIEW'">
+                </delivery>
+
+                <seller 
+                  *ngSwitchCase="'SELLERVIEW'" 
+                  [Item]="item_properties[property]">
+                </seller>
+
+                <gallery-view 
+                  *ngSwitchCase="'GALLERYVIEW'" 
+                  [Items]="item_properties[property].items"
+                  [options]="options_galleryView">
+                </gallery-view>
+
+                <paragraph-view 
+                  *ngSwitchCase="'PARAGRAPHVIEW'" 
+                  [Items]="item_properties[property].items">
+                </paragraph-view>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--  ****    end: "PROPERTIES View"  ****  -->

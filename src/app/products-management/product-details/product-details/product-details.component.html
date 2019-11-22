@@ -79,6 +79,7 @@
 
 
             <!--  ***  start: "OFFERS section"   ***  -->
+
             <div class="offers mt-3">
                 <h6><strong>Available offers</strong></h6>
                 <ul class="text-dark">
@@ -100,21 +101,49 @@
                     <span *ngIf="remainingOffersToDisplay > 1">offers</span>
                 </a>
             </div>
+
             <!--  ***  end: "OFFERS section"   ***  -->
 
 
             <!--  ***  start: "PROPERTIES section"   ***  -->
-            <div class="properties">
-                <main-view 
+
+            <div class="properties-section">
+                <properties 
                 [item_properties]="item_properties" 
                 [listOfProperties]="listOfProperties"
                 [options_galleryView]="options_galleryView"
                 [options_boxView]="options_boxView"
                 [options_bulletsView]="options_bulletsView"
                 >
-                </main-view>
+                </properties>
             </div>
+            
             <!--  ***    end: "PROPERTIES section"   ***  -->
+
+
+            <!--  ***  start: "SPECIFICATIONS section"   ***  -->
+
+            <div class="specifications-section">
+                <specifications 
+                  [item_specifications]="item_specifications"
+                  [MPI_Info]="MPI_Info"
+                >
+                </specifications>
+            </div>
+           
+            <!--  ***    end: "SPECIFICATIONS section"   ***  -->
+
+
+             <!--  ***  start: "RATINGS & REVIEWS section"   ***  -->
+
+             <div class="ratings-and-reviews-section">
+                    <ratings-and-reviews
+                    >
+
+                    </ratings-and-reviews>
+             </div>
+               
+            <!--  ***    end: "RATINGS & REVIEWS section"   ***  -->
 
         </div>
 
@@ -126,5 +155,4 @@
 
 
 <div class="more">
-
 </div>

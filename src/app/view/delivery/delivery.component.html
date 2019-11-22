@@ -1,0 +1,31 @@
+<!-- ****  start: "DELIVERY" input  **** -->
+<div class="delivery">
+
+    <div class="pincode" [ngClass]="isFocused ? 'underline' : ''">
+
+        <i class="fa fa-map-marker-alt icon-marker"></i>
+        <input 
+            placeholder="Enter Delivery Pincode" 
+            oninput="javascript: if (this.value.length > this.maxLength) 
+                                  this.value = this.value.slice(0, this.maxLength);" 
+            type="number"
+            maxlength="6" 
+            name="pin-code"
+            [(ngModel)]="pincode" 
+            (keyup.enter)="checkPincode()" 
+            (focus)="isFocused = true"
+            (focusout)="isFocused = false" 
+        />
+        <a href='#'>Change</a>
+        
+    </div>
+
+    <div class="delivery-details">
+        <p>Delivery by Tommorrow | 
+            <span class="text-success">Free </span>
+            <span class="txt-dec-lt">&#8377;40</span></p>
+        <a href="#">View Details</a>
+    </div>
+    
+</div>
+<!-- ****  end: "DELIVERY" input  **** -->

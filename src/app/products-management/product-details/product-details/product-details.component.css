@@ -183,7 +183,7 @@
 
 
 /* Properties Section */
-.properties {
+.properties-section {
   margin-top: 15px;
 }
 
@@ -340,3 +340,5 @@
 .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
   opacity: 1;
 }
+
+

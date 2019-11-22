@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from 'src/app/services/data-provider.service';
+import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 
 
 @Component({
@@ -22,6 +23,11 @@ export class ProductDetailsComponent implements OnInit {
   public remainingOffersToDisplay: number;
   public item_properties = {};  // properties of the Item
   public listOfProperties: string[];  // order of properties to be displayed
+
+  public item_specifications: any;
+  public MPI_Info: any;
+
+  public ratingCircleOptions: RatingCircle;
 
   // View Options to be passed
   public options_galleryView = {};
@@ -58,6 +64,14 @@ export class ProductDetailsComponent implements OnInit {
       height: '40px'
     };
 
+    // Item Specifications
+    this.item_specifications = this._data.Item.specifications;
+    this.MPI_Info = this._data.Item.MPI_Info;
+
+    // Ratings and Reviews
+    this.ratingCircleOptions = {
+      rating: 50
+    }
   }
 
 

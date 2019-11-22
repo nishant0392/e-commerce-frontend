@@ -1,0 +1,31 @@
+.box-view {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.box-view .items-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+
+.box-view .items-container .item {
+  display: flex;
+  border: 2px solid rgb(194, 194, 186);
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.box-view .items-container .item span {
+  margin: auto;
+  color: #878787;
+  font-weight: 600;
+}
+
+.box-view .items-container .item:hover {
+  border-color: rgb(187, 187, 76);
+}
+
+.gallery-view .items-container .item.active {
+  border-color: #17a2b8;
+}

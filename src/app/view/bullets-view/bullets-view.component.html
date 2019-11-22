@@ -1,0 +1,17 @@
+<!--  ****  start: "BULLETS View"  ****  -->
+
+<div class="bullets-view">
+
+    <div class="items-container" *ngIf="Item">
+
+        <ul>
+            <li *ngFor="let item of Item.items">{{ item }}</li>
+        </ul>
+
+        <a href="#" *ngIf="Item.lastLine">{{ Item.lastLine.title }}</a>
+
+    </div>
+
+</div>
+
+<!--  ****   end: "BULLETS View"   ****  -->

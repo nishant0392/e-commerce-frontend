@@ -1,0 +1,62 @@
+<!--  ****  start: "RATINGS & REVIEWS View"  ****  -->
+
+<div class="ratings-and-reviews-view">
+
+    <div class="ratings-and-reviews">
+
+        <div class="header">
+            <h3>Ratings &amp; Reviews</h3>
+            <button type="button" class="rate-product">Rate Product</button>
+        </div>
+
+        <div class="content">
+
+            <!--  ****  start: "RATINGS" Section  ****  -->
+            <div class="ratings" *ngIf="ratingData">
+
+                <div class="average-rating">
+
+                    <div class="average-rating-container">
+                        {{ ratingData.avgRating }} <i class="fas fa-star icon-rating"></i>
+                        <div class="rar">
+                            {{ ratingData.ratingsCount | number }} Ratings <br> & <br>
+                            {{ ratingData.reviewsCount | number }} Reviews
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bar-rating">
+                    <div class="bar-rating-container">
+                        <rating-bar></rating-bar>
+                    </div>
+                </div>
+
+                <div class="circle-rating">
+
+                    <div class="param-rating-container">
+                        <div class="param-rating" *ngFor="let paramRating of ratingData.paramWiseRating">
+
+                            <rating-circle [Options]="paramRating"></rating-circle>
+                            <div class="param">{{ paramRating.param }}</div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--  ****  end: "RATINGS" Section  ****  -->
+
+
+            <!--  ****  start: "REVIEWS" Section  ****  -->
+            <div class="reviews">
+                
+            </div>
+            <!--  ****  end: "REVIEWS" Section  ****  -->
+        </div>
+    </div>
+
+</div>
+
+<!--  ****    end: "RATINGS & REVIEWS View"  ****  -->

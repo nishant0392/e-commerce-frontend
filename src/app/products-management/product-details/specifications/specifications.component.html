@@ -1,0 +1,37 @@
+<!--  ****  start: "SPECIFICATIONS View"  ****  -->
+
+<div class="specifications-view">
+
+        <div class="specifications">
+    
+            <h3>Specifications</h3>
+            <div class="spec" *ngFor="let spec of specifications">
+    
+                <h5>{{spec.title}}</h5>
+    
+                <div *ngFor="let x of spec | keyvalue">
+    
+                    <div class="details" *ngIf="x.key !== 'title'">
+                        <div class="feature">{{x.key}}</div>
+                        <div class="description">{{x.value}}</div>
+                    </div>
+    
+                </div>
+    
+            </div>
+
+            <div *ngIf="MPI_Info && readMore" class="MPI">
+                Manufacturing, Packaging and Import Info
+            </div>
+
+            <div class="read-more" 
+              *ngIf="!readMore"
+              (click)="specifications = item_specifications; readMore = true">
+                Read More
+            </div>
+           
+        </div>
+    
+    </div>
+    
+    <!--  ****    end: "SPECIFICATIONS View"  ****  -->
