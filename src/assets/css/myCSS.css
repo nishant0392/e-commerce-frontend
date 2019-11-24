@@ -1,12 +1,5 @@
 
-/*  ****  start: "ICONS"   ****  */
-
-.icon-rating {
-  position: relative;
-  font-size: 0.6rem;
-  padding: 0 2px;
-  bottom: 0.1em;
-}
+/*  ****  start: "ICONS & SYMBOLS"   ****  */
 
 .icon-info {
   font-size: 1rem;
@@ -14,7 +7,13 @@
   vertical-align: middle;
 }
 
-/* SHOPPING CART */
+/** RATING STAR **/
+.icon-star:after {
+  content: "\2605";
+  font-size: 32px;
+}
+
+/** SHOPPING CART **/
 .icon-shopping-cart {
   position: relative;
 }
@@ -38,4 +37,28 @@
   margin-right: 4px;
 }
 
-/*  ****   end: "ICONS"   ****  */
+
+/*** UPLOAD IMAGE (camera with plus icon ) ***/
+.icon-camera-upload {
+  position: relative;
+}
+
+.icon-camera-upload .plus {
+  position: absolute;
+  top: -17px;
+  left: -2px;
+  font-weight: bold;
+}
+
+.icon-camera-upload .icon-camera {
+  font-size: 24px;
+}
+/*  ****   end: "ICONS & SYMBOLS"   ****  */
+
+.not-visible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}

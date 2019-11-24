@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ratings-and-reviews',
@@ -11,7 +12,8 @@ export class RatingsAndReviewsComponent implements OnInit {
   public ratingOptions: RatingCircle;
   public ratingData;
 
-  constructor() { }
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.ratingOptions = {
@@ -41,6 +43,15 @@ export class RatingsAndReviewsComponent implements OnInit {
         }
       ]
     }
+  }
+
+  public getProductReviews() {
+
+    let params = this.route.snapshot.params;
+
+    console.log('params:', params)
+
+    this.router.navigate([`/${params.product_name}/write-review/${params.pid}`]);
   }
 
 }

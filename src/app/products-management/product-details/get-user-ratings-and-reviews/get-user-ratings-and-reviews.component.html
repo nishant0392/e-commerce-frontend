@@ -1,1 +1,115 @@
-<p>get-user-ratings-and-reviews works!</p>
+<!--  *****************    Get User Ratings & Reviews for the Item    *****************  -->
+
+<div class="user-reviews">
+
+        <div class="header">
+            <div class="title">Ratings &amp; Reviews</div>
+    
+            <div class="product-view">
+    
+                <div class="description">
+                    <span>RedMi Note 7S Sapphire 64GB</span> <br>
+                    <star-rating-view [rating]="4.4"></star-rating-view> &nbsp;({{ 2537 | number }}) &nbsp;
+                </div>
+    
+                <img width="50" height="50" />
+            </div>
+        </div>
+    
+        <div class="sidebar-content">
+            <div class="sidebar">
+                <h5 class="title">What makes a good review</h5>
+                <div class="content">
+                    <h5>Have you used this product?</h5>
+                    <p class="bb">Your review should be about your experience with the product.</p>
+    
+                    <h5>Why review a product?</h5>
+                    <p class="bb">Your valuable feedback will help fellow shoppers decide!</p>
+    
+                    <h5>How to review a product?</h5>
+                    <p>Your review should include facts. An honest opinion is always appreciated.
+                        If you have an issue with the product or service please contact us
+                        from the <a href="">help centre.</a></p>
+                </div>
+            </div>
+    
+            <div class="content">
+    
+                <div class="rating">
+                    <h5>Rate this product</h5>
+                    <rating-star (rating)="saveRating($event)"></rating-star>
+                </div>
+    
+                <div class="review">
+    
+                    <h5>Review this product</h5>
+    
+                    <div class="review-form">
+    
+                        <div class="text-section">
+                            <div class="description">
+                                <p>
+                                    <span [ngStyle]="{ 'color': activeColor_description }">Description</span>
+                                    <span 
+                                      class="error"
+                                      [ngClass]="{ 'visible': error_description }">
+                                      {{ errorMsg_description }}
+                                    </span>
+                                </p>
+                                <textarea 
+                                   rows="8" 
+                                   placeholder="Description..." 
+                                   name="reviewDescription"
+                                   [(ngModel)]="reviewDescription"
+                                   (focus)="activeColor_description = 'blue'"
+                                   (focusout)="showMessage('description')"
+                                ></textarea>
+    
+                            </div>
+    
+                            <div class="review-title">
+                                <p>
+                                   <span [ngStyle]="{ 'color': activeColor_title }">Title (optional)</span>
+                                   <span 
+                                      class="error"
+                                      [ngClass]="{ 'visible': error_title }">
+                                      {{ errorMsg_title }}
+                                    </span>
+                                </p>
+                                <input type="text" placeholder="Review title..." [maxlength]="maxlength_title"
+                                    name="reviewTitle"
+                                    [(ngModel)]="reviewTitle"
+                                    (focus)="activeColor_title = 'blue'"
+                                    (focusout)="activeColor_title = ''" 
+                                    (keydown)="showMessage('review-title')" 
+                                />
+                            </div>
+    
+                            <div class="name">
+                                <p>
+                                   <span [ngStyle]="{ 'color': activeColor_name }">Name</span>
+                                </p>
+                                <input type="text" placeholder="Name" value="Flipkart Customer" maxlength="30"
+                                  (focus)="activeColor_name = 'blue'"
+                                  (focusout)="showMessage('name'); activeColor_name = ''" 
+                                />
+                            </div>
+                        </div>
+    
+                        <div class="upload">
+                            <span class="icon-camera-upload">
+                                <span class="plus">+</span>
+                                <i class="fa fa-camera icon-camera"></i>
+                            </span>
+                            <input type="file" name="file" accept="image/*" multiple />
+                        </div> <br>
+    
+                        <button type="button">SUBMIT</button>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    </div>

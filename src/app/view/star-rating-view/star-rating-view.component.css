@@ -1,0 +1,18 @@
+/** STAR RATING **/
+
+.rating-symbol .star-rating {
+  position: relative;
+  font-size: 0.9rem;
+  padding: 3px 19px 3px 6px;
+  background-color: cadetblue; /* fallback color */
+  color: white;
+  border-radius: 2px;
+}
+
+.rating-symbol .star-rating .icon-rating {
+  position: absolute;
+  font-size: 0.6rem;
+  padding: 0 3px;
+  top: 0.4rem;
+}
+

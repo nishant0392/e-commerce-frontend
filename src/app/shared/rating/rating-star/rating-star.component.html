@@ -1,0 +1,18 @@
+<!--  ****  start: "Rating Star"  ****  -->
+
+<div class="five-star-rating">
+    <span
+     *ngFor="let i of [0,1,2,3,4]"
+     class="icon-star" 
+     [ngClass]="stars[i]" 
+     (mouseover)="addCheckedClass(i)" 
+     (mouseout)="removeCheckedClass()"
+     (click)="emitRating(i)"
+    >
+    </span>
+
+    <span class="rating-info" [ngStyle]="{ 'color': ratingInfoColor }">{{ ratingInfo }}</span>
+    <span *ngIf="isRatingSaved" class="save-info">Your rating has been saved</span>
+</div>
+
+<!--  ****  end: "Rating Star"  ****  -->
