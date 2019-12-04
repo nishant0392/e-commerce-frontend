@@ -56,10 +56,11 @@
 
         </div>
 
-        <div class="item">
+        <div class="item" *ngIf="Item">
             <div class="item-description">
                 <h5 class="item-title">{{Item.title}}</h5>
-                <p><span class="item-ratings">{{Item.rating.stars}}<i class="fas fa-star icon-rating"></i></span>
+                <p>
+                    <star-rating-view [rating]="Item.rating.stars"></star-rating-view>
                     <span class="text-muted ml-2">{{ Item.rating.ratingsCount | number }} Ratings &amp;
                         {{ Item.rating.reviewsCount | number }} Reviews</span>
                     <img *ngIf="Item.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="ml-3" />

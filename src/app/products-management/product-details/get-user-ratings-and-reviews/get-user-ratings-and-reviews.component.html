@@ -88,10 +88,17 @@
                             <div class="name">
                                 <p>
                                    <span [ngStyle]="{ 'color': activeColor_name }">Name</span>
+                                   <span 
+                                      class="error"
+                                      [ngClass]="{ 'visible': error_name }">
+                                      {{ errorMsg_name }}
+                                    </span>
                                 </p>
-                                <input type="text" placeholder="Name" value="Flipkart Customer" maxlength="30"
+                                <input type="text" placeholder="Name" value="Flipkart Customer" [maxlength]="maxlength_name"
+                                  name="reviewerName"
+                                  [(ngModel)]="reviewerName"
                                   (focus)="activeColor_name = 'blue'"
-                                  (focusout)="showMessage('name'); activeColor_name = ''" 
+                                  (focusout)="showMessage('name')" 
                                 />
                             </div>
                         </div>
@@ -104,7 +111,7 @@
                             <input type="file" name="file" accept="image/*" multiple />
                         </div> <br>
     
-                        <button type="button">SUBMIT</button>
+                        <button type="button" (click)="saveProductReviews()">SUBMIT</button>
     
                     </div>
                 </div>

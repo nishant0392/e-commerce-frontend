@@ -28,6 +28,12 @@ section {
   font-weight: bold;
 }
 
+.customer-ratings .icon-rating {
+  font-size: .7em;
+  position: relative;
+  bottom: 1px;
+}
+
 .categories p {
   font-size: 0.7rem;
 }

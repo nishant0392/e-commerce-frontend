@@ -1,0 +1,26 @@
+<!-- ********  start: PRICE DETAILS  ******** -->
+
+<div class="price-details-container">
+    <div class="title">PRICE DETAILS</div>
+    <div class="price-details">
+        <p class="total-price">Price ({{ countOfCartItems }} item<span *ngIf="countOfCartItems > 1">s</span>)
+            <span class="total-price-text">₹{{ totalPrice }}</span>
+        </p>
+        <p class="delivery-fee">
+            Delivery Fee
+            <span *ngIf="deliveryFee">₹{{ deliveryFee }}</span>
+            <span *ngIf="!deliveryFee" class="txt-green">Free</span>
+        </p>
+        <p class="total-payable">
+            Total Payable <span>₹{{ totalPrice + deliveryFee }}</span>
+        </p>
+    </div>
+    <div class="savings" *ngIf="totalSavings">You will save ₹{{ totalSavings }} on this order</div>
+    <div class="secure-payments-text">
+        <div><i class="fa fa-shield-alt icon-shield"></i></div>
+        <div><span>Safe and Secure Payments.Easy Returns.100% Authentic Products.</span></div>
+    </div>
+</div>
+
+<!-- ********  end: PRICE DETAILS  ******** -->
+

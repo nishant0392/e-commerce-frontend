@@ -10,6 +10,7 @@ body {
 .nav-item {
   margin: 0px 15px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .brand-name {
@@ -93,12 +94,49 @@ body {
   background-color: #ebf0f5;
 }
 
+/***  FOOTER  ***/
+
 footer {
-  text-align: center;
-  order: 1px solid #17a2b8;
   background-color: #212121;
-  color: whitesmoke;
-  margin-top: 5px; 
+  color: #fff;
+  margin-top: 25px;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a.tel {
+  color: #2874f0;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .footer-row-one {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 3em 4em;
+}
+
+.footer-col span {
+  color: #878787;
+}
+
+.footer-col ul {
+  margin-top: 15px;
+}
+
+.footer-col .list li {
+  margin-bottom: 10px;
+}
+
+footer .copyrights {
+  border-top: 1px solid #454d5e;
+  padding: 10px 0;
+  text-align: center;
 }
 
 /* menu settings */

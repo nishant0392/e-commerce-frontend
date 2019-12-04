@@ -4,8 +4,8 @@
 
     <div class="items-container" *ngIf="Item">
 
-        <a href="#">{{ Item.seller }}</a>
-        <span class="item-ratings">{{ Item.rating }}<i class="fas fa-star icon-rating"></i></span>
+        <a href="#">{{ Item.seller }}</a> &nbsp;
+        <star-rating-view [rating]="Item.rating" [category]="'seller'"></star-rating-view>
         <ul>
             <li *ngFor="let item of Item.items">
                 {{ item.policy }}&nbsp;<i *ngIf="item.policyInfo" class="fa fa-info-circle icon-info"></i>

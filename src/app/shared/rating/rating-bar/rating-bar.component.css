@@ -1,5 +1,7 @@
-.icon-rating {
-  bottom: 2px;
+.icon-rating::after {
+  position: relative;
+  bottom: 1px;
+  font-size: 14px;
 }
 
 .rating-bar {

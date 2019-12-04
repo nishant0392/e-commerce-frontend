@@ -1,0 +1,55 @@
+.price-details-container {
+  background-color: #fff;
+}
+
+.price-details-container .title {
+  color: #6c757d;
+  font-weight: 600;
+  padding: 17px 20px 17px 30px;
+  border-bottom: 1px solid #d2d2f1;
+}
+
+.price-details-container .price-details {
+  padding: 17px 20px 17px 30px;
+  border-bottom: 1px solid #d2d2f1;
+}
+
+.price-details .delivery-fee span,
+.price-details .total-payable span,
+.price-details .total-price-text {
+  float: right;
+}
+
+.price-details .delivery-fee {
+  padding-bottom: 1em;
+  border-bottom: 1px dashed #878787;
+}
+
+.price-details .total-payable {
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+.price-details p {
+  margin-bottom: 1em;
+}
+
+.price-details-container .savings {
+  padding: 17px 20px 17px 30px;
+  color: green;
+}
+
+.price-details-container .secure-payments-text {
+  padding: 17px 10px 17px 34px;
+  background-color: #ebf0f5;
+  color: #878787;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.price-details-container .icon-shield {
+  font-size: 2em;
+  margin-right: 10px;
+}

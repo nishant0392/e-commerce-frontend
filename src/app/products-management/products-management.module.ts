@@ -14,10 +14,11 @@ import { PropertiesComponent } from './product-details/properties/properties.com
 import { SpecificationsComponent } from './product-details/specifications/specifications.component';
 import { RatingsAndReviewsComponent } from './product-details/ratings-and-reviews/ratings-and-reviews.component';
 import { GetUserRatingsAndReviewsComponent } from './product-details/get-user-ratings-and-reviews/get-user-ratings-and-reviews.component';
+import { ViewCartComponent } from './view-cart/view-cart.component';
 
 
 @NgModule({
-  declarations: [DisplayProductComponent, HomeComponent, ProductDetailsComponent, PropertiesComponent, SpecificationsComponent, RatingsAndReviewsComponent, GetUserRatingsAndReviewsComponent],
+  declarations: [DisplayProductComponent, HomeComponent, ProductDetailsComponent, PropertiesComponent, SpecificationsComponent, RatingsAndReviewsComponent, GetUserRatingsAndReviewsComponent, ViewCartComponent],
   imports: [
     SharedModule,
     Ng5SliderModule,

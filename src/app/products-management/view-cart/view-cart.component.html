@@ -1,0 +1,147 @@
+<!-- **********************   View Cart   ********************** -->
+
+<div class="view-cart">
+    <div class="view-cart-container">
+
+        <div class="non-empty-cart" *ngIf="countOfCartItems">
+
+            <div class="cart-items">
+                <div class="title">
+                    <div class="my-cart">My Cart <span>({{ countOfCartItems }})</span></div>
+                    <div>
+                        <i class="fa fa-map-marker-alt icon-map-marker"></i>
+                        <span class="deliver-to-text">Deliver to</span>
+                        <span class="navbar d-inline-block address-dropdown">
+                            <span class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="payment-address font-600 text-muted">
+                                        <span class="txt-black">{{ paymentInfo.recipient }},</span>
+                                        <span> {{ paymentInfo.billingAddress }}</span>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="select">Select from Saved Addresses:</a>
+                                    <a class="dropdown-item" href="#">
+                                        <span class="payment-address font-600 text-muted">
+                                            <span class="txt-black">{{ paymentInfo.recipient }},</span>
+                                            <span> {{ paymentInfo.billingAddress }}</span>
+                                        </span>
+                                    </a>
+
+                                </div>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="item" *ngFor="let item of CartItems; let index=index;">
+                    <div class="item-details">
+                        <div class="item-image">
+                            <img src="../../../assets/images/{{item.image}}" />
+                        </div>
+                        <div class="item-description">
+                            <h5 class="item-title">{{item.title}}</h5>
+                            <p class="text-muted mb-1"><small>4GB RAM</small></p>
+
+                            <p class="text-muted mb-1">Seller: Flashstar Commerce <img
+                                    src="../../../assets/images/fa_8b4b59.png" height="22px" /></p>
+                            <h5 class="d-inline">₹{{item.price | number}} </h5>
+                            <small class="txt-dec-lt mr-2">₹{{item.MRP | number}}</small>
+                            <small class="txt-green">{{item.discount}}% off</small>
+                        </div>
+
+                        <div class="item-delivery">
+                            <p>
+                                Delivery by Tomorrow, Wed | <span class="txt-green pr-1">Free</span>
+                                <span class="txt-dec-lt">₹40</span>
+                            </p>
+                            <p class="text-muted"><small>10 days Replacement Policy</small></p>
+                        </div>
+                    </div>
+
+                    <div class="item-quantity">
+                        <quantity [inputQuantity]="item.quantity" (quantity)="getQuantity($event, index)"></quantity>
+                        <span class="ml-4 mr-4 cur-p text-dark" (click)="saveForLater(index)"><b>SAVE FOR
+                                LATER</b></span>
+                        <span class="cur-p text-dark" (click)="removeItemFromCart(index)"><b>REMOVE</b></span>
+                    </div>
+                </div>
+
+                <div class="place-order">
+                    <button type="button" [routerLink]="['/checkout/init']">PLACE ORDER</button>
+                </div>
+            </div>
+
+            <!-- ********  start: PRICE DETAILS  ******** -->
+            <div class="price-details-container">
+                <price-details
+                  [countOfCartItems]="countOfCartItems"
+                  [totalPrice]="totalPrice"
+                  [deliveryFee]="deliveryFee"
+                  [totalSavings]="totalSavings"
+                >
+                </price-details>
+            </div>
+            <!-- ********  end: PRICE DETAILS  ******** -->
+
+        </div>
+    </div>
+
+    <!-- ********  start: EMPTY CART  ******** -->
+    <div class="empty-cart" *ngIf="!countOfCartItems">
+        <h6><b>My Cart</b></h6> <br>
+        <div class="content">
+            <img src="assets/images/d438a32e-765a-4d8b-b4a6-520b560971e8.png" />
+            <p>Your cart is empty!</p>
+            <p><small>Add items to it now.</small></p>
+            <a [routerLink]="['/']">Shop now</a>
+        </div>
+    </div>
+    <!-- ********  end: EMPTY CART  ******** -->
+
+
+</div>
+
+
+<!-- ********  start: SAVED FOR LATER  ******** -->
+<div class="saved-for-later view-cart non-empty-cart" *ngIf="countOfSavedForLaterItems">
+
+    <div class="cart-items">
+
+        <div class="title">
+            <div class="my-cart">Saved For Later <span>({{ countOfSavedForLaterItems }})</span></div>
+        </div>
+
+        <div class="item" *ngFor="let item of savedForLaterItems; let index=index;">
+
+            <div *ngIf="item">
+                <div class="item-details">
+                    <div class="item-image">
+                        <img src="../../../assets/images/{{item.image}}" />
+                    </div>
+                    <div class="item-description">
+                        <h5 class="item-title">{{item.title}}</h5>
+                        <p class="text-muted mb-3"><small>4GB RAM</small></p>
+
+                        <h5 class="d-inline">₹{{item.price | number}} </h5>
+                        <small class="txt-dec-lt mr-2">₹{{item.MRP | number}}</small>
+                        <small class="txt-green">{{item.discount}}% off</small>
+                    </div>
+                    <div class="item-delivery"></div>
+                </div>
+
+                <div class="item-quantity">
+                    <quantity [inputQuantity]="item.quantity" [readOnly]="'true'"></quantity>
+                    <span class="ml-4 mr-4 cur-p text-dark" (click)="moveToCart(index)"><b>MOVE TO CART</b></span>
+                    <span class="cur-p text-dark"
+                        (click)="removeItemFromCart(index, 'savedForLater')"><b>REMOVE</b></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ********  end: SAVED FOR LATER  ******** -->

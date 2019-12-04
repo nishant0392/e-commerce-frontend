@@ -1,0 +1,30 @@
+.change-quantity-container {
+  font-weight: 800;
+}
+
+.change-quantity-container .increase,
+.change-quantity-container .decrease {
+  border: 1px solid #d2d2f1;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer; 
+}
+
+.change-quantity-container .increase {
+  margin-left: 0.5em;
+}
+
+.change-quantity-container .decrease {
+  margin-right: 0.5em;
+}
+
+.change-quantity-container .quantity {
+  border: 1px solid #d2d2f1;
+  border-radius: 2px;
+  padding: 5px 20px;
+}
+
+.read-only {
+  opacity: 0.4;
+  cursor: text;
+}

@@ -1,0 +1,12 @@
+.review-purchases {
+    background-color: #fff;
+}
+
+.review-purchases .title {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.review-purchases .content {
+    padding: 20px;
+}

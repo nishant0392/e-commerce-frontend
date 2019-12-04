@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-get-user-ratings-and-reviews',
   templateUrl: './get-user-ratings-and-reviews.component.html',
   styleUrls: ['./get-user-ratings-and-reviews.component.css']
 })
-export class GetUserRatingsAndReviewsComponent implements OnInit {
+export class GetUserRatingsAndReviewsComponent {
 
   public userRating: number;         // star rating out of 5
   public reviewTitle: string;        // Title of review (optional)
@@ -17,13 +17,16 @@ export class GetUserRatingsAndReviewsComponent implements OnInit {
   public activeColor_description: string = '';
 
   public errorMsg_title: string = "Max 60 characters";
-  public maxlength_title: number = 5;
+  public maxlength_title: number = 60;
   public error_title: boolean = false;
   public activeColor_title: string = '';
 
-  constructor() { }
+  public errorMsg_name: string = "Name cannot be empty";
+  public maxlength_name: number = 30;
+  public error_name: boolean = false;
+  public activeColor_name: string = '';
 
-  ngOnInit() { }
+  constructor() { }
 
 
   /**
@@ -36,7 +39,7 @@ export class GetUserRatingsAndReviewsComponent implements OnInit {
   }
 
 
-  showMessage(category: string) {
+  public showMessage(category: string) {
 
     switch (category) {
       case 'description': {
@@ -45,17 +48,20 @@ export class GetUserRatingsAndReviewsComponent implements OnInit {
       }
 
       case 'review-title': {
-        if (this.reviewTitle) {
+        if (this.reviewTitle) 
           this.error_title = this.reviewTitle.length === this.maxlength_title ? true : false;
-          console.log(this.reviewTitle.length)
-        }
       }
 
       case 'name': {
-        //   this.error_description = this.reviewDescription ? false : true;
-
+        this.error_name = this.reviewerName ? false : true;
+        this.activeColor_name = this.reviewerName ? "" : "red";
       }
     }
+  }
+
+
+  public saveProductReviews() {
+    
   }
 
 }

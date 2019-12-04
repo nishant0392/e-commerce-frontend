@@ -11,6 +11,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { SellerComponent } from './seller/seller.component';
 import { ParagraphViewComponent } from './paragraph-view/paragraph-view.component';
 import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
+import { PriceDetailsComponent } from './price-details/price-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { StarRatingViewComponent } from './star-rating-view/star-rating-view.com
     SellerComponent,
     ViewPipe,
     ParagraphViewComponent,
-    StarRatingViewComponent
+    StarRatingViewComponent,
+    PriceDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { StarRatingViewComponent } from './star-rating-view/star-rating-view.com
     SellerComponent,
     ViewPipe,
     ParagraphViewComponent,
-    StarRatingViewComponent
+    StarRatingViewComponent,
+    PriceDetailsComponent
   ]
 })
 export class ViewModule { }

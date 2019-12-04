@@ -1,0 +1,16 @@
+<!-- ************  Change Quantity  ************ -->
+
+<span class="change-quantity-container" *ngIf="!readOnlyVersion">
+    <span class="decrease" (click)="changeQuantity('decrease')" [ngStyle]="addStyle()">-</span>
+    <span class="quantity">{{ quantity }}</span>
+    <span class="increase" (click)="changeQuantity('increase')">+</span>
+</span>
+
+
+<!-- start: Read Only version -->
+<span class="change-quantity-container read-only" *ngIf="readOnlyVersion">
+    <span class="decrease">-</span>
+    <span class="quantity">{{ quantity }}</span>
+    <span class="increase">+</span>
+</span>
+<!--   end: Read Only version -->

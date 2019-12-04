@@ -118,4 +118,10 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 
+.clearFix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /*******************************************/

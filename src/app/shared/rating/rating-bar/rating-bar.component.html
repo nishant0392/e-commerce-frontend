@@ -6,7 +6,7 @@
 
         <div class="bar" *ngFor="let i of [5,4,3,2,1]; let index = index;">
             <div class="category">
-                {{ i }}<i class="fa fa-star icon-rating"></i>
+                {{ i }}<span class="icon-star icon-rating"></span>
             </div>
             <div class="bar-container">
                 <div class="bar-{{ i }}" [ngStyle]="addWidth(index)"></div>

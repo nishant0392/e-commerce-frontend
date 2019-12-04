@@ -37,8 +37,9 @@
 }
 
 .icon-rating {
+  position: relative;
   font-size: 24px;
-  bottom: 5px;
+  bottom: 3px;
 }
 
 .content .ratings .average-rating {

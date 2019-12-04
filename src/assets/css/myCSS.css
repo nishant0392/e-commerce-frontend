@@ -7,6 +7,12 @@
   vertical-align: middle;
 }
 
+.icon-map-marker {
+  color: #0d63ee;
+  font-size: 14px;
+  padding-right: 5px;
+}
+
 /** RATING STAR **/
 .icon-star:after {
   content: "\2605";
@@ -62,3 +68,41 @@
 .visible {
   visibility: visible;
 }
+
+.border {
+  border: 1px solid #d2d2f1;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #d2d2f1;
+}
+
+
+/*  ****   start: "COLORS"   ****  */
+
+.txt-green {
+  color: green;
+}
+
+.txt-black {
+  color: #212121;
+}
+
+/*  ****   end: "COLORS"   ****  */
+
+
+/*  ****   start: "FONTS"   ****  */
+
+.font-600 {
+  font-weight: 600;
+}
+
+/*  ****   end: "FONTS"   ****  */
+
+
+
+/*  ****   start: "MISCELLANEOUS"   ****  */
+
+
+
+/*  ****   end: "MISCELLANEOUS"   ****  */

@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ProductsManagementModule } from './products-management/products-management.module';
+import { UserManagementModule } from './user-management/user-management.module';
+import { PaymentsManagementModule } from './payments-management/payments-management.module';
 import { ViewModule } from './view/view.module';
 
 
@@ -28,6 +30,8 @@ import { DataProviderService } from './services/data-provider.service';
     BrowserModule,
     AppRoutingModule,
     ProductsManagementModule,
+    UserManagementModule,
+    PaymentsManagementModule,
     ViewModule,
     HttpClientModule
   ],
