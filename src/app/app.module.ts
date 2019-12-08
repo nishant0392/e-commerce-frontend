@@ -17,8 +17,9 @@ import { AppComponent } from './app.component';
 
 // Services here
 import { UserManagementService } from './services/user-management.service';
-import { ProductManagementService } from './services/product-management.service';
+import { CartService } from './services/cart.service';
 import { DataProviderService } from './services/data-provider.service';
+import { WebComponentsService } from './services/web-components.service';
 
 
 
@@ -35,7 +36,7 @@ import { DataProviderService } from './services/data-provider.service';
     ViewModule,
     HttpClientModule
   ],
-  providers: [UserManagementService, ProductManagementService, DataProviderService],
+  providers: [UserManagementService, CartService, DataProviderService, WebComponentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,251 @@
 <!-- *******************  CHECKOUT  ******************* -->
 
+<div class="checkout">
 
-<!-- ********  start: PRICE DETAILS  ******** -->
-<div class="price-details-container">
-    <price-details 
-      [countOfCartItems]="countOfCartItems" 
-      [totalPrice]="totalPrice" 
-      [deliveryFee]="deliveryFee"
+  <!-- ********  start: CHECKOUT DETAILS  ******** -->
+  <div class="checkout-details-container">
+
+    <!-- **** start: Check LOGIN **** -->
+    <div id="check-login" [ngSwitch]="View[0]">
+
+      <!-- start: UNCHECKED View-->
+      <div class="UNCHECKED-VIEW" *ngSwitchCase="'UNCHECKED'">
+        <div class="header">
+          <span class="checkout-index">1</span>
+          <span class="txt-lightgrey fs-12 font-600">LOGIN</span>
+        </div>
+      </div>
+      <!-- end: UNCHECKED View-->
+
+      <!-- start: CHANGE View -->
+      <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+
+        <div class="header">
+          <span class="checkout-index bg-white">1</span>
+          <span class="text-white fs-12 font-600">LOGIN</span>
+        </div>
+
+        <div class="login-info">
+
+          <div class="login-details">
+
+            <p class="fs-12 mb-2">
+              <span class="txt-lightgrey">Name</span>&nbsp;<span class="font-600 ml-3">Flipkart Customer</span>
+            </p>
+
+            <p class="fs-12 mb-2">
+              <span class="txt-lightgrey">Phone</span><span class="font-600 ml-3">+917204190121</span>
+            </p>
+
+            <a href="#">Logout &amp; Sign in to another account</a> <br>
+
+            <button type="button" class="button-lg" (click)="continueCheckout(0)">CONTINUE CHECKOUT</button>
+          </div>
+
+          <div class="login-ad">
+            <p class="txt-lightgrey">Advantages of our secure login</p>
+            <p><i class="fa fa-truck ad-icon"></i>Easily Track Orders, Hassle free Returns</p>
+            <p><i class="fa fa-bell ad-icon"></i> Get Relevant Alerts and Recommendation</p>
+            <p><span class="icon-star ad-icon"></span> Wishlist, Reviews, Ratings and more.</p>
+          </div>
+        </div>
+
+        <p class="warning">Please note that upon clicking "Logout" you will lose all items
+          in cart and will be redirected to N-Kart home page.
+        </p>
+      </div>
+      <!-- end: CHANGE View -->
+
+      <!-- start: CHECKED View-->
+      <div class="CHECKED-VIEW" *ngSwitchCase="'CHECKED'">
+        <div class="checkout-index">1</div>
+
+        <div class="login-info">
+          <span class="title">LOGIN</span>
+          <i class="fa fa-check icon-check"></i>
+          <p class="fs-12">
+            <span class="font-600 mr-2">Flipkart Customer</span>
+            <span class="fs-14">+917204190121</span>
+          </p>
+        </div>
+
+        <div class="change-button">
+          <button type="button" (click)="changeView(0)">CHANGE</button>
+        </div>
+      </div>
+      <!-- end: CHECKED View-->
+
+    </div>
+    <!-- **** end: Check LOGIN **** -->
+
+
+    <!-- **** start: Check DELIVERY ADDRESS **** -->
+    <div id="check-delivery-address" [ngSwitch]="View[1]">
+
+      <!-- start: UNCHECKED View-->
+      <div class="UNCHECKED-VIEW" *ngSwitchCase="'UNCHECKED'">
+        <div class="header">
+          <span class="checkout-index">2</span>
+          <span class="txt-lightgrey fs-12 font-600">DELIVERY ADDRESS</span>
+        </div>
+      </div>
+      <!-- end: UNCHECKED View-->
+
+      <!-- start: CHANGE View -->
+      <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+        <div class="header">
+          <span class="checkout-index bg-white">2</span>
+          <span class="text-white fs-12 font-600">DELIVERY ADDRESS</span>
+        </div>
+
+        <div class="delivery-address-info">
+
+          <div class="address radio-button-group">
+
+            <radio-button [value]="'NISHANT'" (selectedValue)="selectAddress($event)"></radio-button>
+
+            <div class="ml-3">
+              <p class="fs-12 mb-2">
+
+                <span class="font-600 mr-2">NISHANT KUMAR</span>
+                <span class="font-600 mr-2">7204190121</span>
+                <span class="txt-blue">EDIT</span>
+              </p>
+
+              <span class="fs-14">
+                <span class="area-street">B-11, Sri Balaji Boys PG, New BEL Road, Devasandra, </span>
+                <span class="landmark">Opposite to HP Petrol Pump, </span>
+                <span>Bangalore, Karnataka-</span>
+                <span class="pincode fs-12 font-600">560054</span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button type="button" class="button-md ml-5" (click)="continueCheckout(1)">DELIVER HERE</button>
+      </div>
+      <!-- end: CHANGE View -->
+
+      <!-- start: CHECKED View-->
+      <div class="CHECKED-VIEW" *ngSwitchCase="'CHECKED'">
+        <div class="checkout-index">2</div>
+
+        <div class="delivery-address-info">
+          <span class="title">DELIVERY ADDRESS</span>
+          <i class="fa fa-check icon-check"></i>
+          <p class="fs-12">
+            <span class="font-600 mr-2">NISHANT KUMAR</span>
+            <span class="fs-14">
+              <span class="area-street">B-11, Sri Balaji Boys PG, New BEL Road, Devasandra, </span>
+              <span class="landmark">Opposite to HP Petrol Pump, </span>
+              <span>Bangalore, Karnataka-</span>
+              <span class="pincode fs-12 font-600">560054</span>
+            </span>
+          </p>
+        </div>
+
+        <div class="change-button">
+          <button type="button" (click)="changeView(1)">CHANGE</button>
+        </div>
+      </div>
+      <!-- end: CHECKED View-->
+
+    </div>
+    <!-- **** end: Check DELIVERY ADDRESS **** -->
+
+
+    <!-- **** start: Check ORDER SUMMARY **** -->
+    <div id="check-order-summary" [ngSwitch]="View[2]">
+
+      <!-- start: UNCHECKED View-->
+      <div class="UNCHECKED-VIEW" *ngSwitchCase="'UNCHECKED'">
+        <div class="header">
+          <span class="checkout-index">3</span>
+          <span class="txt-lightgrey fs-12 font-600">ORDER SUMMARY</span>
+        </div>
+      </div>
+      <!-- end: UNCHECKED View-->
+
+      <!-- start: CHANGE View -->
+      <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+
+      </div>
+      <!-- end: CHANGE View -->
+
+      <!-- start: CHECKED View-->
+      <div class="CHECKED-VIEW" *ngSwitchCase="'CHECKED'">
+        <div class="checkout-index">3</div>
+
+        <div class="order-summary-info">
+          <span class="title">ORDER SUMMARY</span>
+          <i class="fa fa-check icon-check"></i>
+          <p class="fs-12">
+            <span class="font-600 mr-2">1 item</span>
+          </p>
+        </div>
+
+        <div class="change-button">
+          <button type="button">CHANGE</button>
+        </div>
+      </div>
+      <!-- end: CHECKED View-->
+
+    </div>
+    <!-- **** end: Check ORDER SUMMARY **** -->
+
+
+    <!-- **** start: Check PAYMENT OPTIONS **** -->
+    <div id="check-payment-options" [ngSwitch]="View[3]">
+
+      <!-- start: UNCHECKED View-->
+      <div class="UNCHECKED-VIEW" *ngSwitchCase="'UNCHECKED'">
+        <div class="header">
+          <span class="checkout-index">4</span>
+          <span class="txt-lightgrey fs-12 font-600">PAYMENT OPTIONS</span>
+        </div>
+      </div>
+      <!-- end: UNCHECKED View-->
+
+      <!-- start: CHANGE View -->
+      <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+
+      </div>
+      <!-- end: CHANGE View -->
+
+      <!-- start: CHECKED View-->
+      <div class="CHECKED-VIEW" *ngSwitchCase="'CHECKED'">
+        <div class="checkout-index">4</div>
+
+        <div class="payment-options-info">
+          <span class="title">PAYMENT OPTIONS</span>
+          <i class="fa fa-check icon-check"></i>
+          <p class="fs-12">
+            <span class="font-600 mr-2">1 item</span>
+          </p>
+        </div>
+
+        <div class="change-button">
+          <button type="button">CHANGE</button>
+        </div>
+      </div>
+      <!-- end: CHECKED View-->
+
+    </div>
+    <!-- **** end: Check PAYMENT OPTIONS **** -->
+
+
+  </div>
+  <!-- ********   end: CHECKOUT DETAILS  ******** -->
+
+
+  <!-- ********  start: PRICE DETAILS  ******** -->
+  <div class="price-details-container">
+    <price-details [countOfCartItems]="countOfCartItems" [totalPrice]="totalPrice" [deliveryFee]="deliveryFee"
       [totalSavings]="totalSavings">
     </price-details>
+  </div>
+  <!-- ********  end: PRICE DETAILS  ******** -->
+
 </div>
-<div class="clearFix"></div>
-<!-- ********  end: PRICE DETAILS  ******** -->

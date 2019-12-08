@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider2Service } from 'src/app/services/data-provider2.service';
-import { ProductManagementService } from 'src/app/services/product-management.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Cart } from 'src/app/interfaces/cart.interface';
 
 @Component({
   selector: 'app-view-cart',
@@ -9,13 +10,13 @@ import { ProductManagementService } from 'src/app/services/product-management.se
 })
 export class ViewCartComponent implements OnInit {
 
-  constructor(private productMgmtService: ProductManagementService,
+  constructor(private cartService: CartService,
     private data: DataProvider2Service) { }
 
   public CartItems: any[] = [];
-  public SavedForLaterItems: any[] = [];
+  public CartRelatedData: Cart;
 
-  public countOfCartItems: number = 0;
+  public SavedForLaterItems: any[] = [];
   public countOfSavedForLaterItems: number = 0;
 
   public paymentInfo = {
@@ -23,28 +24,16 @@ export class ViewCartComponent implements OnInit {
     billingAddress: `Sri Balaji Boys PG, New BEL Road`
   }
 
-  public deliveryFee: number = 0;
-  public totalPrice: number = 0;
-  public totalPayable: number = 0;
-  public totalSavings: number = 0;
+
 
   ngOnInit() {
+
+    // Initialize Cart
     this.initCart();
 
-    this.productMgmtService.initCart_data$.subscribe(
-      (initCart_result) => {
-        this.totalPrice = initCart_result.totalPrice;
-        this.deliveryFee = initCart_result.deliveryFee;
-        this.totalPayable = initCart_result.totalPayable;
-        this.totalSavings = initCart_result.totalSavings;
-        this.countOfCartItems = initCart_result.countOfItems;
-      },
-      (err) => console.log(err)
-    )
   }
 
 
-  
   /**
    * Initialize Cart
    */
@@ -56,86 +45,51 @@ export class ViewCartComponent implements OnInit {
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
-    this.productMgmtService.calculateTotal(this.CartItems);
+    this.cartService.calculateTotal(this.CartItems);
+
+    // calculate count of "Saved For Later" items
+    this.countOfSavedForLaterItems
+      = this.cartService.calculateCountOfItems(this.SavedForLaterItems);
+
+    // save the count in service file  
+    this.cartService.countOfSavedForLaterItems = this.countOfSavedForLaterItems;
+
+    // Get the Cart Related Data
+    this.cartService.initCart_data$.subscribe(
+      (initCart_result) => {
+
+        this.CartRelatedData = {
+          totalPrice: initCart_result.totalPrice,
+          deliveryFee: initCart_result.deliveryFee,
+          totalPayable: initCart_result.totalPayable,
+          totalSavings: initCart_result.totalSavings,
+          countOfItems: initCart_result.countOfCartItems
+        };
+
+      },
+
+      (err) => console.log(err)
+    );
 
   }
 
 
-  public getQuantity(quantity: number, index: number) {
+  /**
+   * Performs the given operation on the corresponding Cart Item. Operations are:  
+   ** 'UPDATE_QUANTITY' - Update the quantity of the respective item.
+   ** 'SAVE_FOR_LATER' - Save the item for later.
+   ** 'REMOVE' - Remove the item from cart.
+   ** 'MOVE_TO_CART' - Move the "saved for later" item to cart.
+   * @param data data received namely 'operation', 'indexOfItem', 'cartType' and/or 'quantity'.
+   */
+  public operationOnCartItem(data: any) {
 
-    let cartItem = this.CartItems[index];
-    let change = quantity - cartItem.quantity;
+    this.cartService.
+      operationOnCartItem(this.CartItems, this.CartRelatedData, this.SavedForLaterItems, data);
 
-    this.totalPrice = this.totalPrice + change * cartItem.price;
-    this.totalSavings = this.totalSavings + change * (cartItem.MRP - cartItem.price);
-
-    this.CartItems[index].quantity = quantity;
-
-    if (change === 1)
-      this.countOfCartItems++;
-
-    else if (change === -1)
-      this.countOfCartItems--;
-  }
-
-
-  public removeItemFromCart(indexOfItem: number, cartType?: string) {
-
-    if (cartType === 'savedForLater') {
-
-      this.countOfSavedForLaterItems -= this.SavedForLaterItems[indexOfItem].quantity;
-
-      this.SavedForLaterItems = this.SavedForLaterItems.filter(
-        (currentValue, index) => {
-          return (indexOfItem !== index);
-        });
-    }
-
-    else {
-      let cartItem = this.CartItems[indexOfItem];
-
-      // Do the Maths
-      this.totalPrice = this.totalPrice - (cartItem.quantity * cartItem.price);
-      this.totalSavings = this.totalSavings - (cartItem.quantity * (cartItem.MRP - cartItem.price));
-      this.countOfCartItems = this.countOfCartItems - cartItem.quantity;
-
-      this.CartItems = this.CartItems.filter(
-        (currentValue, index) => {
-          return (indexOfItem !== index);
-        });
-    }
-  }
-
-
-  public saveForLater(indexOfItem: number) {
-
-    // Add to "savedForLater" Cart
-    this.SavedForLaterItems.push(this.CartItems[indexOfItem]);
-    this.countOfSavedForLaterItems += this.CartItems[indexOfItem].quantity;
-
-    // Remove from Cart
-    this.removeItemFromCart(indexOfItem);
+    // update count for "SAVED FOR LATER" Items
+    this.countOfSavedForLaterItems = this.cartService.countOfSavedForLaterItems;
 
   }
 
-
-  public moveToCart(indexOfItem: number) {
-
-    let itemToAdd = this.SavedForLaterItems[indexOfItem];
-
-    // Add to Cart
-    this.CartItems.push(itemToAdd);
-
-    // Do the Maths
-    this.totalPrice = this.totalPrice + (itemToAdd.quantity * itemToAdd.price);
-    this.totalSavings = this.totalSavings + (itemToAdd.quantity * (itemToAdd.MRP - itemToAdd.price));
-    this.countOfCartItems = this.countOfCartItems + itemToAdd.quantity;
-
-    // Remove from "savedForLater" Cart
-    this.removeItemFromCart(indexOfItem, 'savedForLater');
-
-  }
-
-
-
-}
+} // END

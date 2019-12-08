@@ -88,6 +88,18 @@
   color: #212121;
 }
 
+.txt-lightgrey {
+  color: #878787;
+}
+
+.txt-blue {
+  color: #2874f0;
+}
+
+.bg-Blue {
+  background-color: #2874f0;
+}
+
 /*  ****   end: "COLORS"   ****  */
 
 
@@ -97,12 +109,47 @@
   font-weight: 600;
 }
 
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-15 {
+  font-size: 15px;
+}
+
 /*  ****   end: "FONTS"   ****  */
 
 
+/*  ****   start: "BUTTONS"   ****  */
+
+.button-lg {
+  padding: 0.8em 1.4em;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  width: 100%;
+  background-color: #fb641b;
+}
+
+.button-md {
+  padding: 0.8em 1.4em;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  width: 150px;
+  background-color: #fb641b;
+}
+
+
+
+/*  ****   end: "BUTTONS"   ****  */
+
 
 /*  ****   start: "MISCELLANEOUS"   ****  */
-
 
 
 /*  ****   end: "MISCELLANEOUS"   ****  */

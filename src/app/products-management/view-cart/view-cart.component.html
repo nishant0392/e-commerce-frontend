@@ -3,11 +3,11 @@
 <div class="view-cart">
     <div class="view-cart-container">
 
-        <div class="non-empty-cart" *ngIf="countOfCartItems">
+        <div class="non-empty-cart" *ngIf="CartRelatedData.countOfItems">
 
             <div class="cart-items">
                 <div class="title">
-                    <div class="my-cart">My Cart <span>({{ countOfCartItems }})</span></div>
+                    <div class="my-cart">My Cart <span>({{ CartRelatedData.countOfItems }})</span></div>
                     <div>
                         <i class="fa fa-map-marker-alt icon-map-marker"></i>
                         <span class="deliver-to-text">Deliver to</span>
@@ -35,38 +35,10 @@
                     </div>
                 </div>
 
-                <div class="item" *ngFor="let item of CartItems; let index=index;">
-                    <div class="item-details">
-                        <div class="item-image">
-                            <img src="../../../assets/images/{{item.image}}" />
-                        </div>
-                        <div class="item-description">
-                            <h5 class="item-title">{{item.title}}</h5>
-                            <p class="text-muted mb-1"><small>4GB RAM</small></p>
-
-                            <p class="text-muted mb-1">Seller: Flashstar Commerce <img
-                                    src="../../../assets/images/fa_8b4b59.png" height="22px" /></p>
-                            <h5 class="d-inline">₹{{item.price | number}} </h5>
-                            <small class="txt-dec-lt mr-2">₹{{item.MRP | number}}</small>
-                            <small class="txt-green">{{item.discount}}% off</small>
-                        </div>
-
-                        <div class="item-delivery">
-                            <p>
-                                Delivery by Tomorrow, Wed | <span class="txt-green pr-1">Free</span>
-                                <span class="txt-dec-lt">₹40</span>
-                            </p>
-                            <p class="text-muted"><small>10 days Replacement Policy</small></p>
-                        </div>
-                    </div>
-
-                    <div class="item-quantity">
-                        <quantity [inputQuantity]="item.quantity" (quantity)="getQuantity($event, index)"></quantity>
-                        <span class="ml-4 mr-4 cur-p text-dark" (click)="saveForLater(index)"><b>SAVE FOR
-                                LATER</b></span>
-                        <span class="cur-p text-dark" (click)="removeItemFromCart(index)"><b>REMOVE</b></span>
-                    </div>
-                </div>
+                <cart-items 
+                [CartItems]="CartItems" 
+                (OutputData)="operationOnCartItem($event)">
+                </cart-items>
 
                 <div class="place-order">
                     <button type="button" [routerLink]="['/checkout/init']">PLACE ORDER</button>
@@ -76,10 +48,10 @@
             <!-- ********  start: PRICE DETAILS  ******** -->
             <div class="price-details-container">
                 <price-details
-                  [countOfCartItems]="countOfCartItems"
-                  [totalPrice]="totalPrice"
-                  [deliveryFee]="deliveryFee"
-                  [totalSavings]="totalSavings"
+                  [countOfCartItems]="CartRelatedData.countOfItems"
+                  [totalPrice]="CartRelatedData.totalPrice"
+                  [deliveryFee]="CartRelatedData.deliveryFee"
+                  [totalSavings]="CartRelatedData.totalSavings"
                 >
                 </price-details>
             </div>
@@ -89,7 +61,7 @@
     </div>
 
     <!-- ********  start: EMPTY CART  ******** -->
-    <div class="empty-cart" *ngIf="!countOfCartItems">
+    <div class="empty-cart" *ngIf="!CartRelatedData.countOfItems">
         <h6><b>My Cart</b></h6> <br>
         <div class="content">
             <img src="assets/images/d438a32e-765a-4d8b-b4a6-520b560971e8.png" />
@@ -113,33 +85,10 @@
             <div class="my-cart">Saved For Later <span>({{ countOfSavedForLaterItems }})</span></div>
         </div>
 
-        <div class="item" *ngFor="let item of savedForLaterItems; let index=index;">
-
-            <div *ngIf="item">
-                <div class="item-details">
-                    <div class="item-image">
-                        <img src="../../../assets/images/{{item.image}}" />
-                    </div>
-                    <div class="item-description">
-                        <h5 class="item-title">{{item.title}}</h5>
-                        <p class="text-muted mb-3"><small>4GB RAM</small></p>
-
-                        <h5 class="d-inline">₹{{item.price | number}} </h5>
-                        <small class="txt-dec-lt mr-2">₹{{item.MRP | number}}</small>
-                        <small class="txt-green">{{item.discount}}% off</small>
-                    </div>
-                    <div class="item-delivery"></div>
-                </div>
-
-                <div class="item-quantity">
-                    <quantity [inputQuantity]="item.quantity" [readOnly]="'true'"></quantity>
-                    <span class="ml-4 mr-4 cur-p text-dark" (click)="moveToCart(index)"><b>MOVE TO CART</b></span>
-                    <span class="cur-p text-dark"
-                        (click)="removeItemFromCart(index, 'savedForLater')"><b>REMOVE</b></span>
-                </div>
-            </div>
-
-        </div>
+        <cart-items 
+            [SavedForLaterItems]="SavedForLaterItems" 
+            (OutputData)="operationOnCartItem($event)">
+        </cart-items>
 
     </div>
 

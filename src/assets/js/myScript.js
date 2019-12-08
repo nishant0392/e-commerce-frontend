@@ -10,7 +10,7 @@ function scrollToTop() {
   setTimeout(() => {
     window.scrollTo({
       top: 0,
-      behaviour: 'smooth'
+      behavior: 'smooth'
     })
   }, 250);
 

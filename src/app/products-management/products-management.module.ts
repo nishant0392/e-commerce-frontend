@@ -15,10 +15,21 @@ import { SpecificationsComponent } from './product-details/specifications/specif
 import { RatingsAndReviewsComponent } from './product-details/ratings-and-reviews/ratings-and-reviews.component';
 import { GetUserRatingsAndReviewsComponent } from './product-details/get-user-ratings-and-reviews/get-user-ratings-and-reviews.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
+import { CartItemsComponent } from './view-cart/cart-items/cart-items.component';
 
 
 @NgModule({
-  declarations: [DisplayProductComponent, HomeComponent, ProductDetailsComponent, PropertiesComponent, SpecificationsComponent, RatingsAndReviewsComponent, GetUserRatingsAndReviewsComponent, ViewCartComponent],
+  declarations: [
+    DisplayProductComponent,
+    HomeComponent,
+    ProductDetailsComponent,
+    PropertiesComponent, 
+    SpecificationsComponent, 
+    RatingsAndReviewsComponent, 
+    GetUserRatingsAndReviewsComponent, 
+    ViewCartComponent,
+    CartItemsComponent
+  ],
   imports: [
     SharedModule,
     Ng5SliderModule,

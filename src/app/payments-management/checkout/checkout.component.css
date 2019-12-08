@@ -1,4 +1,148 @@
+.checkout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.5em 2em;
+}
+
+.checkout-details-container {
+  flex-basis: 700px;
+  margin-right: 10px;
+}
+
 .price-details-container {
-    width: 400px;
-    float: right;
+  flex-basis: 350px;
+}
+
+#check-login,
+#check-delivery-address,
+#check-order-summary,
+#check-payment-options {
+  margin-bottom: 1em;
+  background-color: #fff;
+}
+
+.checkout-details-container .title {
+  color: #878787;
+  font-size: 15px;
+  font-weight: 600;
+  position: relative;
+  bottom: 3px;
+}
+
+.checkout-details-container p {
+  margin-bottom: 0;
+}
+
+.change-button button {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
+  border-radius: 2px;
+  border: 1px solid #d2d2f1;
+  color: #2874f0;
+  background-color: #fff;
+  margin-left: 20px;
+}
+
+.CHECKED-VIEW .login-info,
+.CHECKED-VIEW .delivery-address-info,
+.CHECKED-VIEW .order-summary-info,
+.CHECKED-VIEW .payment-options-info {
+  flex: 1;
+}
+
+.icon-check {
+  font-size: 12px;
+  color: #113f88;
+  margin: 0 10px;
+  position: relative;
+  bottom: 3px;
+}
+
+.UNCHECKED-VIEW .header {
+  padding: 6px 20px;
+}
+
+.CHECKED-VIEW {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 15px 15px 15px;
+}
+
+.CHANGE-VIEW .header {
+  padding: 6px 20px;
+  background-color: #2874f0;
+}
+
+.CHANGE-VIEW .login-info {
+  padding: 15px 30px;
+  display: flex;
+}
+
+.CHANGE-VIEW .login-info a {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.CHANGE-VIEW .login-details {
+  width: 275px;
+  margin-right: 75px;
+}
+
+.CHANGE-VIEW .login-ad {
+  font-size: 12px;
+}
+
+.CHANGE-VIEW .login-ad p {
+  margin-bottom: 0.8em;
+}
+
+.CHANGE-VIEW .login-ad .icon-star:after {
+  font-size: 14px;
+}
+
+.CHANGE-VIEW p.warning {
+  font-size: 12px;
+  color: #878787;
+  padding: 15px 30px;
+}
+
+.ad-icon {
+  color: #2874f0;
+  margin-right: 1em;
+}
+
+.checkout-index {
+  background-color: #f0f0f0;
+  color: #2874f0;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0px 5px;
+  margin-right: 15px;
+}
+
+.button-lg {
+  font-size: 14px;
+  padding: 0.7em 1em;
+  margin-top: 8px;
+}
+
+.button-md {
+  font-size: 14px;
+  padding: 0.7em 1em;
+  margin: 8px 5px 15px 30px;
+  width: 200px;
+}
+
+.delivery-address-info .address {
+  padding: 15px 20px;
+  display: flex;
+}
+
+.address span.txt-blue {
+  float: right;
+  cursor: pointer;
 }

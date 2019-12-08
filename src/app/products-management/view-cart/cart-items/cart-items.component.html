@@ -1,0 +1,80 @@
+<!--  *********************  start: CART Items  *********************  -->
+
+<div class="cart-items">
+
+    <div class="item" *ngFor="let item of CartItems; let index=index;">
+
+        <div class="item-details">
+            <div class="item-image">
+                <img src="/assets/images/{{item.image}}" />
+            </div>
+            <div class="item-description">
+                <h6 class="item-title">{{ item.title }}</h6>
+                <p class="text-muted mb-1"><small>4GB RAM</small></p>
+
+                <p class="text-muted mb-1 fs-14">Seller: {{ item.seller.name }}
+                    <img src="/assets/images/fa_8b4b59.png" height="18px" width="50px" /></p>
+                <h5 class="d-inline">₹{{ item.price | number }} </h5>
+                <small class="txt-dec-lt mr-2">₹{{ item.MRP | number }}</small>
+                <small class="txt-green">{{ item.discount }}% off</small>
+            </div>
+
+            <div class="item-delivery">
+                <p class="mb-0">
+                    Delivery by Tomorrow, Wed | <span class="txt-green pr-1">Free</span>
+                    <span class="txt-dec-lt">₹40</span>
+                </p>
+                <p class="text-muted"><small>10 days Replacement Policy</small></p>
+            </div>
+        </div>
+
+        <div class="item-quantity">
+            <quantity [inputQuantity]="item.quantity" (quantity)="sendData('UPDATE_QUANTITY', index, 'CART', $event)">
+            </quantity>
+            <span class="ml-4 mr-4 cur-p text-dark" (click)="sendData('SAVE_FOR_LATER', index, 'CART')">
+                <b>SAVE FOR LATER</b></span>
+            <span class="cur-p text-dark" (click)="sendData('REMOVE', index, 'CART')"><b>REMOVE</b></span>
+        </div>
+
+    </div>
+
+</div>
+
+<!--  *********************  end: CART Items  *********************  -->
+
+
+
+<!--  **************  start: "SAVED FOR LATER" Items  **************  -->
+
+<div class="cart-items">
+
+    <div class="item" *ngFor="let item of SavedForLaterItems; let index=index;">
+
+        <div *ngIf="item">
+            <div class="item-details">
+                <div class="item-image">
+                    <img src="../../../assets/images/{{item.image}}" />
+                </div>
+                <div class="item-description">
+                    <h6 class="item-title">{{item.title}}</h6>
+                    <p class="text-muted mb-3"><small>4GB RAM</small></p>
+
+                    <h5 class="d-inline">₹{{item.price | number}} </h5>
+                    <small class="txt-dec-lt mr-2">₹{{item.MRP | number}}</small>
+                    <small class="txt-green">{{item.discount}}% off</small>
+                </div>
+                <div class="item-delivery"></div>
+            </div>
+
+            <div class="item-quantity">
+                <quantity [inputQuantity]="item.quantity" [readOnly]="'true'"></quantity>
+                <span class="ml-4 mr-4 cur-p text-dark" (click)="sendData('MOVE_TO_CART', index, 'SAVED_FOR_LATER')"><b>MOVE TO CART</b></span>
+                <span class="cur-p text-dark" (click)="sendData('REMOVE', index, 'SAVED_FOR_LATER')"><b>REMOVE</b></span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--  **************  end: "SAVED FOR LATER" Items  **************  -->

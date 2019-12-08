@@ -12,6 +12,7 @@ import { SellerComponent } from './seller/seller.component';
 import { ParagraphViewComponent } from './paragraph-view/paragraph-view.component';
 import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
 import { PriceDetailsComponent } from './price-details/price-details.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PriceDetailsComponent } from './price-details/price-details.component';
     ViewPipe,
     ParagraphViewComponent,
     StarRatingViewComponent,
-    PriceDetailsComponent
+    PriceDetailsComponent,
+    RadioButtonComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { PriceDetailsComponent } from './price-details/price-details.component';
     ViewPipe,
     ParagraphViewComponent,
     StarRatingViewComponent,
-    PriceDetailsComponent
+    PriceDetailsComponent,
+    RadioButtonComponent
   ]
 })
 export class ViewModule { }

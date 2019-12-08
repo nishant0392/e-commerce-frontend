@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider2Service } from 'src/app/services/data-provider2.service';
-import { ProductManagementService } from 'src/app/services/product-management.service';
+import { ProductManagementService, CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -10,7 +10,7 @@ import { ProductManagementService } from 'src/app/services/product-management.se
 export class CheckoutComponent implements OnInit {
 
   constructor(
-    private productMgmtService: ProductManagementService,
+    private cartService: CartService,
     private data: DataProvider2Service
   ) { }
 
@@ -30,10 +30,13 @@ export class CheckoutComponent implements OnInit {
   public totalPayable: number = 0;
   public totalSavings: number = 0;
 
+  // View Controller
+  public View: string[] = ['UNCHECKED', 'CHANGE', 'UNCHECKED', 'UNCHECKED']; 
+
   ngOnInit() {
     this.initCart();
 
-    this.productMgmtService.initCart_data$.subscribe(
+    this.cartService.initCart_data$.subscribe(
       (initCart_result) => {
         this.totalPrice = initCart_result.totalPrice;
         this.deliveryFee = initCart_result.deliveryFee;
@@ -56,10 +59,32 @@ export class CheckoutComponent implements OnInit {
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
-    this.productMgmtService.calculateTotal(this.CartItems);
+    this.cartService.calculateTotal(this.CartItems);
 
   }
 
+
+  public changeView(index: number) {
+    this.View[index] = 'CHANGE';
+  }
+
+  public continueCheckout(index: number) {
+     
+    this.View[index] = 'CHECKED';
+
+    if(index < 3) {
+      this.View[index+1] = 'CHANGE';
+    }
+
+    else {
+
+    }
+  }
+
+
+  public selectAddress(address) {
+  console.log(address)
+  }
 
 
 }
