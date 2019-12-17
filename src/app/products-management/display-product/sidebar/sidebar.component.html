@@ -1,0 +1,77 @@
+<!-- ================  START: Sidebar  =================== -->
+<div class="sidebar">
+    <h5 class="sidebar-header">Filters</h5>
+
+    <!-- *****  CATEGORIES Section  ***** -->
+    <section class="categories">
+
+        <p>CATEGORIES</p>
+        <ul><i (click)="toggleCategories()" [ngClass]="chev_arrow"></i>&nbsp;&nbsp;{{category}}
+            <div *ngIf="!isCollapsed">
+                <li *ngFor="let sub_category of sub_categories">{{sub_category}}</li>
+            </div>
+        </ul>
+
+    </section>
+
+    <!-- *****  PRICE Section  ***** -->
+    <section class="price">
+
+        <p>PRICE <span class="clear-filter">CLEAR</span></p>
+
+        <div class="custom-slider">
+            <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+            <p>Min value: <input type="number" [(ngModel)]="minValue"></p>
+            <p>Max value: <input type="number" [(ngModel)]="maxValue"></p>
+        </div>
+    </section>
+
+
+    <!-- *****  PROPERTIES Section  ***** -->
+    <section *ngFor="let prop of propertiesList; let index = index">
+
+        <div *ngIf="prop">
+
+            <p>{{ prop.property }}
+                <span [ngClass]="prop.show ? chev_up_arrow : chev_down_arrow" class="collapse-filter"
+                    (click)="prop.show = !prop.show"></span>
+            </p>
+
+            <div class="checkbox" *ngIf="prop.show">
+
+                <div [ngSwitch]="prop.property">
+
+                    <div *ngSwitchCase="'CUSTOMER RATINGS'">
+                        <label *ngFor="let i of [4,3,2,1]">
+                            <input type="checkbox" value="">
+                            <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                            {{ i }}<i class="fas fa-star icon-rating"></i> &amp; above
+                        </label>
+                    </div>
+
+                    <div *ngSwitchDefault>
+                        <label *ngFor="let value of ItemFilterProperties[prop.property]">
+                            <input type="checkbox" value="">
+                            <span class="cr"><i class="cr-icon fas fa-check-square"></i></span>
+                            {{ value }}
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- *****  BUYING Guide Section  ***** -->
+    <section id="buying-guide">
+        <p>Need help ? </p>
+        <p class="helpme">Help me decide <i class="fas fa-chevron-right icon-chevron-right"></i></p>
+        <img src="../../../assets/images/buying-guide-illustration_48642c.png" />
+    </section>
+</div>
+
+
+<!-- ================  END: Sidebar  ====================== -->

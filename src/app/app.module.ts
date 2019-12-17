@@ -20,6 +20,7 @@ import { UserManagementService } from './services/user-management.service';
 import { CartService } from './services/cart.service';
 import { DataProviderService } from './services/data-provider.service';
 import { WebComponentsService } from './services/web-components.service';
+import { PaymentService } from './services/payment.service';
 
 
 
@@ -36,7 +37,13 @@ import { WebComponentsService } from './services/web-components.service';
     ViewModule,
     HttpClientModule
   ],
-  providers: [UserManagementService, CartService, DataProviderService, WebComponentsService],
+  providers: [
+    UserManagementService,
+    CartService, 
+    DataProviderService, 
+    WebComponentsService,
+    PaymentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

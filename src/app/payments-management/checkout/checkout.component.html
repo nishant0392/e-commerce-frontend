@@ -1,4 +1,4 @@
-<!-- *******************  CHECKOUT  ******************* -->
+<!-- *******************  START: CHECKOUT  ******************* -->
 
 <div class="checkout">
 
@@ -102,7 +102,7 @@
 
           <div class="address radio-button-group">
 
-            <radio-button [value]="'NISHANT'" (selectedValue)="selectAddress($event)"></radio-button>
+            <radio-button [value]="'NISHANT'" [selected]="true" (selectedValue)="selectAddress($event)"></radio-button>
 
             <div class="ml-3">
               <p class="fs-12 mb-2">
@@ -170,6 +170,31 @@
 
       <!-- start: CHANGE View -->
       <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+        <div class="header">
+          <span class="checkout-index bg-white">3</span>
+          <span class="text-white fs-12 font-600">ORDER SUMMARY</span>
+        </div>
+
+        <div class="order-summary-info">
+
+          <div *ngIf="CheckoutRelatedData.countOfItems">
+              <cart-items 
+              [CartItems]="CheckoutItems" 
+              [saveForLaterOption]="false" 
+              (OutputData)="operationOnCheckoutItem($event)">
+            </cart-items>
+  
+            <div class="confirm-mail">
+              <span class="fs-12">Order confirmation email will be sent to <span class="email">nishkr0392@gmail.com</span></span>
+              <button type="button" class="button-md ml-5" (click)="continueCheckout(2)">CONTINUE</button>
+            </div>
+          </div>
+          
+          <div class="empty" *ngIf="!CheckoutRelatedData.countOfItems">
+              <span>Your checkout has no items.</span>
+          </div>
+
+        </div>
 
       </div>
       <!-- end: CHANGE View -->
@@ -182,12 +207,16 @@
           <span class="title">ORDER SUMMARY</span>
           <i class="fa fa-check icon-check"></i>
           <p class="fs-12">
-            <span class="font-600 mr-2">1 item</span>
+            <span 
+              *ngIf="CheckoutRelatedData.countOfItems"
+              class="font-600 mr-2"
+            >{{ CheckoutRelatedData.countOfItems }} item<span *ngIf="CheckoutRelatedData.countOfItems > 1">s</span>
+            </span>
           </p>
         </div>
 
         <div class="change-button">
-          <button type="button">CHANGE</button>
+          <button type="button" (click)="changeView(2)">CHANGE</button>
         </div>
       </div>
       <!-- end: CHECKED View-->
@@ -210,7 +239,40 @@
 
       <!-- start: CHANGE View -->
       <div class="CHANGE-VIEW" *ngSwitchCase="'CHANGE'">
+          <div class="header">
+              <span class="checkout-index bg-white">4</span>
+              <span class="text-white fs-12 font-600">PAYMENT OPTIONS</span>
+          </div>
+    
+          <div class="payment-options-info">
+            <div class="radio-button-group">
 
+              <div class="radio-button" [ngClass]="{'active': show[0]}">
+                <radio-button [value]="'card'" (selectedValue)="selectPaymentMode($event)"></radio-button>
+                <span class="radio-btn-text">Credit / Debit / ATM Card</span>
+                <div *ngIf="show[0]">
+                  <p class="mt-3 fs-14 ml-4 text-dark font-600">&nbsp;You will be redirected to PayUMoney page where you can pay using card.</p>
+                  <button class="button-md bg-Red" (click)="goToPayment('card')">GO TO PAYMENT</button>
+                </div>
+              </div>
+             
+              <div class="radio-button" [ngClass]="{'active': show[1]}">
+                <radio-button [value]="'COD'" [selected]="true" (selectedValue)="selectPaymentMode($event)"></radio-button>
+                <span class="radio-btn-text">Cash on Delivery</span>
+
+                <div class="COD" *ngIf="show[1]">
+                  <div class="captcha">
+                    <div id="COD-captcha" class="captcha-text"></div>
+                    <i class="fa fa-redo icon-refresh" (click)="getCaptcha()"></i>
+                  </div>
+                  <input-button [maxlength]="6"></input-button>
+                  <button class="button-md bg-Red ml-5">CONFIRM ORDER</button>
+                </div>
+          
+              </div>
+
+            </div>  
+          </div>
       </div>
       <!-- end: CHANGE View -->
 
@@ -222,8 +284,12 @@
           <span class="title">PAYMENT OPTIONS</span>
           <i class="fa fa-check icon-check"></i>
           <p class="fs-12">
-            <span class="font-600 mr-2">1 item</span>
-          </p>
+              <span 
+                *ngIf="CheckoutRelatedData.countOfItems"
+                class="font-600 mr-2"
+              >{{ CheckoutRelatedData.countOfItems }} item<span *ngIf="CheckoutRelatedData.countOfItems > 1">s</span>
+              </span>
+            </p>
         </div>
 
         <div class="change-button">
@@ -241,11 +307,48 @@
 
 
   <!-- ********  start: PRICE DETAILS  ******** -->
-  <div class="price-details-container">
-    <price-details [countOfCartItems]="countOfCartItems" [totalPrice]="totalPrice" [deliveryFee]="deliveryFee"
-      [totalSavings]="totalSavings">
+  <div class="price-details-container" *ngIf="CheckoutRelatedData.countOfItems">
+    <price-details 
+      [countOfCartItems]="CheckoutRelatedData.countOfItems" 
+      [totalPrice]="CheckoutRelatedData.totalPrice" 
+      [deliveryFee]="CheckoutRelatedData.deliveryFee"
+      [totalSavings]="CheckoutRelatedData.totalSavings">
     </price-details>
   </div>
+  
   <!-- ********  end: PRICE DETAILS  ******** -->
 
 </div>
+
+<!-- *******************  END: CHECKOUT  ******************* -->
+
+
+<!--  Hidden Link for 'GO TO CART' Modal  -->
+<a #modal_GoToCart 
+   data-toggle="modal" 
+   data-target="#myModal-GoToCart"
+   data-backdrop="static"
+>GoToCart</a>
+
+
+<!-- START: 'GO TO CART' Modal -->
+
+    <div id="myModal-GoToCart" class="modal">
+        <div class="modal-content">
+    
+          <div class="myModal-custom-content">
+    
+            <div class="main">
+    
+              <i class="fa fa-exclamation-circle icon-exclamation"></i>
+              <p>Your checkout has no items.</p>
+              <a class="button-md" href="/view-cart">GO TO CART</a>
+    
+            </div>
+    
+          </div>
+        </div>
+    </div>
+
+
+<!-- END: 'GO TO CART' Modal  -->

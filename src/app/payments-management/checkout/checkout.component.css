@@ -6,12 +6,12 @@
 }
 
 .checkout-details-container {
-  flex-basis: 700px;
+  flex-basis: 775px;
   margin-right: 10px;
 }
 
 .price-details-container {
-  flex-basis: 350px;
+  flex-basis: 325px;
 }
 
 #check-login,
@@ -145,4 +145,70 @@
 .address span.txt-blue {
   float: right;
   cursor: pointer;
+}
+
+.order-summary-info .confirm-mail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px 0 33px;
+}
+
+.confirm-mail .email {
+  font-weight: 600;
+  background-color: rgb(238, 235, 235);
+}
+
+.confirm-mail span.fs-12 {
+  position: relative;
+  bottom: .2em;
+}
+
+.order-summary-info .empty {
+  background-color: rgb(245, 245, 191);
+  font-size: 14px;
+  padding: 15px 15px 15px 18px;
+}
+
+a[data-target="#myModal-GoToCart"] {
+  visibility: hidden;
+}
+
+.payment-options-info .radio-button {
+  padding: 12px 20px 9px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.payment-options-info .radio-btn-text {
+  font-size: 14px;
+  margin-left: 15px;
+  position: relative;
+  bottom: 3px;
+}
+
+.checkout .active {
+  background-color: rgb(214, 235, 235);
+}
+
+.checkout .COD {
+  display: flex;
+  margin-top: 10px;
+}
+
+.checkout .captcha {
+  margin-right: 20px;
+}
+
+.COD button {
+  margin: 4px 0 0 20px !important;
+  width: auto;
+  height: 40px;
+}
+
+
+/** Media queries **/
+@media screen and (max-width: 900px) {
+  .checkout {
+    padding: 0;
+  }
 }

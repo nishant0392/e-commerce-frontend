@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Options } from 'ng5-slider';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,22 +16,6 @@ export class DisplayProductComponent implements OnInit {
   public Items: any[];
   public countOfItems: number;
 
-  // Miscellaneous
-  public chev_left_arrow = "fas fa-chevron-left icon-chevron-left";
-  public chev_down_arrow = "fas fa-chevron-down icon-chevron-down";
-  public chev_up_arrow = "fas fa-chevron-up icon-chevron-up";
-  public chev_arrow: string;
-  public chev_arrow_show: string;
-  public isCollapsed: boolean = true;
-  public show: boolean[];
-
-  // Range Slider configuration
-  public minValue: number = 50;
-  public maxValue: number = 750;
-  public options: Options = {
-    floor: 0,
-    ceil: 1000
-  };
 
   // Pagination 
   public selectedPage: number = 1;
@@ -359,51 +342,7 @@ export class DisplayProductComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.chev_arrow = this.chev_left_arrow;
-    this.chev_arrow_show = this.chev_down_arrow;
-
-    this.show = [];
-
-    // Set 'show' flags to false (for collapsed version)
-    for (let i = 0; i < 10; i++) {
-      this.show[i] = false;
-    }
-
-    // Set selected 'show' flags to true (for expanded version)
-    this.fillSelected([0, 2]);
-    console.log(this.show)
-
     this.displayItems(5);
-  }
-
-
-  // fill show array with true at selected positions
-  fillSelected(arr) {
-    for (let i = 0; i < arr.length; i++)
-      this.show[arr[i]] = true;
-  }
-
-
-  toggleCategories() {
-    if (this.isCollapsed)
-      this.chev_arrow = this.chev_down_arrow;
-
-    else
-      this.chev_arrow = this.chev_left_arrow;
-
-    this.isCollapsed = !this.isCollapsed;
-  }
-
-
-  toggleCollapse(indexOfSection) {
-    if (this.show[indexOfSection])
-      this.chev_arrow_show = this.chev_up_arrow;
-
-    else
-      this.chev_arrow_show = this.chev_down_arrow;
-
-    this.show[indexOfSection] = !this.show[indexOfSection];
   }
 
 

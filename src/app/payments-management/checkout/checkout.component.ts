@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, isDevMode } from '@angular/core';
 import { DataProvider2Service } from 'src/app/services/data-provider2.service';
-import { ProductManagementService, CartService } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Cart } from 'src/app/interfaces/cart.interface';
+import { PaymentService, PayUMoneyParams } from 'src/app/services/payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -10,56 +13,87 @@ import { ProductManagementService, CartService } from 'src/app/services/cart.ser
 export class CheckoutComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private cartService: CartService,
+    private paymentService: PaymentService,
     private data: DataProvider2Service
   ) { }
 
-  public CartItems: any[] = [];
-  public SavedForLaterItems: any[] = [];
+  // 'Go To Cart' Modal
+  @ViewChild('modal_GoToCart', { static: true }) modal_GoToCart: ElementRef<HTMLElement>
 
-  public countOfCartItems: number = 0;
-  public countOfSavedForLaterItems: number = 0;
+  // replica of the cart items
+  public CheckoutItems: any[] = [];
+  public CheckoutRelatedData: Cart;
 
   public paymentInfo = {
     recipient: 'NISHANT KUMAR',
     billingAddress: `Sri Balaji Boys PG, New BEL Road`
   }
 
-  public deliveryFee: number = 0;
-  public totalPrice: number = 0;
-  public totalPayable: number = 0;
-  public totalSavings: number = 0;
-
   // View Controller
-  public View: string[] = ['UNCHECKED', 'CHANGE', 'UNCHECKED', 'UNCHECKED']; 
+  public View: string[] = ['UNCHECKED', 'UNCHECKED', 'UNCHECKED', 'CHANGE'];
+  public show: boolean[] = [false, true];
+  public captcha: any;   // captcha
+
 
   ngOnInit() {
-    this.initCart();
+    // Initialize Checkout
+    this.initCheckout();
 
-    this.cartService.initCart_data$.subscribe(
-      (initCart_result) => {
-        this.totalPrice = initCart_result.totalPrice;
-        this.deliveryFee = initCart_result.deliveryFee;
-        this.totalPayable = initCart_result.totalPayable;
-        this.totalSavings = initCart_result.totalSavings;
-        this.countOfCartItems = initCart_result.countOfItems;
-      },
-      (err) => console.log(err)
-    )
+    this.CheckoutRelatedData.email = "nishkr0392@gmail.com";
+    this.CheckoutRelatedData.mobile = 7204190121;
+    this.CheckoutRelatedData.userName = { firstName: 'Nishant', lastName: 'Kumar' };
   }
 
-  /**
-   * Initialize Cart
-   */
-  public initCart() {
 
-    // get the CART items and "SAVED FOR LATER" items
-    this.CartItems = this.data.CartItems;
-    this.SavedForLaterItems = this.data.SavedForLaterItems;
+  /**
+   * Initialize Checkout
+   */
+  public initCheckout() {
+
+    // get the CART items into checkout
+    this.CheckoutItems = this.data.CartItems;
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
-    this.cartService.calculateTotal(this.CartItems);
+    this.cartService.calculateTotal(this.CheckoutItems);
+
+    // Get the Checkout Related Data
+    this.cartService.initCart_data$.subscribe(
+      (initCheckout_result) => {
+
+        this.CheckoutRelatedData = {
+          totalPrice: initCheckout_result.totalPrice,
+          deliveryFee: initCheckout_result.deliveryFee,
+          totalPayable: initCheckout_result.totalPayable,
+          totalSavings: initCheckout_result.totalSavings,
+          countOfItems: initCheckout_result.countOfCartItems
+        };
+
+      },
+
+      (err) => console.log(err)
+    );
+
+  } // END initCheckout()
+
+
+  /**
+   * Performs the given operation on the corresponding Checkout Item. Operations are:  
+   ** 'UPDATE_QUANTITY' - Update the quantity of the respective item.
+   ** 'REMOVE' - Remove the item from Checkout (not Cart).
+   * @param data data received namely 'operation', 'indexOfItem', 'cartType' and/or 'quantity'.
+   */
+  public operationOnCheckoutItem(data: any) {
+
+    // Re-using the operationOnCartItem() function
+    this.cartService.
+      operationOnCartItem(this.CheckoutItems, this.CheckoutRelatedData, null, data);
+
+    // trigger click event to open the "GO TO CART" Modal
+    if (this.CheckoutRelatedData.countOfItems < 1)
+      this.modal_GoToCart.nativeElement.click();
 
   }
 
@@ -68,22 +102,106 @@ export class CheckoutComponent implements OnInit {
     this.View[index] = 'CHANGE';
   }
 
+
   public continueCheckout(index: number) {
-     
+
     this.View[index] = 'CHECKED';
 
-    if(index < 3) {
-      this.View[index+1] = 'CHANGE';
+    if (index < 3) {
+      this.View[index + 1] = 'CHANGE';
     }
 
-    else {
+  }
 
+  public getCaptcha() {
+
+        // generate Captcha
+        this.paymentService.getCaptcha()
+        .subscribe((captcha: any) => {
+          this.captcha = captcha;
+          document.getElementById('COD-captcha').innerHTML = this.captcha;
+        },
+        (error) => {
+          console.log(error)
+        });
+  }
+
+  public selectPaymentMode(paymentMode: string) {
+
+    let setFlags = (index: number) => {
+
+      if (this.show[index] === false) {
+        for (let i = 0; i < this.show.length; i++) {
+          (i !== index) ? (this.show[i] = false) : (this.show[i] = true);
+        }
+      }
+
+    }
+
+    switch (paymentMode) {
+      case 'card': {
+        setFlags(0);
+        break;
+      }
+
+      case 'COD': {
+        setFlags(1);
+        this.getCaptcha();
+        break;
+      }
+    }
+
+  } // END selectPaymentMode()
+
+
+  public goToPayment(paymentMode: string) {
+
+    let productInfo = this.CheckoutItems[0].title;
+
+    if (this.CheckoutItems.length > 1) {
+      productInfo += ' and others...';
+    }
+
+    switch (paymentMode) {
+
+      case 'card': {
+
+        let request_data: PayUMoneyParams = {
+
+          amount: this.CheckoutRelatedData.totalPayable,
+          productinfo: productInfo,
+          firstname: this.CheckoutRelatedData.userName.firstName,
+          lastname: this.CheckoutRelatedData.userName.lastName,
+          email: this.CheckoutRelatedData.email,
+          phone: this.CheckoutRelatedData.mobile
+        };
+
+        this.paymentService.makePaymentRequest_PayUMoney(request_data)
+          .subscribe((response: any) => {
+
+            console.log(response)
+            if (response.status === 200) {
+              // redirect to payment link
+              location.href = response.data;
+            }
+            else {
+              console.log(response.error)
+            }
+          })
+
+        break;
+      }
+
+      case 'COD': {
+
+        break;
+      }
     }
   }
 
 
   public selectAddress(address) {
-  console.log(address)
+    console.log(address)
   }
 
 

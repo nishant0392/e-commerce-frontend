@@ -2,150 +2,29 @@
   box-sizing: border-box;
   display: flex;
   min-height: 85vh;
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
-.sidebar {
+.sidebar-container {
   background-color: #fff;
   flex: 1;
   margin-right: 8px;
 }
+
+/* Product content */
 
 .product-content {
   background-color: #fff;
   flex: 4;
 }
 
-.sidebar-header {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 0.6em 0.7em;
-}
-
-section {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 0.6em 1em;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-.customer-ratings .icon-rating {
-  font-size: .7em;
-  position: relative;
-  bottom: 1px;
-}
-
-.categories p {
-  font-size: 0.7rem;
-}
-
-.categories ul {
-  padding: 0;
-  cursor: pointer;
-  list-style-type: none;
-}
-
-.categories li {
-  cursor: pointer;
-  margin-left: 2.2em;
-  font-weight: 400;
-  line-height: 2;
-}
-
-.icon-chevron-down + .icon-chevron-left {
-  font-size: 0.8em;
-}
-
-section p {
-  font-size: 0.8rem;
-}
-
-.clear-filter {
-  color: rgb(105, 105, 197);
-  display: block;
-  float: right;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
-.collapse-filter {
-  float: right;
-  position: relative;
-  top: .2em;
-  cursor: pointer;
-}
-
-/* checkbox */
-.checkbox {
-  font-weight: 400;
-}
-.checkbox label:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.checkbox .cr {
-  position: relative;
-  display: block;
-  border: 1px solid #a9a9a9;
-  border-radius: 0.1em;
-  width: 1.4em;
-  height: 1.3em;
-  float: left;
-  margin: 0 0.5em;
-}
-
-.checkbox .cr .cr-icon {
-  position: absolute;
-  font-size: 1.6em;
-  color: #2196f3;
-  line-height: 0;
-  top: 50%;
-  left: 0%;
-}
-
-.checkbox label input[type="checkbox"] {
-  display: none;
-}
-
-.checkbox label input[type="checkbox"] + .cr > .cr-icon {
-  opacity: 0;
-}
-
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
-  opacity: 1;
-}
-
-#buying-guide {
-  text-align: center;
-  background-color: #ebf0f5;
-  padding-top: 25px;
-  font-weight: 400;
-  line-height: .4;
-}
-
-#buying-guide .helpme {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #2196f3;
-
-}
-
-#buying-guide .icon-chevron-right {
-  font-size: 10px;
-  position: relative;
-  bottom: 2px;
-}
-
-/* Product content */
-
 .sort {
   list-style-type: none;
   padding: 0;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
-.sort li { 
+.sort li {
   float: left;
   padding-right: 1.5em;
 }
@@ -189,7 +68,7 @@ section p {
 }
 
 .items .item-description span {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .items .item-description .item-ratings {
@@ -199,15 +78,22 @@ section p {
   border-radius: 2px;
 }
 
-.items .item-description ul{
+.item-ratings .icon-rating {
+  font-size: 10px;
+  position: relative;
+  bottom: 2px;
+  margin-left: 2px;
+}
+
+.items .item-description ul {
   flex: 2;
   list-style: none;
-  font-size: .9em;
-  padding: 1em .5em;
+  font-size: 0.9em;
+  padding: 1em 0.5em;
 }
 
 .items .item-description ul li::before {
-  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: lightgrey; /* Change the color */
   font-weight: bold; /* If you want it to be bold */
   display: inline-block; /* Needed to add space between the bullet and the text */
@@ -217,7 +103,7 @@ section p {
 .items .item-cost {
   flex: 1;
   padding: 0px 15px;
-  line-height: .5;
+  line-height: 0.5;
 }
 
 .items .item-cost img {
@@ -241,7 +127,7 @@ section p {
 
 .pagination .page-no {
   flex: 1;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .pagination .page-no p {
@@ -265,5 +151,3 @@ section p {
   border-radius: 50%;
   background-color: #ddd;
 }
-
-

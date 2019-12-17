@@ -1,0 +1,84 @@
+/** SIDEBAR **/
+
+.sidebar-header {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.6em 0.7em;
+}
+
+section {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.6em 1em;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+section label {
+  display: block;
+}
+
+.icon-rating {
+  font-size: 0.7em;
+  position: relative;
+  bottom: 1px;
+}
+
+.categories p {
+  font-size: 0.7rem;
+}
+
+.categories ul {
+  padding: 0;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.categories li {
+  cursor: pointer;
+  margin-left: 2.2em;
+  font-weight: 400;
+  line-height: 2;
+}
+
+.icon-chevron-down + .icon-chevron-left {
+  font-size: 0.8em;
+}
+
+section p {
+  font-size: 0.8rem;
+}
+
+.clear-filter {
+  color: rgb(105, 105, 197);
+  display: block;
+  float: right;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.collapse-filter {
+  float: right;
+  position: relative;
+  top: 0.2em;
+  cursor: pointer;
+}
+
+#buying-guide {
+  text-align: center;
+  background-color: #ebf0f5;
+  padding-top: 25px;
+  font-weight: 400;
+  line-height: 0.4;
+}
+
+#buying-guide .helpme {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #2196f3;
+}
+
+#buying-guide .icon-chevron-right {
+  font-size: 10px;
+  position: relative;
+  bottom: 2px;
+}

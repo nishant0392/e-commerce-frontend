@@ -16,6 +16,7 @@ import { RatingsAndReviewsComponent } from './product-details/ratings-and-review
 import { GetUserRatingsAndReviewsComponent } from './product-details/get-user-ratings-and-reviews/get-user-ratings-and-reviews.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
 import { CartItemsComponent } from './view-cart/cart-items/cart-items.component';
+import { SidebarComponent } from './display-product/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -28,12 +29,16 @@ import { CartItemsComponent } from './view-cart/cart-items/cart-items.component'
     RatingsAndReviewsComponent, 
     GetUserRatingsAndReviewsComponent, 
     ViewCartComponent,
-    CartItemsComponent
+    CartItemsComponent,
+    SidebarComponent
   ],
   imports: [
     SharedModule,
     Ng5SliderModule,
     ViewModule
+  ],
+  exports: [
+    CartItemsComponent
   ]
 })
 export class ProductsManagementModule { }

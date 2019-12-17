@@ -27,10 +27,8 @@ export class ViewCartComponent implements OnInit {
 
 
   ngOnInit() {
-
     // Initialize Cart
     this.initCart();
-
   }
 
 
@@ -90,6 +88,6 @@ export class ViewCartComponent implements OnInit {
     // update count for "SAVED FOR LATER" Items
     this.countOfSavedForLaterItems = this.cartService.countOfSavedForLaterItems;
 
-  }
+  } // END operationOnCartItem()
 
 } // END

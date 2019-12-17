@@ -10,6 +10,8 @@ export class CartItemsComponent {
   @Input() public CartItems: any[];
   @Input() public SavedForLaterItems: any[];
 
+  @Input() public saveForLaterOption: boolean = true;
+
   @Output('OutputData') public outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
 

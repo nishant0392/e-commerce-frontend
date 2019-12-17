@@ -4,6 +4,12 @@ export interface Cart {
     totalPrice: number,
     deliveryFee: number,
     totalPayable: number,
-    totalSavings: number
-    
+    totalSavings: number,
+    userName?: {
+        firstName: string,
+        lastName: string
+    },
+    deliveryAddress?: any
+    email?: string,
+    mobile?: number
 }

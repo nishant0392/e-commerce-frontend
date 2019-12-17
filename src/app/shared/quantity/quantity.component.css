@@ -24,7 +24,7 @@
   padding: 5px 20px;
 }
 
-.read-only {
-  opacity: 0.4;
-  cursor: text;
+.read-only span {
+  opacity: 0.5;
+  cursor: text !important;
 }

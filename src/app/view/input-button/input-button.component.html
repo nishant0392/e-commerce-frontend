@@ -1,0 +1,12 @@
+<!-- *****  INPUT BUTTON with TEXT on top with special effect  ***** -->
+
+<div class="special-input-btn">
+    <p [ngStyle]="{ 'visibility': visibility_style }">Enter the characters</p>
+    <input 
+      type="text" 
+      [attr.placeholder]="placeholder"
+      [attr.maxlength]="maxlength" 
+      class="input-btn" 
+      (focus)="addClass('focusin')"
+      (focusout)="addClass('focusout')" />
+</div>

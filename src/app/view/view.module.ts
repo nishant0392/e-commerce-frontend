@@ -13,6 +13,7 @@ import { ParagraphViewComponent } from './paragraph-view/paragraph-view.componen
 import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
 import { PriceDetailsComponent } from './price-details/price-details.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { InputButtonComponent } from './input-button/input-button.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     ParagraphViewComponent,
     StarRatingViewComponent,
     PriceDetailsComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    InputButtonComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     ParagraphViewComponent,
     StarRatingViewComponent,
     PriceDetailsComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    InputButtonComponent
   ]
 })
 export class ViewModule { }
