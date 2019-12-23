@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Options } from 'ng5-slider';
 
 @Component({
@@ -13,8 +13,8 @@ export class SidebarComponent implements OnInit {
   public sub_categories: string[];
 
   // Item Properties
-  public propertiesList: any[];
-  public ItemFilterProperties: any;
+  @Input() public propertiesList: any[];
+  @Input() public ItemFilterProperties: any;
 
   // Miscellaneous
   public chev_left_arrow = "fas fa-chevron-left icon-chevron-left";
@@ -41,30 +41,7 @@ export class SidebarComponent implements OnInit {
       'Tablets',
       'Mobile Accessories'
     ];
-    this.propertiesList = [
-      {
-        property: 'AVAILABILITY',
-        show: true
-      },
-      {
-        property: 'RAM',
-        show: true
-      },
-      {
-        property: 'BRAND',
-        show: false
-      },
-      {
-        property: 'CUSTOMER RATINGS',
-        show: true
-      }
-    ];
-    this.ItemFilterProperties = {
-      'AVAILABILITY': ['Exclude out of stock'],
-      'RAM': ['6 GB & Above', '4 GB', '3 GB', '2 GB', '1 GB'],
-      'BRAND': ['Mi', 'RealMe', 'Samsung', 'Oppo', 'Apple'],
-      'CUSTOMER RATINGS': []
-    };
+   
   }
 
   ngOnInit() {

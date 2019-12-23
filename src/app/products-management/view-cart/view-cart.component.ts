@@ -19,12 +19,16 @@ export class ViewCartComponent implements OnInit {
   public SavedForLaterItems: any[] = [];
   public countOfSavedForLaterItems: number = 0;
 
-  public paymentInfo = {
-    recipient: 'NISHANT KUMAR',
-    billingAddress: `Sri Balaji Boys PG, New BEL Road`
-  }
-
-
+  public paymentInfo = [
+    {
+      recipient: 'NISHANT KUMAR',
+      billingAddress: `Sri Balaji Boys PG, New BEL Road`
+    },
+    {
+      recipient: 'PRASHANT KUMAR',
+      billingAddress: `D-28, PC Colony, Kankarbagh`
+    }
+  ];
 
   ngOnInit() {
     // Initialize Cart

@@ -6,10 +6,11 @@ import { ProductsManagementModule } from '../products-management/products-manage
 import { RouterModule } from '@angular/router';
 
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderResponseComponent } from './order-response/order-response.component';
 
 
 @NgModule({
-  declarations: [CheckoutComponent],
+  declarations: [CheckoutComponent, OrderResponseComponent],
   imports: [
     CommonModule,
     ViewModule,

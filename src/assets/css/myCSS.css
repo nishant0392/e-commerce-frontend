@@ -65,6 +65,8 @@
 
 /*  ****   end: "ICONS & SYMBOLS"   ****  */
 
+/* **   start: "Project Specific"  ** */ 
+
 .not-visible {
   visibility: hidden;
 }
@@ -80,6 +82,9 @@
 .border-bottom {
   border-bottom: 1px solid #d2d2f1;
 }
+
+/* **   end: "Project Specific"  ** */ 
+
 
 /*  ****   start: "COLORS"   ****  */
 

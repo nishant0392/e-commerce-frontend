@@ -1,0 +1,16 @@
+<div class="order-response">
+
+    <div class="first-div">
+        <h4>Order placed for ₹{{ totalPrice }}!</h4>
+        <p class="fs-14">Your {{ countOfItems }} item<span *ngIf="countOfItems > 1">s</span>
+            will be delivered by <span class="font-600">{{ deliveryDate | date:'fullDate' }}.</span></p>
+    </div>
+
+    <div class="second-div">
+        <p class="font-600">Delivery Address</p>
+        <p class="font-600 fs-14">{{ recipient }}</p>
+        <p class="fs-14">{{ billingAddress }}</p>
+        <p class="fs-14"><span class="font-600">Phone number</span> {{ mobileNo }}</p>
+    </div>
+    
+</div>

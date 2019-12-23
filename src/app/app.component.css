@@ -7,6 +7,16 @@ body {
   font-size: 1.1em;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block; 
+}
+
+li.dropdown a.dropdown-toggle,
+a[data-target="#myModal-signup"] {
+  padding-top: 13px; 
+  padding-bottom: 13px;
+}
+
 .nav-item {
   margin: 0px 15px;
   cursor: pointer;

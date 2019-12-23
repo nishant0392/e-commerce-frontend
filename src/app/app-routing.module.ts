@@ -8,17 +8,19 @@ import { GetUserRatingsAndReviewsComponent } from './products-management/product
 import { UserReviewsComponent } from './user-management/user-reviews/user-reviews.component';
 import { ViewCartComponent } from './products-management/view-cart/view-cart.component';
 import { CheckoutComponent } from './payments-management/checkout/checkout.component';
+import { OrderResponseComponent } from './payments-management/order-response/order-response.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'checkout/init', component: CheckoutComponent },
-  { path: ':product_category/:product_brand', component: DisplayProductComponent, pathMatch: 'full' },
+  { path: ':product_category/:product_brand/pr', component: DisplayProductComponent, pathMatch: 'full' },
   { path: ':product_name/p/:pid', component: ProductDetailsComponent, pathMatch: 'full' },
   { path: ':product_name/write-review/:pid', component: GetUserRatingsAndReviewsComponent },
   { path: ':product_name/product-reviews/:pid', component: GetUserRatingsAndReviewsComponent },
   { path: 'review-purchases', component: UserReviewsComponent },
   { path: 'view-cart', component: ViewCartComponent },
+  { path: 'orderresponse', component: OrderResponseComponent },
   { path: '*', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];

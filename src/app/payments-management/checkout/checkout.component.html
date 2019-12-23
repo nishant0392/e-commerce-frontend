@@ -219,7 +219,7 @@
           <button type="button" (click)="changeView(2)">CHANGE</button>
         </div>
       </div>
-      <!-- end: CHECKED View-->
+      <!-- end: CHECKED View -->
 
     </div>
     <!-- **** end: Check ORDER SUMMARY **** -->
@@ -251,7 +251,9 @@
                 <radio-button [value]="'card'" (selectedValue)="selectPaymentMode($event)"></radio-button>
                 <span class="radio-btn-text">Credit / Debit / ATM Card</span>
                 <div *ngIf="show[0]">
-                  <p class="mt-3 fs-14 ml-4 text-dark font-600">&nbsp;You will be redirected to PayUMoney page where you can pay using card.</p>
+                  <p class="mt-3 fs-14 ml-4 text-dark font-600">&nbsp;
+                    <span *ngIf="paymentOptionLoad">You will be redirected to PayUMoney page where you can pay using card.</span>
+                    <span *ngIf="!paymentOptionLoad">Sorry!! Something went wrong.</span></p>
                   <button class="button-md bg-Red" (click)="goToPayment('card')">GO TO PAYMENT</button>
                 </div>
               </div>
@@ -266,7 +268,7 @@
                     <i class="fa fa-redo icon-refresh" (click)="getCaptcha()"></i>
                   </div>
                   <input-button [maxlength]="6"></input-button>
-                  <button class="button-md bg-Red ml-5">CONFIRM ORDER</button>
+                  <button class="button-md bg-Red ml-5" [routerLink]="['/orderresponse']">CONFIRM ORDER</button>
                 </div>
           
               </div>

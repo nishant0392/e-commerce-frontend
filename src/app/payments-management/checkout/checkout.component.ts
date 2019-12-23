@@ -31,6 +31,8 @@ export class CheckoutComponent implements OnInit {
     billingAddress: `Sri Balaji Boys PG, New BEL Road`
   }
 
+  public paymentOptionLoad: boolean = true;
+
   // View Controller
   public View: string[] = ['UNCHECKED', 'UNCHECKED', 'UNCHECKED', 'CHANGE'];
   public show: boolean[] = [false, true];
@@ -175,7 +177,7 @@ export class CheckoutComponent implements OnInit {
           email: this.CheckoutRelatedData.email,
           phone: this.CheckoutRelatedData.mobile
         };
-
+        this.paymentOptionLoad = false;
         this.paymentService.makePaymentRequest_PayUMoney(request_data)
           .subscribe((response: any) => {
 
@@ -186,6 +188,8 @@ export class CheckoutComponent implements OnInit {
             }
             else {
               console.log(response.error)
+              // couldn't load payment option
+              this.paymentOptionLoad = false;
             }
           })
 

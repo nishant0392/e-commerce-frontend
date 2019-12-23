@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserManagementService } from './services/user-management.service';
 import { Router } from '@angular/router';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +13,37 @@ export class AppComponent implements OnInit {
   public isMobNoValid: boolean = false;
   public errorMsg_Mobno: boolean = false;
 
-  constructor(private userService: UserManagementService,
-    private router: Router) {
+  public countOfCartItems: number = 0;
 
+  constructor(private userService: UserManagementService,
+    private cartService: CartService,
+    private router: Router) { }
+
+  ngOnInit() {
+    this.initCountOfCartItems();
   }
-  
+
+
+  initCountOfCartItems() {
+    // get Count of Cart Items
+    this.countOfCartItems = 2;
+
+    setTimeout(() => {
+      // Subscribe for count of Cart Items
+      this.cartService.countOfCartItems$
+        .subscribe((countOfCartItems) => {
+          if (typeof countOfCartItems === 'number')
+            this.countOfCartItems = countOfCartItems;
+        })
+    })
+  }
 
   /**
    * This OTP is incorrect. You have 9 attempt(s) left.
 
    */
 
-  ngOnInit() {}
+
 
   /**
    * Searches for the query.
@@ -32,14 +52,14 @@ export class AppComponent implements OnInit {
   search(query) {
     console.log('Search Query:', query)
     return false;
-    this.router.navigate(['/assets/images/Nishant.JPG'])
+    // this.router.navigate(['/assets/images/Nishant.JPG'])
   }
 
   verifyMobileNo(mobileNo: number) {
 
     let response = this.userService.verifyAndSendSMS(mobileNo, 'USERMV');
 
-    if(response === false) {
+    if (response === false) {
       this.errorMsg_Mobno = true;
     }
 
@@ -49,7 +69,7 @@ export class AppComponent implements OnInit {
 
       response.subscribe((apiResponse: any) => {
         console.log('apiResponse:', apiResponse)
-        if(apiResponse.error) {
+        if (apiResponse.error) {
           this.errorMsg_Mobno = true;
         }
         else {
@@ -62,9 +82,9 @@ export class AppComponent implements OnInit {
 
   /* Adds red border at bottom */
   addRedBorder() {
-    if(this.errorMsg_Mobno) {
+    if (this.errorMsg_Mobno) {
       return {
-         'border-bottom-color': 'indianred'
+        'border-bottom-color': 'indianred'
       };
     }
   }

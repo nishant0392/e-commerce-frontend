@@ -13,11 +13,18 @@ export class CartService {
   private initCart_data_Source = new BehaviorSubject<any>({});
   public initCart_data$ = this.initCart_data_Source.asObservable();
 
-  private defaultDeliveryFee: number = 40;  // Default delivery fee fixed by Flipkart.
+  // count of Cart Items
+  private countOfCartItems_Source = new BehaviorSubject<any>({});
+  public countOfCartItems$ = this.countOfCartItems_Source.asObservable();
 
+  private defaultDeliveryFee: number = 40;  // Default delivery fee fixed by Flipkart.
 
   public changeInitCart_data(data: {}) {
     this.initCart_data_Source.next(data);
+  }
+
+  public changeCountOfCartItems(count: number) {
+    this.countOfCartItems_Source.next(count);
   }
 
 
@@ -97,6 +104,9 @@ export class CartService {
 
     // Store the 'initCart' data
     this.changeInitCart_data(result);
+
+    // emit count of Cart items
+    this.changeCountOfCartItems(countOfCartItems);
 
   } // END calculateTotal()
 
@@ -226,32 +236,17 @@ export class CartService {
         else if (change === -1)
           CartRelatedData.countOfItems--;
 
-        // re-calculate delivery fee and total payable amount
-        CartRelatedData.deliveryFee = this.calculateDeliveryFee(CartItems, this.defaultDeliveryFee);
-        CartRelatedData.totalPayable = CartRelatedData.totalPrice + CartRelatedData.deliveryFee;
-
         break;
       }
 
       case 'SAVE_FOR_LATER': {
         this.saveForLater(CartItems, CartRelatedData, SavedForLaterItems, indexOfItem);
-
-        // re-calculate delivery fee and total payable amount
-        CartRelatedData.deliveryFee = this.calculateDeliveryFee(CartItems, this.defaultDeliveryFee);
-        CartRelatedData.totalPayable = CartRelatedData.totalPrice + CartRelatedData.deliveryFee;
-
         break;
       }
 
       case 'REMOVE': {
-        if (data.cartType === 'CART') {
-
-          this.removeItemFromCart(CartItems, indexOfItem, 'CART', CartRelatedData);
-
-          // re-calculate delivery fee and total payable amount
-          CartRelatedData.deliveryFee = this.calculateDeliveryFee(CartItems, this.defaultDeliveryFee);
-          CartRelatedData.totalPayable = CartRelatedData.totalPrice + CartRelatedData.deliveryFee;
-        }
+        if (data.cartType === 'CART') 
+          this.removeItemFromCart(CartItems, indexOfItem, 'CART', CartRelatedData); 
 
         if (data.cartType === 'SAVED_FOR_LATER')
           this.removeItemFromCart(SavedForLaterItems, indexOfItem, 'SAVED_FOR_LATER');
@@ -261,11 +256,6 @@ export class CartService {
 
       case 'MOVE_TO_CART': {
         this.moveToCart(CartItems, CartRelatedData, SavedForLaterItems, indexOfItem);
-
-        // re-calculate delivery fee and total payable amount
-        CartRelatedData.deliveryFee = this.calculateDeliveryFee(CartItems, this.defaultDeliveryFee);
-        CartRelatedData.totalPayable = CartRelatedData.totalPrice + CartRelatedData.deliveryFee;
-
         break;
       }
 
@@ -293,7 +283,9 @@ export class CartService {
 
     } // end switch
 
-  }
+    // emit count of Cart items
+    this.changeCountOfCartItems(CartRelatedData.countOfItems);
 
+  }
 
 } // END

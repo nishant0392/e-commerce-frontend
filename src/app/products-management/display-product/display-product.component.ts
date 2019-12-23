@@ -16,6 +16,10 @@ export class DisplayProductComponent implements OnInit {
   public Items: any[];
   public countOfItems: number;
 
+  // Item properties (for sidebar)
+  public propertiesList: any[];
+  public ItemFilterProperties: any;
+
 
   // Pagination 
   public selectedPage: number = 1;
@@ -343,6 +347,30 @@ export class DisplayProductComponent implements OnInit {
 
   ngOnInit() {
     this.displayItems(5);
+    this.propertiesList = [
+      {
+        property: 'AVAILABILITY',
+        show: true
+      },
+      {
+        property: 'RAM',
+        show: true
+      },
+      {
+        property: 'BRAND',
+        show: false
+      },
+      {
+        property: 'CUSTOMER RATINGS',
+        show: true
+      }
+    ];
+    this.ItemFilterProperties = {
+      'AVAILABILITY': ['Exclude out of stock'],
+      'RAM': ['6 GB & Above', '4 GB', '3 GB', '2 GB', '1 GB'],
+      'BRAND': ['Mi', 'RealMe', 'Samsung', 'Oppo', 'Apple'],
+      'CUSTOMER RATINGS': []
+    };
   }
 
 

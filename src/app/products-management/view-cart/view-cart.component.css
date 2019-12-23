@@ -36,33 +36,6 @@
   padding: 0 0.3em;
 }
 
-.cart-items .address-dropdown {
-  border: 1px solid #d2d2f1;
-  padding: 0;
-}
-
-.cart-items .payment-address {
-  display: inline-block;
-  width: 250px;
-  font-size: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-  vertical-align: top;
-}
-
-.dropdown-menu {
-  margin-top: 40px;
-}
-
-.dropdown-menu a {
-  color: #6c757d;
-}
-
-.dropdown-menu .select {
-  margin-left: 1rem !important;
-}
-
 .view-cart p {
   margin-bottom: 0;
 }

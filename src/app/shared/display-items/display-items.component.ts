@@ -8,22 +8,19 @@ import { Component, Input, AfterContentInit } from '@angular/core';
 export class DisplayItemsComponent implements AfterContentInit {
 
   @Input() Items: any[];
-  @Input() itemImageDefaultHeight: Number | String;
+  @Input() itemImageDefaultHeight: number | String;
   @Input() counterForSliders: String;
+  @Input('ItemsPerSlide') countOfItemsPerSlide: number = 6;
 
   public counterForItemsPerSlide: Array<number>;
   public counterForSlides: Array<number>;
   public counterForItemsInLastSlide: Array<number>;
 
 
-  constructor() { }
-
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     
-    this.displayItemsUsingCarousel(6);
+    this.displayItemsUsingCarousel(this.countOfItemsPerSlide);
   }
-
-  ngOnInit() { }
 
 
   /**

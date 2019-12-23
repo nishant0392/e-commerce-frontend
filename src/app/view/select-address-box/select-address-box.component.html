@@ -1,0 +1,25 @@
+<!-- *******  SELECT Dropdown  ******** -->
+
+<span class="navbar d-inline-block select-dropdown">
+    <span class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            (click)="showIt = !showIt">
+            <span *ngIf="!savedAddresses.length">No address to select </span>
+            <span class="payment-address font-600 text-muted" *ngIf="savedAddresses.length">
+                <span class="txt-black">{{ selectedAddress.recipient }},</span>
+                <span> {{ selectedAddress.billingAddress }}</span>
+            </span>
+        </a>
+        <div class="dropdown-menu" [ngClass]="{ 'disp-block': showIt }" aria-labelledby="navbarDropdown" 
+        *ngIf="savedAddresses.length">
+            <a class="select">Select from Saved Addresses:</a>
+            <a class="dropdown-item" (click)="selectOption(savedAddress)" *ngFor="let savedAddress of savedAddresses">
+                <span class="payment-address font-600 text-muted">
+                    <span class="txt-black">{{ savedAddress.recipient }},</span>
+                    <span> {{ savedAddress.billingAddress }}</span>
+                </span>
+            </a>
+        </div>
+    </span>
+</span>

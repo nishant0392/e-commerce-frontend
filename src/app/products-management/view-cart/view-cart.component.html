@@ -11,27 +11,8 @@
                     <div>
                         <i class="fa fa-map-marker-alt icon-map-marker"></i>
                         <span class="deliver-to-text">Deliver to</span>
-                        <span class="navbar d-inline-block address-dropdown">
-                            <span class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="payment-address font-600 text-muted">
-                                        <span class="txt-black">{{ paymentInfo.recipient }},</span>
-                                        <span> {{ paymentInfo.billingAddress }}</span>
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="select">Select from Saved Addresses:</a>
-                                    <a class="dropdown-item" href="#">
-                                        <span class="payment-address font-600 text-muted">
-                                            <span class="txt-black">{{ paymentInfo.recipient }},</span>
-                                            <span> {{ paymentInfo.billingAddress }}</span>
-                                        </span>
-                                    </a>
 
-                                </div>
-                            </span>
-                        </span>
+                        <select-address-box [Addresses]="paymentInfo"></select-address-box>
                     </div>
                 </div>
 

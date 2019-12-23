@@ -1,0 +1,39 @@
+/* Select Dropdown */
+.select-dropdown {
+  border: 1px solid #d2d2f1;
+  padding: 0;
+}
+
+.payment-address {
+  display: inline-block;
+  width: 250px;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  vertical-align: top;
+}
+
+.dropdown-menu {
+  margin-top: 40px;
+}
+
+.dropdown-menu a {
+  color: #6c757d;
+}
+
+.dropdown-menu .select {
+  margin-left: 1rem !important;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.disp-block {
+    display: block;
+}
