@@ -205,6 +205,17 @@ a[data-target="#myModal-GoToCart"] {
   height: 40px;
 }
 
+.edit-address input-button {
+  margin-right: 25px;
+}
+
+.address-buttons {
+  margin-bottom: 15px;
+}
+
+.deliver-btn {
+  margin-left: 50px;
+}
 
 /** Media queries **/
 @media screen and (max-width: 900px) {

@@ -5,15 +5,16 @@
         <div class="items-container">
     
             <div class="item" 
-            *ngFor="let item of Items" 
+            *ngFor="let item of Items; let index=index" 
+            [ngClass]="{ 'active': isActive[index] }"
             [ngStyle]="addWidthAndHeight()" 
-            (click)="loadItem(item)"
+            (click)="loadItem(index)"
             >
                 <span>{{ item }}</span>
             </div>
     
         </div>
     
-    </div>
+    </div> 
      
     <!--  ****   end: "BOX View"   ****  -->

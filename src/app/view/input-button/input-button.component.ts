@@ -15,6 +15,7 @@ export class InputButtonComponent implements OnInit {
 
   @Input() public maxlength: number;
   @Input('placeholder') public default_placeholder: string = "Enter the characters";
+  @Input('width') public width: number;
   public placeholder: string;
   public visibility_style: string = "";
 
@@ -28,6 +29,14 @@ export class InputButtonComponent implements OnInit {
     else {
       this.placeholder = this.default_placeholder;
       this.visibility_style = "";
+    }
+  }
+
+
+  public addWidth() {
+
+    return {
+      'width': this.width + 'px'
     }
   }
 

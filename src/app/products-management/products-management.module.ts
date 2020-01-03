@@ -17,6 +17,8 @@ import { GetUserRatingsAndReviewsComponent } from './product-details/get-user-ra
 import { ViewCartComponent } from './view-cart/view-cart.component';
 import { CartItemsComponent } from './view-cart/cart-items/cart-items.component';
 import { SidebarComponent } from './display-product/sidebar/sidebar.component';
+import { ImageZoomModule } from 'angular2-image-zoom';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { SidebarComponent } from './display-product/sidebar/sidebar.component';
   imports: [
     SharedModule,
     Ng5SliderModule,
-    ViewModule
+    ViewModule,
+    ImageZoomModule,
+    NgxImageZoomModule.forRoot()
   ],
   exports: [
     CartItemsComponent

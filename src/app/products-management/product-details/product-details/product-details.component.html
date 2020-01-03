@@ -9,20 +9,31 @@
 
             <div class="image-select-bar">
 
-                <carousel [carouselOptions]="carouselOptions" [carouselItems]="carouselItems"
-                    (hoverOverSubitemEvent)="onHoverOverSubitem($event)">
+                <carousel 
+                  [carouselOptions]="carouselOptions" 
+                  [carouselItems]="carouselItems"
+                  (hoverOverSubitemEvent)="onHoverOverSubitem($event)">
                 </carousel>
 
             </div>
-
+            
             <div class="selected-image">
-                <img src="{{ selectedImage }}" />
+                <img [src]="selectedImage">
+                <!--img 
+                  [src]="selectedImage" 
+                  [imageZoom]="zoomImage" 
+                  [scrollZoom]="false"
+                  [lensWidth]="widthOfZoomImage"
+                  [lensHeight]="heightOfZoomImage"
+                  (mouseover)="zindex_details = -100"
+                  (mouseout)="zindex_details = 100"
+                -->
             </div>
 
         </div>
 
         <div class="purchase-btn">
-            <button type="button" class="add-to-cart">
+            <button type="button" class="add-to-cart" (click)="addToCart()">
                 <i class="fa fa-shopping-cart"></i>ADD TO CART</button>
             <button type="button" class="buy-now">
                 <i class="fa fa-bolt"></i>BUY NOW</button>
@@ -33,7 +44,7 @@
 
     <!--  ----------------    START: Product Description    ------------------  -->
 
-    <div class="details">
+    <div class="details" [style.zIndex]="zindex_details">
         <div class="custom-breadcrumb">
 
             <small class="text-muted">
@@ -56,24 +67,24 @@
 
         </div>
 
-        <div class="item" *ngIf="Item">
+        <div class="item" *ngIf="primaryDetailsOfItem">
             <div class="item-description">
-                <h5 class="item-title">{{Item.title}}</h5>
+                <h5 class="item-title">{{primaryDetailsOfItem.title}}</h5>
                 <p>
-                    <star-rating-view [rating]="Item.rating.stars"></star-rating-view>
-                    <span class="text-muted ml-2">{{ Item.rating.ratingsCount | number }} Ratings &amp;
-                        {{ Item.rating.reviewsCount | number }} Reviews</span>
-                    <img *ngIf="Item.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="ml-3" />
+                    <star-rating-view [rating]="primaryDetailsOfItem.rating.stars"></star-rating-view>
+                    <span class="text-muted ml-2">{{ primaryDetailsOfItem.rating.ratingsCount | number }} Ratings &amp;
+                        {{ primaryDetailsOfItem.rating.reviewsCount | number }} Reviews</span>
+                    <img *ngIf="primaryDetailsOfItem.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="ml-3" />
                 </p>
             </div>
 
             <div class="item-cost">
 
-                <p class="discount">Extra ₹{{Item.MRP - Item.price}} discount</p>
+                <p class="discount">Extra ₹{{primaryDetailsOfItem.MRP - primaryDetailsOfItem.price}} discount</p>
 
-                <h3><strong>₹{{Item.price | number}}</strong>
-                    <span class="text-muted mrp">₹{{Item.MRP | number}}</span>
-                    <span class="discount-percent">{{Item.discount}}% off</span>
+                <h3><strong>₹{{primaryDetailsOfItem.price | number}}</strong>
+                    <span class="text-muted mrp">₹{{primaryDetailsOfItem.MRP | number}}</span>
+                    <span class="discount-percent">{{primaryDetailsOfItem.discount}}% off</span>
                     <span class="fa fa-info-circle icon-info"></span>
                 </h3>
             </div>

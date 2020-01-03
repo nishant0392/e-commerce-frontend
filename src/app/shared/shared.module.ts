@@ -14,6 +14,7 @@ import { RatingBarComponent } from './rating/rating-bar/rating-bar.component';
 import { RatingStarComponent } from './rating/rating-star/rating-star.component';
 import { QuantityComponent } from './quantity/quantity.component';
 import { RouterModule } from '@angular/router';
+import { ZoomImageComponent } from './zoom-image/zoom-image.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     RatingCircleComponent,
     RatingBarComponent,
     RatingStarComponent,
-    QuantityComponent
+    QuantityComponent,
+    ZoomImageComponent
   ],
   imports: [
     CommonModule
@@ -39,6 +41,7 @@ import { RouterModule } from '@angular/router';
     RatingBarComponent,
     RatingStarComponent,
     QuantityComponent,
+    ZoomImageComponent,
     CommonModule,
     FormsModule,
     RouterModule

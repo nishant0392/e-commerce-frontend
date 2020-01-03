@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Cart } from '../interfaces/cart.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+
+  private baseUrl = isDevMode() ? 'http://localhost:3000/api/v2' : 'http://api.nkart.nishant-kumar.com/api/v2';
 
   public countOfSavedForLaterItems: number = 0;
 
@@ -25,6 +28,10 @@ export class CartService {
 
   public changeCountOfCartItems(count: number) {
     this.countOfCartItems_Source.next(count);
+  }
+
+
+  constructor(private http: HttpClient) {
   }
 
 
@@ -286,6 +293,19 @@ export class CartService {
     // emit count of Cart items
     this.changeCountOfCartItems(CartRelatedData.countOfItems);
 
+  }
+
+
+  public addToCart(cartItems: any[], overWrite: boolean) {
+    
+    let _cartItems = JSON.stringify(cartItems);
+    let _overWrite = overWrite ? 'true' : 'false';
+  
+    let params = new HttpParams()
+    .set('cartItems', _cartItems)
+    .set('overWrite', _overWrite)
+
+    return this.http.post(this.baseUrl+'/cart/add', params);
   }
 
 } // END

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from 'src/app/services/data-provider.service';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
-
+import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -10,13 +11,18 @@ import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.
 })
 export class ProductDetailsComponent implements OnInit {
 
+  // Product Image
   public img_list: any[];
   public selectedImage: any;
+  public zoomImage: any;
+  public widthOfZoomImage: number;
+  public heightOfZoomImage: number;
 
   public carouselOptions: any;
   public carouselItems: any[];
 
   public Item: any;
+  public primaryDetailsOfItem = {}; // primary details of Item
   public offers: any;      // a reference to Item.offers
   public initialCountForOffers: number = 4;
   public offersToDisplay_counter: number[] = [];
@@ -34,7 +40,9 @@ export class ProductDetailsComponent implements OnInit {
   public options_boxView = {};
   public options_bulletsView = {};
 
-  constructor(public _data: DataProviderService) { }
+  constructor(private cartService: CartService,
+    private router: Router,
+    public _data: DataProviderService) { }
 
   ngOnInit() {
 
@@ -44,15 +52,20 @@ export class ProductDetailsComponent implements OnInit {
 
     // set the default image
     this.selectedImage = "/assets/images/" + this.carouselItems[0].fullImg;
+    //this.zoomImage = "/assets/images/" + this.carouselItems[1].fullImg;
+    this.widthOfZoomImage = 480;
+    this.heightOfZoomImage = 1000;
+
 
     // Item details
     this.Item = this._data.Item;
-      
+
     // Item related offers
     this.offers = this.Item.offers;
     this.setInitialCounterForOffers();
 
     // Item Properties
+    this.primaryDetailsOfItem = this._data.Item.primaryDetailsOfItem;
     this.item_properties = this._data.Item.properties;
     this.listOfProperties = this._data.Item.listOfProperties;
     this.options_galleryView = {
@@ -72,6 +85,7 @@ export class ProductDetailsComponent implements OnInit {
     this.ratingCircleOptions = {
       rating: 50
     }
+
   }
 
 
@@ -141,5 +155,21 @@ export class ProductDetailsComponent implements OnInit {
       return false;
     }
   }
+
+
+
+  public addToCart() {
+    this.cartService.addToCart([this.Item], false)
+      .subscribe((response: any) => {
+        console.log(response)
+        if (!response.error) {
+          // emit count of Cart items
+          // this.changeCountOfCartItems();
+          this.router.navigate(['/view-cart'])
+        }
+      })
+      this.router.navigate(['/view-cart'])
+  }
+
 
 }

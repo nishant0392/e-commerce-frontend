@@ -34,9 +34,10 @@ export class CheckoutComponent implements OnInit {
   public paymentOptionLoad: boolean = true;
 
   // View Controller
-  public View: string[] = ['UNCHECKED', 'UNCHECKED', 'UNCHECKED', 'CHANGE'];
+  public View: string[] = ['UNCHECKED', 'CHANGE', 'UNCHECKED', 'UNCHECKED'];
   public show: boolean[] = [false, true];
   public captcha: any;   // captcha
+  public editAddress: boolean;
 
 
   ngOnInit() {
@@ -46,6 +47,8 @@ export class CheckoutComponent implements OnInit {
     this.CheckoutRelatedData.email = "nishkr0392@gmail.com";
     this.CheckoutRelatedData.mobile = 7204190121;
     this.CheckoutRelatedData.userName = { firstName: 'Nishant', lastName: 'Kumar' };
+
+    this.editAddress = true;
   }
 
 

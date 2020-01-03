@@ -29,6 +29,7 @@
 }
 
 .selected-image img {
+  cursor: crosshair !important;
   margin: auto;
   max-width: 95%;
 }

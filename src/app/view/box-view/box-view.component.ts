@@ -9,7 +9,8 @@ export class BoxViewComponent implements OnInit {
 
   @Input() public Items: any[] = [];
   @Input() public options;
-  
+  public isActive: boolean[] = [];
+
   constructor() { }
 
   ngOnInit() {
@@ -20,6 +21,14 @@ export class BoxViewComponent implements OnInit {
       'width': this.options.width,
       'height': this.options.height
     }
+  }
+
+
+  loadItem(indexOfItem: number) {
+    for (let i = 0; i < this.Items.length; i++)
+      this.isActive[i] = false;
+
+    this.isActive[indexOfItem] = true;
   }
 
 }

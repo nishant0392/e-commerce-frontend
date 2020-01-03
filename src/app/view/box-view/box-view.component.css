@@ -14,6 +14,7 @@
   border: 2px solid rgb(194, 194, 186);
   margin-right: 15px;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .box-view .items-container .item span {
@@ -26,6 +27,6 @@
   border-color: rgb(187, 187, 76);
 }
 
-.gallery-view .items-container .item.active {
+.box-view .items-container .item.active {
   border-color: #17a2b8;
 }
