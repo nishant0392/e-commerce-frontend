@@ -15,12 +15,23 @@ export class AppComponent implements OnInit {
 
   public countOfCartItems: number = 0;
 
+  // Secondary Navbar 
+  public navItems: any[] = [];
+
   constructor(private userService: UserManagementService,
     private cartService: CartService,
     private router: Router) { }
 
   ngOnInit() {
     this.initCountOfCartItems();
+    
+    this.navItems = [
+      { name: 'Electronics', type: 'dropdown' }, { name: 'TVs & Appliances', type: 'dropdown' },
+      { name: 'Men', type: 'dropdown' }, { name: 'Women', type: 'dropdown' },
+      { name: 'Baby & Kids', type: 'dropdown' }, { name: 'Home & Furniture', type: 'dropdown' },
+      { name: 'Sports, Books & More', type: 'dropdown' }, { name: 'Grocery', type: 'link' },
+      { name: 'Offer Zone', type: 'link' }
+    ];
   }
 
 

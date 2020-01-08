@@ -1,18 +1,26 @@
-.medium-banners {
-    display: flex;
-    justify-content: space-between;
-}
-
 .medium-banners img {
-    width: 32.7%;
+    width: 100%;
 }
 
-/*
-@media screen and (max-width: 600px) {
-    .medium-banners img{
+
+@media screen and (min-width: 486px) {
+    .medium-banners {
+        display: flex;
+        justify-content: space-around;
+        flex-flow: row wrap;
+    }
+
+    .medium-banners img {
         width: 50%;
     }
 }
-*/
+
+@media screen and (min-width: 888px) {
+    .medium-banners img {
+        width: 32.7%;
+    }
+}
+
+
 
 

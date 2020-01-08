@@ -138,7 +138,7 @@
 }
 
 .delivery-address-info .address {
-  padding: 15px 20px;
+  padding: 15px 20px 0 20px;
   display: flex;
 }
 
@@ -213,8 +213,26 @@ a[data-target="#myModal-GoToCart"] {
   margin-bottom: 15px;
 }
 
-.deliver-btn {
+.deliver-btn, .save-and-deliver-btn {
   margin-left: 50px;
+}
+
+.address-type {
+  margin-left: 50px;
+}
+
+.address-type radio-button {
+  margin-right: 8px;
+}
+
+.address-type span {
+  margin-right: 50px;
+  position: relative;
+  bottom: 3px;
+}
+
+.save-and-deliver-btn {
+  width: 250px;
 }
 
 /** Media queries **/

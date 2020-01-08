@@ -40,3 +40,18 @@
 .carousel-control-next, .carousel-control-prev {
     width: 15px;
 }
+
+
+@media screen and (max-width: 420px) {
+	.items-banner-header {
+		padding: .6em 1em .2em 1em; 
+	}
+	.items-banner-header h3 {
+		font-size: 1.2em;
+	}
+
+	.items-banner-header button {
+		font-size: .9em;
+		padding: .1em .5em;
+	}
+}

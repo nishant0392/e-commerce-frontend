@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'input-button',
@@ -13,22 +13,34 @@ export class InputButtonComponent implements OnInit {
     this.placeholder = this.default_placeholder;
   }
 
+  @Input('type') type: string = 'input'; // input type
   @Input() public maxlength: number;
   @Input('placeholder') public default_placeholder: string = "Enter the characters";
   @Input('width') public width: number;
   public placeholder: string;
   public visibility_style: string = "";
 
+  // Input value
+  public value: any;
+  @Output('value') public emitValue = new EventEmitter<any>();
+
+  // textarea related
+  @Input() public rows: number;
+
 
   public addClass(focus: string) {
 
-    if(focus == 'focusin') {
+    // focus in
+    if (focus == 'focusin') {
       this.placeholder = "";
       this.visibility_style = "visible";
     }
+    // focus out
     else {
       this.placeholder = this.default_placeholder;
       this.visibility_style = "";
+      // emit value
+      this.emitValue.emit(this.value);
     }
   }
 

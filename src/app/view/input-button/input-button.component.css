@@ -4,15 +4,18 @@
   top: 4px;
 }
 
-.special-input-btn input {
-  width: 140px;
-  height: 41px;
+.special-input-btn input, .special-input-btn textarea {
   padding: 9px;
   outline-color: aquamarine;
   border-color: #0b54c9;
   border-width: 1px;
   border-radius: 3px;
   font-size: 12px;
+}
+
+.special-input-btn input {
+  width: 140px;
+  height: 41px;
 }
 
 .special-input-btn p {

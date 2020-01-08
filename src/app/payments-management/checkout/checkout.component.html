@@ -124,27 +124,54 @@
               <p class="fs-12 mb-2 font-600 txt-blue">EDIT ADDRESS</p>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'Name'" [width]="250"></input-button>
-                <input-button [placeholder]="'10-digit mobile number'" [width]="250"></input-button>
+                <input-button [placeholder]="'Name'" [width]="250" (value)="name=$event"></input-button>
+                <input-button [placeholder]="'10-digit mobile number'" [width]="250" (value)="mobile=$event">
+                </input-button>
               </div>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'Pincode'" [width]="250"></input-button>
-                <input-button [placeholder]="'Locality'" [width]="250"></input-button>
+                <input-button [placeholder]="'Address (Area and Street)'" [width]="525" (value)="areaAndStreet=$event"
+                  [rows]="3" [type]="'textarea'">
+                </input-button>
               </div>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'City/District/Town'" [width]="250"></input-button>
-                <input-button [placeholder]="'State'" [width]="250"></input-button>
+                <input-button [placeholder]="'Pincode'" [width]="250" (value)="pincode=$event"></input-button>
+                <input-button [placeholder]="'Locality'" [width]="250" (value)="locality=$event"></input-button>
+              </div>
+
+              <div class="address-buttons">
+                <input-button [placeholder]="'City/District/Town'" [width]="250" (value)="cityOrDistrictOrTown=$event">
+                </input-button>
+                <input-button [placeholder]="'State'" [width]="250" (value)="state=$event"></input-button>
               </div>
 
             </div>
 
           </div>
 
+          <div class="address-type fs-12 radio-button-group">
+
+            <p class="text-muted mb-2">Address Type</p>
+
+            <radio-button [value]="'HOME'" [selected]="false" (selectedValue)="addressType=$event">
+            </radio-button><span>HOME (All day delivery)</span>
+
+            <radio-button [value]="'WORK'" [selected]="false" (selectedValue)="addressType=$event">
+            </radio-button><span>WORK (Delivery between 10AM - 5PM)</span>
+
+          </div>
+
         </div>
 
-        <button type="button" class="button-md deliver-btn" (click)="continueCheckout(1)">DELIVER HERE</button>
+        <div *ngIf="missingError">
+          <p class="fs-12 text-danger ml-5 mt-2">Please fill the required parameters.</p>
+        </div>
+
+        <button type="button" class="button-md deliver-btn" (click)="continueCheckout(1)" *ngIf="!editAddress">DELIVER
+          HERE</button>
+        <button type="button" class="button-md save-and-deliver-btn" (click)="saveAddressAndContinue()"
+          *ngIf="editAddress">SAVE AND DELIVER HERE</button>
       </div>
       <!-- end: CHANGE View -->
 

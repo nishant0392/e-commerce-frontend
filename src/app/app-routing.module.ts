@@ -9,6 +9,7 @@ import { UserReviewsComponent } from './user-management/user-reviews/user-review
 import { ViewCartComponent } from './products-management/view-cart/view-cart.component';
 import { CheckoutComponent } from './payments-management/checkout/checkout.component';
 import { OrderResponseComponent } from './payments-management/order-response/order-response.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'review-purchases', component: UserReviewsComponent },
   { path: 'view-cart', component: ViewCartComponent },
   { path: 'orderresponse', component: OrderResponseComponent },
+  { path: 'test', component: NavbarComponent },
   { path: '*', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];

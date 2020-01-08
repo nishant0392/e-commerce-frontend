@@ -33,6 +33,10 @@
   display: inline;
 }
 
+.disp-none {
+  display: none;
+}
+
 /*******  Position  *******/
 .float-right {
   float: right;

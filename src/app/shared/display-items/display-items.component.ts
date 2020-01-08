@@ -1,4 +1,4 @@
-import { Component, Input, AfterContentInit } from '@angular/core';
+import { Component, Input, AfterContentInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'display-items',
@@ -8,6 +8,7 @@ import { Component, Input, AfterContentInit } from '@angular/core';
 export class DisplayItemsComponent implements AfterContentInit {
 
   @Input() Items: any[];
+  @Input() header: string;  // header to display
   @Input() itemImageDefaultHeight: number | String;
   @Input() counterForSliders: String;
   @Input('ItemsPerSlide') countOfItemsPerSlide: number = 6;
@@ -18,8 +19,14 @@ export class DisplayItemsComponent implements AfterContentInit {
 
 
   ngAfterContentInit() {
-    
     this.displayItemsUsingCarousel(this.countOfItemsPerSlide);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // if count of items per slide has changed
+    if(changes.countOfItemsPerSlide) {
+      this.displayItemsUsingCarousel(this.countOfItemsPerSlide);
+    }
   }
 
 
@@ -36,11 +43,9 @@ export class DisplayItemsComponent implements AfterContentInit {
     this.counterForItemsPerSlide = <Array<number>>Array(countOfItemsPerSlide).fill(0).map((val, idx) => idx);
 
     let countOfSlides = Math.ceil(len / countOfItemsPerSlide);
-    console.log(countOfSlides)
 
     // create an array [0,1,2,...,countOfSlides-2] for no. of slides (excluding last slide)
     this.counterForSlides = <Array<number>>Array(countOfSlides-1).fill(0).map((val, idx) => idx);
-    console.log('counterFor Slides', this.counterForSlides)
 
     // create an array [len-countOfItemsPerSlide,...,len-2,len-1] for the last slide
     this.counterForItemsInLastSlide = [];

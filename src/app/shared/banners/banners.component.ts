@@ -20,7 +20,6 @@ export class BannersComponent implements OnInit {
 
   ngOnInit() {
     this.idForSlider = "bigBanner" + this.counterForSliders;
-    console.log("idForSlider", this.idForSlider)
   }
 
 }

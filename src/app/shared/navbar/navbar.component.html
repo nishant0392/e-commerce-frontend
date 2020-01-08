@@ -1,0 +1,108 @@
+
+<div class="myNavbar" [ngSwitch]="navbar">
+
+    <!-- =============================   START: Main Navigation bar   ============================= -->
+
+    <nav class="custom-main-nav navbar navbar-expand-xl navbar-dark bg-primary fixed-top p-0 pr-2"
+        *ngSwitchCase="'MAIN_NAV'">
+
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-store-alt icon-store" aria-hidden="true"></i>
+            <span class="brand-name txt-shadow"> N-Kart</span>
+        </a>
+
+        <div class="search-form">
+            <input #searchInput class="form-control" type="input" placeholder="Search for products, brands and more..."
+                (keyup.enter)="search(searchInput.value)" />
+            <i class="fa fa-search icon-search" aria-hidden="true" (click)="search(searchInput.value)"></i>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#myModal-signup">Login &amp;
+                        Signup</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class="fas fa-bell icon-bell"></i>Notification
+                            Preferences</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-briefcase icon-briefcase"></i>Sell on
+                            Flipkart</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-question-circle icon-question"></i>24 x 7
+                            Customer Care</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-ad icon-ad"></i>Advertise</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-download icon-download"></i>Download App</a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/view-cart']">
+                        <span class="icon-shopping-cart">
+                            <span class="icon-quantity" *ngIf="countOfCartItems">{{ countOfCartItems }}</span>
+                            <i class="fa fa-shopping-cart icon-cart" aria-hidden="true"></i>
+                        </span>
+                        Cart
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- =============================   END: Main Navigation bar   ============================= -->
+
+
+    <!-- =============================   START: Navigation bar   ============================= -->
+
+    <nav class="custom-nav" *ngSwitchCase="'NAV'">
+
+        <!-- Toggle Icon -->
+        <div class="toggle-icon" [ngClass]="{ toggleMenu: toggle }" (click)="toggleMenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
+        <!-- Part of Menu visible only on tablets and desktops -->
+        <div class="desktop-visible-menu" [ngClass]="displayClass_dvMenu">
+
+            <ul>
+                <li class="nav-item dropdown-on-hover" *ngFor="let index of visibleItemsIndex">
+                    <a class="nav-link">{{ navItems[index].name }}<i class="fas fa-chevron-down icon-dropdown"
+                            *ngIf="navItems[index].type === 'dropdown'"></i></a>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Collapsible Menu -->
+        <div class="collapsible-menu" [ngClass]="displayClass_cMenu">
+
+            <ul>
+                <li class="nav-item dropdown-on-hover" *ngFor="let index of collapsibleItemsIndex">
+                    <a class="nav-link">{{ navItems[index].name }}<i class="fas fa-chevron-down icon-dropdown"
+                            *ngIf="navItems[index].type === 'dropdown'"></i></a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- =============================   END: Navigation bar   ============================= -->
+</div>
+
+<!--h3 class="mt-5 text-success text-center">{{ windowWidth }}</h3-->

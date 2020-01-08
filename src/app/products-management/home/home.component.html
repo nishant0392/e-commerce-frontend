@@ -9,17 +9,19 @@
 
 <display-items 
     [Items]="Items"
+    [header]="'You May Like'"
     [itemImageDefaultHeight]="itemImageDefaultHeight"
     [counterForSliders]="2"
-    [ItemsPerSlide]="7"
+    [ItemsPerSlide]="itemsCount1"
 > 
 </display-items>
 
 <display-items 
     [Items]="Items" 
+    [header]="'Recommended'"
     [itemImageDefaultHeight]="itemImageDefaultHeight"
     [counterForSliders]="3"
-    [ItemsPerSlide]="6"
+    [ItemsPerSlide]="itemsCount2"
 > 
 </display-items>
 

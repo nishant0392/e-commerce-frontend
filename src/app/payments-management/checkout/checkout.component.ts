@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { PaymentService, PayUMoneyParams } from 'src/app/services/payment.service';
 import { Router } from '@angular/router';
+import { UserManagementService } from 'src/app/services/user-management.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +15,7 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private userService: UserManagementService,
     private cartService: CartService,
     private paymentService: PaymentService,
     private data: DataProvider2Service
@@ -34,10 +36,22 @@ export class CheckoutComponent implements OnInit {
   public paymentOptionLoad: boolean = true;
 
   // View Controller
-  public View: string[] = ['UNCHECKED', 'CHANGE', 'UNCHECKED', 'UNCHECKED'];
+  public View: string[] = ['CHANGE', 'UNCHECKED', 'UNCHECKED', 'UNCHECKED'];
   public show: boolean[] = [false, true];
   public captcha: any;   // captcha
+
   public editAddress: boolean;
+  public missingError: boolean = false;
+
+  // Edit address details
+  public name;
+  public mobile;
+  public areaAndStreet;
+  public pincode;
+  public locality;
+  public cityOrDistrictOrTown;
+  public state;
+  public addressType;
 
 
   ngOnInit() {
@@ -120,12 +134,12 @@ export class CheckoutComponent implements OnInit {
 
   public getCaptcha() {
 
-        // generate Captcha
-        this.paymentService.getCaptcha()
-        .subscribe((captcha: any) => {
-          this.captcha = captcha;
-          document.getElementById('COD-captcha').innerHTML = this.captcha;
-        },
+    // generate Captcha
+    this.paymentService.getCaptcha()
+      .subscribe((captcha: any) => {
+        this.captcha = captcha;
+        document.getElementById('COD-captcha').innerHTML = this.captcha;
+      },
         (error) => {
           console.log(error)
         });
@@ -210,6 +224,37 @@ export class CheckoutComponent implements OnInit {
   public selectAddress(address) {
     console.log(address)
   }
+
+
+  public saveAddressAndContinue() {
+
+    let address = {
+      name: this.name,
+      mobile: this.mobile,
+      areaAndStreet: this.areaAndStreet,
+      pincode: this.pincode,
+      locality: this.locality,
+      cityOrDistrictOrTown: this.cityOrDistrictOrTown,
+      state: this.state,
+      addressType: this.addressType
+    };
+
+    if (this.userService.isAnyPropertyNull(address)) {
+      this.missingError = true;
+      return;
+    }
+
+    this.missingError = false;
+
+    console.log(address)
+    this.userService.saveUserAddress(address)
+      .subscribe((apiResponse: any) => {
+        console.log(apiResponse)
+        if (!apiResponse.error)
+          this.continueCheckout(1);
+      })
+
+  } // END saveAddressAndContinue()
 
 
 }

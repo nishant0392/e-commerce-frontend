@@ -9,6 +9,7 @@ import { ProductsManagementModule } from './products-management/products-managem
 import { UserManagementModule } from './user-management/user-management.module';
 import { PaymentsManagementModule } from './payments-management/payments-management.module';
 import { ViewModule } from './view/view.module';
+import { SharedModule } from './shared/shared.module';
 
 
 // Components here
@@ -21,6 +22,7 @@ import { CartService } from './services/cart.service';
 import { DataProviderService } from './services/data-provider.service';
 import { WebComponentsService } from './services/web-components.service';
 import { PaymentService } from './services/payment.service';
+import { UtilityService } from './services/utility.service';
 
 
 
@@ -35,6 +37,7 @@ import { PaymentService } from './services/payment.service';
     UserManagementModule,
     PaymentsManagementModule,
     ViewModule,
+    SharedModule,
     HttpClientModule
   ],
   providers: [
@@ -42,7 +45,8 @@ import { PaymentService } from './services/payment.service';
     CartService, 
     DataProviderService, 
     WebComponentsService,
-    PaymentService
+    PaymentService,
+    UtilityService
   ],
   bootstrap: [AppComponent]
 })

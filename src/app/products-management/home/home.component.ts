@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Banner } from '../../shared/interfaces/banner.interface';
+import { UtilityService } from 'src/app/services/utility.service';
 
 
 @Component({
@@ -15,7 +16,12 @@ export class HomeComponent implements OnInit {
   public Items: Banner[];
   public itemImageDefaultHeight: Number | String;
 
-  constructor() {
+  // Parameters for responsiveness
+  public windowWidth: number;
+  public itemsCount1: number = 7;
+  public itemsCount2: number = 6;
+
+  constructor(private utilService: UtilityService) {
 
     // Banners
     this._banners = [
@@ -104,11 +110,61 @@ export class HomeComponent implements OnInit {
         imgName: 'realme-3i-rmx1827-original-imafgbbj49es6vff.jpeg'
       } 
     ];
+
+    // For Responsiveness (child component needs to be re-rendered)
+    window.addEventListener('resize', this.utilService.debounce((event) => {
+      this.adjustCount();
+    }, 1000));
+
   } // END constructor
 
+  
   ngOnInit() {
     this._bannerDefaultHeight = 280;
     this.itemImageDefaultHeight = 166;
+
+    this.adjustCount();
   }
+
+
+  adjustCount() {
+  
+    // --- Media Queries effect ---
+    this.windowWidth = window.innerWidth;
+   
+    // Desktop View
+    if (this.windowWidth > 1150) {
+      this.itemsCount1 = 7;
+      this.itemsCount2 = 6;
+    }
+
+    else if (this.windowWidth > 1075 && this.windowWidth <= 1150) {
+      this.itemsCount1 = 6;
+      this.itemsCount2 = 6;
+    }
+
+    else if (this.windowWidth > 880 && this.windowWidth <= 1075) {
+      this.itemsCount1 = 5;
+      this.itemsCount2 = 5;
+    }
+     
+    // Tablet View
+    else if (this.windowWidth > 700 && this.windowWidth <= 880) {
+      this.itemsCount1 = 4;
+      this.itemsCount2 = 4;
+    }
+
+    else if (this.windowWidth > 560 && this.windowWidth <= 700) {
+      this.itemsCount1 = 3;
+      this.itemsCount2 = 3;
+    }
+
+    // Mobile View
+    else {
+      this.itemsCount1 = 2;
+      this.itemsCount2 = 2;
+    };
+
+  } // END adjustCount()
 
 } // END 

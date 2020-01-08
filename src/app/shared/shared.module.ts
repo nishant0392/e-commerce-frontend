@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Components here
 import { BannersComponent } from './banners/banners.component';
@@ -13,8 +14,8 @@ import { RatingCircleComponent } from './rating/rating-circle/rating-circle.comp
 import { RatingBarComponent } from './rating/rating-bar/rating-bar.component';
 import { RatingStarComponent } from './rating/rating-star/rating-star.component';
 import { QuantityComponent } from './quantity/quantity.component';
-import { RouterModule } from '@angular/router';
-import { ZoomImageComponent } from './zoom-image/zoom-image.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -27,10 +28,12 @@ import { ZoomImageComponent } from './zoom-image/zoom-image.component';
     RatingBarComponent,
     RatingStarComponent,
     QuantityComponent,
-    ZoomImageComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     BannersComponent,
@@ -41,7 +44,8 @@ import { ZoomImageComponent } from './zoom-image/zoom-image.component';
     RatingBarComponent,
     RatingStarComponent,
     QuantityComponent,
-    ZoomImageComponent,
+    NavbarComponent,
+    FooterComponent,
     CommonModule,
     FormsModule,
     RouterModule
