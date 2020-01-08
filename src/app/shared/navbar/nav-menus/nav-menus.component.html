@@ -1,0 +1,218 @@
+<!-- *************  Navigation Menus  ************* -->
+
+<div class="nav-menus" [ngSwitch]="menuTitle">
+
+    <ul class="nav-menu" *ngSwitchCase="'Electronics'">
+
+        <!-- ***  First Column  *** -->
+        <li class="mega-menu-col">
+
+            <ul>
+                <!-- **  Sub-category => Mobile  ** -->
+                <li class="subcategory">
+                    <a title="Mobiles" href="/mobile-phones-store?otracker=nmenu_sub_Electronics_0_Mobiles">Mobiles
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory1.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <!-- *** Second Column *** -->
+        <li class="mega-menu-col">
+
+            <ul>
+                <!-- **  Sub-category => Mobile Accessories  ** -->
+                <li class="subcategory">
+                    <a title="Mobile Accessories"
+                        href="/mobile-accessories/pr?sid=tyy,4mr&amp;otracker=nmenu_sub_Electronics_0_Mobile%20Accessories">Mobile
+                        Accessories <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory2.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Smart Wearable Tech  ** -->
+                <li class="subcategory">
+                    <a title="Smart Wearable Tech"
+                        href="/smart-wearables-store?otracker=nmenu_sub_Electronics_0_Smart%20Wearable%20Tech">Smart
+                        Wearable Tech <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory3.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Health Care Appliances  ** -->
+                <li class="subcategory">
+                    <a title="Health Care Appliances"
+                        href="/health-and-appliances-store?otracker=nmenu_sub_Electronics_0_Health%20Care%20Appliances">Health
+                        Care Appliances <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory4.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+            </ul>
+
+        </li>
+
+        <!-- *** Third Column *** -->
+        <li class="mega-menu-col">
+
+            <ul>
+                <!-- **  Sub-category => Laptops  ** -->
+                <li class="subcategory">
+                    <a title="Laptops" href="/laptops-store?otracker=nmenu_sub_Electronics_0_Laptops">Laptops
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+
+                <!-- **  Sub-category => Desktop PCs  ** -->
+                <li class="subcategory">
+                    <a title="Desktop PCs"
+                        href="/desktop-pc-store?otracker=nmenu_sub_Electronics_0_Desktop%20PCs">Desktop PCs
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+
+                <!-- **  Sub-category => Gaming & Accessories  ** -->
+                <li class="subcategory">
+                    <a title="Gaming &amp; Accessories"
+                        href="/gaming-store?otracker=nmenu_sub_Electronics_0_Gaming%20%26%20Accessories">Gaming
+                        &amp; Accessories
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+
+                <!-- **  Sub-category => Computer Accessories  ** -->
+                <li class="subcategory">
+                    <a title="Computer Accessories"
+                        href="/computer-accessories-store?otracker=nmenu_sub_Electronics_0_Computer%20Accessories">Computer
+                        Accessories
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory5.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Tablets  ** -->
+                <li class="subcategory">
+                    <a title="Tablets" href="/tablets-store?otracker=nmenu_sub_Electronics_0_Tablets">Tablets
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory6.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+            </ul>
+
+        </li>
+
+        <!-- *** Fourth Column *** -->
+        <li class="mega-menu-col">
+
+            <ul>
+                <li class="tv">
+                    <a title="Televisions"
+                        href="/television-store?otracker=nmenu_sub_Electronics_0_Televisions">Televisions
+                    </a>
+                </li>
+
+                <!-- **  Sub-category => Speakers  ** -->
+                <li class="subcategory">
+                    <a title="Speakers" href="/audio-speaker-store?otracker=nmenu_sub_Electronics_0_Speakers">Speakers
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory7.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+
+                <!-- **  Sub-category => Smart Home Automation  ** -->
+                <li class="subcategory">
+                    <a title="Smart Home Automation"
+                        href="/smart-home-automation-store?otracker=nmenu_sub_Electronics_0_Smart%20Home%20Automation">Smart
+                        Home Automation
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory8.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Camera  ** -->
+                <li class="subcategory">
+                    <a title="Camera" href="/camera-clp-store?otracker=nmenu_sub_Electronics_0_Camera">Camera
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory9.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Camera Accessories  ** -->
+                <li class="subcategory">
+                    <a title="Camera Accessories"
+                        href="/cameras-accessories-store?otracker=nmenu_sub_Electronics_0_Camera%20Accessories">Camera
+                        Accessories
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of electronics.subCategory10.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+
+                <!-- **  Sub-category => Network Components  ** -->
+                <li class="subcategory">
+                    <a title="Network Components"
+                        href="/computers/network-components/pr?sid=6bo,70k&amp;otracker=categorytree&amp;otracker=nmenu_sub_Electronics_0_Network%20Components">Network
+                        Components
+                        <i class="fas fa-caret-right icon-triangle-right"></i>
+                    </a>
+                </li>
+                <li><a title="Routers"
+                        href="/computers/network-components/routers/pr?sid=6bo%2F70k%2F2a2&amp;otracker=nmenu_sub_Electronics_0_Routers">Routers</a>
+                </li>
+            </ul>
+
+        </li>
+
+        <!-- *** Fifth Column (Last column) *** -->
+        <li class="mega-menu-col">
+
+            <ul>
+                <!-- **  Sub-category => Featured  ** -->
+                <li class="subcategory">Featured</li>
+                <li *ngFor="let item of electronics.subCategory11.items">
+                    <a [title]="item.title" [href]="item.url">{{ item.title }}</a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+    <ul class="nav-menu" *ngSwitchCase="'TVs & Appliances'">
+    </ul>
+
+    <ul class="nav-menu" *ngSwitchCase="'Men'">
+    </ul>
+
+    <ul class="nav-menu" *ngSwitchCase="'Women'">
+    </ul>
+
+    <ul class="nav-menu" *ngSwitchCase="'Baby & Kids'">
+    </ul>
+
+    <ul class="nav-menu" *ngSwitchCase="'Home & Furniture'">
+    </ul>
+
+</div>
+

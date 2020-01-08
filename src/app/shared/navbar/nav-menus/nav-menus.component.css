@@ -1,0 +1,33 @@
+.icon-triangle-right {
+  position: relative;
+  top: 1px;
+  padding: 0px 6px;
+  color: lightslategrey;
+}
+
+.subcategory {
+  font-weight: bold;
+  font-size: 17px;
+  margin: 10px 2px 5px 0px;
+}
+
+/* Remove default settings */
+.nav-menus ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-menus a {
+  text-decoration: none;
+  color: #212121;
+}
+
+.tv {
+  margin-top: 10px;
+}
+
+ul.nav-menu {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
