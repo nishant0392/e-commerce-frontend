@@ -59,6 +59,7 @@ a[data-target="#myModal-signup"] {
   padding-bottom: 13px;
 }
 
+
 .brand-name {
   font-weight: bold;
   font-size: 1.5em;
@@ -144,6 +145,28 @@ a[data-target="#myModal-signup"] {
 
 .collapsible-menu {
   background-color: whitesmoke;
+}
+
+/* The dropdown container */
+.dropdown-on-hover {
+  overflow: hidden;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 98%;
+  left: 1%;
+  right: 1%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 5000;
+}
+
+/* Show the dropdown content on hover */
+.dropdown-on-hover:hover .dropdown-content {
+  display: block;
 }
 
 /** =======  Media Queries  ======= **/

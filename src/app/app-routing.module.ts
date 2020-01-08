@@ -10,6 +10,7 @@ import { ViewCartComponent } from './products-management/view-cart/view-cart.com
 import { CheckoutComponent } from './payments-management/checkout/checkout.component';
 import { OrderResponseComponent } from './payments-management/order-response/order-response.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavMenusComponent } from './shared/navbar/nav-menus/nav-menus.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'view-cart', component: ViewCartComponent },
   { path: 'orderresponse', component: OrderResponseComponent },
   { path: 'test', component: NavbarComponent },
+  { path: 'menu', component: NavMenusComponent },
   { path: '*', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];

@@ -16,6 +16,7 @@ import { RatingStarComponent } from './rating/rating-star/rating-star.component'
 import { QuantityComponent } from './quantity/quantity.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavMenusComponent } from './navbar/nav-menus/nav-menus.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FooterComponent } from './footer/footer.component';
     RatingStarComponent,
     QuantityComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    NavMenusComponent
   ],
   imports: [
     CommonModule,
