@@ -176,7 +176,7 @@
   top: 2px;
 }
 
-/*---  CHECKBOX  ---*/
+/*---  START: CHECKBOX  ---*/
 .checkbox {
   font-weight: 400;
   font-size: 14px;
@@ -218,5 +218,7 @@
 .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
   opacity: 1;
 }
+/*---  END: CHECKBOX  ---*/
+
 
 /*  ****   end: "MISCELLANEOUS"   ****  */

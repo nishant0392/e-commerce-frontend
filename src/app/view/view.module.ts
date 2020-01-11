@@ -15,6 +15,7 @@ import { PriceDetailsComponent } from './price-details/price-details.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { InputButtonComponent } from './input-button/input-button.component';
 import { SelectAddressBoxComponent } from '../view/select-address-box/select-address-box.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SelectAddressBoxComponent } from '../view/select-address-box/select-add
     PriceDetailsComponent,
     RadioButtonComponent,
     InputButtonComponent,
-    SelectAddressBoxComponent
+    SelectAddressBoxComponent,
+    ScrollToTopComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { SelectAddressBoxComponent } from '../view/select-address-box/select-add
     PriceDetailsComponent,
     RadioButtonComponent,
     InputButtonComponent,
-    SelectAddressBoxComponent
+    SelectAddressBoxComponent,
+    ScrollToTopComponent
   ]
 })
 export class ViewModule { }

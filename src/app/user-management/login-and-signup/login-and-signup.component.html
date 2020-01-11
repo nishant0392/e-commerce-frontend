@@ -1,0 +1,93 @@
+<!-- START: Modal content for Login -->
+<div id="myModal-login" class="modal login-signup">
+    <div class="modal-content">
+
+        <div class="myModal-custom-content">
+
+            <div class="sidebar">
+                <h3><strong>Login</strong></h3>
+                <p class="mt-4">Get access to your Orders, Wishlist and Recommendations</p>
+                <div class="login-img"></div>
+            </div>
+
+            <div class="main">
+                <div class="close-modal">
+                    <i class="fas fa-times icon-close" data-dismiss="modal"></i>
+                </div>
+
+                <input type="text" placeholder="Enter Email / Mobile Number" />
+
+                <div class="pass" [ngClass]="isFocused ? 'underline' : ''">
+
+                    <input type="password" placeholder="Enter Password" (focus)="isFocused = true"
+                        (focusout)="isFocused = false" />
+
+                    <a href='/forgot_password'>Forgot ?</a>
+                </div>
+
+                <button type="input" id="login">Login</button>
+                <p id="or">OR</p>
+                <button type="input" id="request-otp">Request OTP</button>
+
+                <a class="cur-p" id="signup" data-toggle="modal" data-dismiss="modal" data-target="#myModal-signup">New
+                    to Flipkart? Create an account</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Modal content for Login -->
+
+
+<!-- START: Modal content for Signup -->
+<div id="myModal-signup" class="modal login-signup">
+    <div class="modal-content">
+
+        <div class="myModal-custom-content">
+
+            <div class="sidebar">
+                <h3><strong>Signup</strong></h3>
+                <p class="mt-4">We do not share your personal details with anyone.</p>
+                <div class="login-img"></div>
+            </div>
+
+            <div class="main">
+                <div class="close-modal">
+                    <i class="fas fa-times icon-close" data-dismiss="modal"></i>
+                </div>
+
+                <input #mobNo type="number" placeholder="Enter Mobile Number" style="margin: 0;"
+                    [ngStyle]="addRedBorder()" />
+                <small class="error-msg" *ngIf="errorMsg_Mobno">
+                    Please enter a valid Mobile number
+                </small>
+
+                <div class="signup-otp-pass text-dark mt-4" *ngIf="isMobNoValid">
+                    <p>
+                        OTP sent to Mobile
+                        <span style="float: right; color: #0d63ee;">Resend?</span>
+                    </p>
+
+                    <input type="number" placeholder="Enter OTP" />
+                    <small class="error-msg" *ngIf="incorrect_OTP">
+                        This OTP is incorrect. You have 9 attempt(s) left.
+                    </small>
+
+                    <input type="password" placeholder="Set Password" class="mb-2 mt-2" />
+                    <small class="error-msg" *ngIf="invalid_Password">
+                        Please enter a valid Password.
+                    </small>
+                </div>
+
+                <button type="input" id="signup-continue" (click)="verifyMobileNo(mobNo.value)">
+                    <span *ngIf="!isMobNoValid">Continue</span>
+                    <span *ngIf="isMobNoValid">Signup</span>
+                </button><br /><br />
+
+                <button type="input" id="signup-exst-user" data-toggle="modal" data-dismiss="modal"
+                    data-target="#myModal-login">Existing User? Log in</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Modal content for Signup -->

@@ -10,16 +10,12 @@ import { CartService } from './services/cart.service';
 })
 export class AppComponent implements OnInit {
 
-  public isMobNoValid: boolean = false;
-  public errorMsg_Mobno: boolean = false;
-
   public countOfCartItems: number = 0;
 
   // Secondary Navbar 
   public navItems: any[] = [];
 
-  constructor(private userService: UserManagementService,
-    private cartService: CartService,
+  constructor(private cartService: CartService,
     private router: Router) { }
 
   ngOnInit() {
@@ -49,12 +45,6 @@ export class AppComponent implements OnInit {
     })
   }
 
-  /**
-   * This OTP is incorrect. You have 9 attempt(s) left.
-
-   */
-
-
 
   /**
    * Searches for the query.
@@ -66,38 +56,6 @@ export class AppComponent implements OnInit {
     // this.router.navigate(['/assets/images/Nishant.JPG'])
   }
 
-  verifyMobileNo(mobileNo: number) {
+  
 
-    let response = this.userService.verifyAndSendSMS(mobileNo, 'USERMV');
-
-    if (response === false) {
-      this.errorMsg_Mobno = true;
-    }
-
-    else {
-      this.isMobNoValid = true;
-      this.errorMsg_Mobno = false;
-
-      response.subscribe((apiResponse: any) => {
-        console.log('apiResponse:', apiResponse)
-        if (apiResponse.error) {
-          this.errorMsg_Mobno = true;
-        }
-        else {
-          //
-        }
-      })
-    }
-
-  }
-
-  /* Adds red border at bottom */
-  addRedBorder() {
-    if (this.errorMsg_Mobno) {
-      return {
-        'border-bottom-color': 'indianred'
-      };
-    }
-  }
-
-}
+} // END

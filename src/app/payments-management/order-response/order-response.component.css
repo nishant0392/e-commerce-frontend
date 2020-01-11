@@ -1,10 +1,10 @@
 .order-response {
-  width: 1100px;
   margin: 10px auto;
 }
 
-.first-div, .second-div {
-  background-color: #fff; 
+.first-div,
+.second-div {
+  background-color: #fff;
   padding: 15px 20px;
 }
 
@@ -17,5 +17,5 @@
 }
 
 .order-response .second-div {
-    margin-top: 10px;
+  margin-top: 10px;
 }
