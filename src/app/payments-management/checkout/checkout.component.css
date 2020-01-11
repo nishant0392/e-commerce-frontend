@@ -78,6 +78,7 @@
 .CHANGE-VIEW .login-info {
   padding: 15px 30px;
   display: flex;
+  flex-wrap: wrap-reverse;
 }
 
 .CHANGE-VIEW .login-info a {
@@ -151,6 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 5px 15px 0 33px;
 }
 
@@ -161,7 +163,7 @@
 
 .confirm-mail span.fs-12 {
   position: relative;
-  bottom: .2em;
+  bottom: 0.2em;
 }
 
 .order-summary-info .empty {
@@ -192,28 +194,42 @@ a[data-target="#myModal-GoToCart"] {
 
 .checkout .COD {
   display: flex;
+  flex-flow: row wrap;
   margin-top: 10px;
 }
 
 .checkout .captcha {
-  margin-right: 20px;
+  margin-right: 15px !important;
 }
 
 .COD button {
-  margin: 4px 0 0 20px !important;
+  margin-top: 4px;
   width: auto;
   height: 40px;
+  white-space: nowrap;
 }
 
+/*- Edit Address -*/
 .edit-address input-button {
   margin-right: 25px;
 }
 
-.address-buttons {
+.edit-address .address-buttons {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 15px;
 }
 
-.deliver-btn, .save-and-deliver-btn {
+.address-textarea {
+  margin-bottom: -8px !important;
+}
+
+.address-textarea input-button {
+  width: 525px;
+}
+
+.deliver-btn,
+.save-and-deliver-btn {
   margin-left: 50px;
 }
 
@@ -226,9 +242,17 @@ a[data-target="#myModal-GoToCart"] {
 }
 
 .address-type span {
-  margin-right: 50px;
   position: relative;
   bottom: 3px;
+  white-space: nowrap;
+}
+
+.address-type div {
+  display: inline;
+}
+
+.address-home {
+  margin-right: 50px;
 }
 
 .save-and-deliver-btn {
@@ -236,11 +260,83 @@ a[data-target="#myModal-GoToCart"] {
 }
 
 /** Media queries **/
-@media screen and (max-width: 900px) {
+
+@media screen and (max-width: 986px) {
   .checkout {
+    flex-wrap: wrap-reverse;
     padding: 0;
+  }
+
+  .checkout-details-container {
+    margin-right: 0;
+  }
+
+  .price-details-container {
+    flex-basis: 75%;
+    margin-bottom: 2em;
   }
 }
 
+@media screen and (max-width: 630px) {
+  .checkout-details-container {
+    width: 100%;
+  }
 
+  .edit-address .address-buttons {
+    display: block;
+  }
 
+  .address-textarea input-button {
+    width: 250px;
+  }
+
+  .address-buttons div {
+    margin: 15px auto;
+  }
+
+  .address-type div {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+}
+
+@media screen and (max-width: 520px) {
+  .CHANGE-VIEW .login-ad {
+    margin-bottom: 2em;
+  }
+
+}
+
+@media screen and (max-width: 440px) {
+  .CHANGE-VIEW .login-details {
+    margin-right: 0;
+  }
+
+  .checkout-details-container {
+    width: 100%;
+  }
+
+  .price-details-container {
+    flex-basis: 100%;
+  }
+}
+
+@media screen and (min-width: 404px) and (max-width: 443px) {
+  .COD button {
+    margin: 30px auto 0 105px !important;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 403px) {
+  .COD button {
+    margin: 30px auto 0 90px !important;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .COD button {
+    margin: 30px auto 0 80px !important;
+  }
+
+}

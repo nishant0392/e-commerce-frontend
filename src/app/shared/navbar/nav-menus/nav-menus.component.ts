@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataProvider2Service } from 'src/app/services/data-provider2.service';
+
+// Importing Navigation MENUs
+import electronics_Menu from '../../../../assets/json/menus/electronics.json';
 
 @Component({
   selector: 'nav-menu',
@@ -8,13 +10,20 @@ import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 })
 export class NavMenusComponent implements OnInit {
 
-  constructor(private data: DataProvider2Service) { }
-
   @Input('menu') public menuTitle: string;
-  public electronics;
+
+  // Navigation MENUs
+  public Electronics;
+  public TVs_and_Appliances;
+  public Men;
+  public Women;
+  public Baby_and_Kids;
+  public Home_and_Furniture;
+  public Sports_Books_and_More;
+
 
   ngOnInit() {
-    this.electronics = this.data.electronics;
+    this.Electronics = electronics_Menu;
   }
 
 }

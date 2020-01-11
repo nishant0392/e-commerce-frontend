@@ -47,6 +47,7 @@ export class InputButtonComponent implements OnInit {
 
   public addWidth() {
 
+    if(this.width)
     return {
       'width': this.width + 'px'
     }

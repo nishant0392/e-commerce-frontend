@@ -28,7 +28,6 @@
         <div class="login-info">
 
           <div class="login-details">
-
             <p class="fs-12 mb-2">
               <span class="txt-lightgrey">Name</span>&nbsp;<span class="font-600 ml-3">Flipkart Customer</span>
             </p>
@@ -124,26 +123,52 @@
               <p class="fs-12 mb-2 font-600 txt-blue">EDIT ADDRESS</p>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'Name'" [width]="250" (value)="name=$event"></input-button>
-                <input-button [placeholder]="'10-digit mobile number'" [width]="250" (value)="mobile=$event">
-                </input-button>
+
+                <div>
+                  <input-button [placeholder]="'Name'" [width]="250" (value)="name=$event"></input-button>
+                </div>
+
+                <div>
+                  <input-button [placeholder]="'10-digit mobile number'" [width]="250" (value)="mobile=$event">
+                  </input-button>
+                </div>
+
               </div>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'Address (Area and Street)'" [width]="525" (value)="areaAndStreet=$event"
-                  [rows]="3" [type]="'textarea'">
-                </input-button>
+
+                <div class="address-textarea">
+                  <input-button [placeholder]="'Address (Area and Street)'" (value)="areaAndStreet=$event"
+                    [rows]="3" [type]="'textarea'">
+                  </input-button>
+                </div>
+
               </div>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'Pincode'" [width]="250" (value)="pincode=$event"></input-button>
-                <input-button [placeholder]="'Locality'" [width]="250" (value)="locality=$event"></input-button>
+
+                <div>
+                  <input-button [placeholder]="'Pincode'" [width]="250" (value)="pincode=$event"></input-button>
+                </div>
+
+                <div>
+                  <input-button [placeholder]="'Locality'" [width]="250" (value)="locality=$event"></input-button>
+                </div>
+
               </div>
 
               <div class="address-buttons">
-                <input-button [placeholder]="'City/District/Town'" [width]="250" (value)="cityOrDistrictOrTown=$event">
-                </input-button>
-                <input-button [placeholder]="'State'" [width]="250" (value)="state=$event"></input-button>
+
+                <div>
+                  <input-button [placeholder]="'City/District/Town'" [width]="250"
+                    (value)="cityOrDistrictOrTown=$event">
+                  </input-button>
+                </div>
+
+                <div>
+                  <input-button [placeholder]="'State'" [width]="250" (value)="state=$event"></input-button>
+                </div>
+
               </div>
 
             </div>
@@ -154,11 +179,15 @@
 
             <p class="text-muted mb-2">Address Type</p>
 
-            <radio-button [value]="'HOME'" [selected]="false" (selectedValue)="addressType=$event">
-            </radio-button><span>HOME (All day delivery)</span>
+            <div>
+              <radio-button [value]="'HOME'" [selected]="false" (selectedValue)="addressType=$event">
+              </radio-button><span class="address-home">HOME (All day delivery)</span>
+            </div>
 
-            <radio-button [value]="'WORK'" [selected]="false" (selectedValue)="addressType=$event">
-            </radio-button><span>WORK (Delivery between 10AM - 5PM)</span>
+            <div>
+              <radio-button [value]="'WORK'" [selected]="false" (selectedValue)="addressType=$event">
+              </radio-button><span>WORK (Delivery between 10AM - 5PM)</span>
+            </div>
 
           </div>
 
@@ -391,3 +420,5 @@
 
 
 <!-- END: 'GO TO CART' Modal  -->
+
+<textarea rows="2" style="width: 100%"></textarea>

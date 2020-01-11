@@ -16,14 +16,13 @@
 
 <!-- *****  TEXTAREA INPUT BUTTON with TEXT on top with special effect  ***** -->
 
-<div class="special-input-btn" *ngIf="type !== 'input'">
+<div class="special-input-btn input-textarea" *ngIf="type !== 'input'">
   <p [ngStyle]="{ 'visibility': visibility_style }">{{ default_placeholder }}</p>
   <textarea 
     type="text" 
     [attr.placeholder]="placeholder"
     [attr.rows]="rows" 
     class="input-btn" 
-    [ngStyle]="addWidth()"
     (focus)="addClass('focusin')"
     (focusout)="addClass('focusout')"
     [(ngModel)]="value"

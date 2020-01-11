@@ -36,7 +36,7 @@ export class CheckoutComponent implements OnInit {
   public paymentOptionLoad: boolean = true;
 
   // View Controller
-  public View: string[] = ['CHANGE', 'UNCHECKED', 'UNCHECKED', 'UNCHECKED'];
+  public View: string[] = ['UNCHECKED', 'CHANGE', 'CHANGE', 'UNCHECKED'];
   public show: boolean[] = [false, true];
   public captcha: any;   // captcha
 
@@ -238,7 +238,7 @@ export class CheckoutComponent implements OnInit {
       state: this.state,
       addressType: this.addressType
     };
-
+/*
     if (this.userService.isAnyPropertyNull(address)) {
       this.missingError = true;
       return;
@@ -252,8 +252,8 @@ export class CheckoutComponent implements OnInit {
         console.log(apiResponse)
         if (!apiResponse.error)
           this.continueCheckout(1);
-      })
-
+      })*/
+      this.continueCheckout(1);
   } // END saveAddressAndContinue()
 
 

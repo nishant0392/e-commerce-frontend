@@ -18,6 +18,14 @@
   height: 41px;
 }
 
+.input-textarea { 
+  width: inherit !important;
+}
+
+.special-input-btn textarea {
+  width: 100%;
+}
+
 .special-input-btn p {
   position: absolute;
   color: #878787;
