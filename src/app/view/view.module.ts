@@ -16,6 +16,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { InputButtonComponent } from './input-button/input-button.component';
 import { SelectAddressBoxComponent } from '../view/select-address-box/select-address-box.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { MobileviewSidebarComponent } from './mobileview-sidebar/mobileview-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     RadioButtonComponent,
     InputButtonComponent,
     SelectAddressBoxComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    MobileviewSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     RadioButtonComponent,
     InputButtonComponent,
     SelectAddressBoxComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    MobileviewSidebarComponent
   ]
 })
 export class ViewModule { }

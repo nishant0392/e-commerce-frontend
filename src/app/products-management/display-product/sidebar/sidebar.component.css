@@ -82,3 +82,13 @@ section p {
   position: relative;
   bottom: 2px;
 }
+
+.custom-slider input {
+  width: 150px;
+  padding: 0px 2px 0px 4px;
+  margin-left: 5px;
+}
+
+.custom-slider input[name="minValue"] {
+  margin-left: 7px;
+} 

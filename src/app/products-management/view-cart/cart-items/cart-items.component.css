@@ -112,3 +112,16 @@
   
 }
 
+@media screen and (max-width: 378px) {
+ 
+  .cart-items .item .item-quantity quantity {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .cart-items .item span:nth-child(2) {
+    margin-left: 0 !important;
+  }
+  
+}
+

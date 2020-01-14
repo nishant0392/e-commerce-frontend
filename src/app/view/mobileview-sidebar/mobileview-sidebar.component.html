@@ -1,0 +1,15 @@
+<!-- *******   Sidebar (Mobile View)  ******** -->
+
+<div class="mobileview-sidebar">
+    <div class="sidebar-btn" (click)="addAnimation()" *ngIf="!showSidebar">
+        {{ sidebarButtonName }}
+    </div>
+    <div 
+      class="sidebar-content" 
+      [ngClass]="toggleSidebar"
+      *ngIf="showSidebar"
+      (mouseleave)="removeAnimation()"
+    >
+       <ng-content></ng-content>
+    </div>
+</div>

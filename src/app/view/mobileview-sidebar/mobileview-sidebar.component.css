@@ -1,0 +1,62 @@
+.mobileview-sidebar {
+  z-index: 5000;
+  position: relative;
+}
+
+.mobileview-sidebar .sidebar-btn {
+  background-color: #17a4b8;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 600;
+  position: fixed;
+  top: 50%;
+  left: -29px;
+  padding: 5px 15px;
+  border-radius: 7px 7px 0 0;
+  transform: rotate(90deg);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all .5s ease;
+}
+
+.mobileview-sidebar .sidebar-btn:hover {
+  opacity: 1;
+}
+
+.mobileview-sidebar .sidebar-content {
+  background-color: #fff;
+  border: 1px solid #d2d2f1;
+  position: absolute;
+  left: -300px;
+  border-radius: 0 5px 5px 0;
+}
+
+/* Sidebar Animation */
+.displaySidebar {
+  animation: slide-forwards 0.7s forwards;
+}
+
+.hideSidebar {
+  animation: slide-backwards 0.7s forwards;
+}
+
+/**---  CSS Animation  ---**/
+@keyframes slide-forwards {
+  from {
+    transform: translateX(0px);
+  }
+
+  to {
+    transform: translateX(114%);
+  }
+}
+
+@keyframes slide-backwards {
+  from {
+    transform: translateX(114%);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+}
