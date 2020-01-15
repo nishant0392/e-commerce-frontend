@@ -44,3 +44,25 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 586px) {
+  .specifications h3, .specifications .spec {
+    padding: 10px 10px 12px 10px;
+  }
+
+  .specifications-view {
+    width: 102% !important;
+    margin: 25px 0 10px -10px;
+  }
+}
+
+
+@media screen and (max-width: 472px) {
+  .specifications-view {
+    font-size: .9em;
+  }
+
+  .specifications .feature {
+    margin-right: 10px;
+  }
+}
+

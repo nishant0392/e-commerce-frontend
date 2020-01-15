@@ -6,6 +6,7 @@
   background-color: #fff;
 }
 
+/** Product Image **/
 .product-image-wrapper {
   flex: 1;
   /** (1) Make left content(flex-item) sticky (for scrollable part) **/
@@ -43,14 +44,15 @@
 
 .purchase-btn button {
   padding: 1em 1.5em;
-  box-shadow: 1px 2px 0 rgba(0,0,0,.2);
+  box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   border: none;
   color: #fff;
   width: 48.8%;
 }
 
-.purchase-btn .fa-bolt, .purchase-btn .fa-shopping-cart {
+.purchase-btn .fa-bolt,
+.purchase-btn .fa-shopping-cart {
   margin-right: 15px;
 }
 
@@ -62,9 +64,11 @@
   background-color: #fb641b;
 }
 
-.compare, .share {
+/**  PRODUCT DETAILS  **/
+.compare,
+.share {
   float: right;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .icon-share {
@@ -93,11 +97,11 @@
 }
 
 .item .item-description p {
-  margin-bottom: .7rem;
+  margin-bottom: 0.7rem;
 }
 
 .item .item-description span {
-  font-size: .85em;
+  font-size: 0.85em;
 }
 
 .item .item-description .item-ratings {
@@ -107,15 +111,15 @@
   border-radius: 2px;
 }
 
-.item .item-description ul{
+.item .item-description ul {
   flex: 2;
   list-style: none;
-  font-size: .9em;
-  padding: 1em .5em;
+  font-size: 0.9em;
+  padding: 1em 0.5em;
 }
 
 .item .item-description ul li::before {
-  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: lightgrey; /* Change the color */
   font-weight: bold; /* If you want it to be bold */
   display: inline-block; /* Needed to add space between the bullet and the text */
@@ -123,7 +127,7 @@
 }
 
 .item .item-cost .discount {
-  font-size: .9em;
+  font-size: 0.9em;
   color: green;
 }
 
@@ -131,9 +135,10 @@
   margin-bottom: 0.2rem;
 }
 
-.item .item-cost .mrp, .discount-percent {
+.item .item-cost .mrp,
+.discount-percent {
   vertical-align: middle;
-  font-size: .6em;
+  font-size: 0.6em;
   margin: 0 10px;
 }
 
@@ -155,7 +160,7 @@
 
 .offers i {
   color: rgb(20, 185, 20);
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .offers a {
@@ -164,7 +169,7 @@
 
 .offers .icon-chevron-right {
   color: #2874f0;
-  font-size: .7rem; 
+  font-size: 0.7rem;
   position: relative;
   bottom: 1px;
 }
@@ -182,154 +187,67 @@
   cursor: pointer;
 }
 
-
 /* Properties Section */
 .properties-section {
   margin-top: 15px;
 }
 
-
-/****    Media Queries  ****/
-@media screen and (max-width: 768px) {
-
-  .purchase-btn button {
-    width: 100%;
-    margin: 10px 0; 
-  }
-  
-}
-
-@media screen and (max-width: 700px) {
-
-  .purchase-btn {
-    margin-left: 0;
-  }
-  .purchase-btn button {
-    margin: 10px 5px 10px 10px; 
-  }
-  
-}
-
-/**   =================    */
-
-.scroll-to-top {
-  width: 140px;
-  padding: 8px 0px;
-  background-color: #fff;
-  color: #2874f0;
-  font-weight: 500;
-  font-size: 16px;
-  text-align: center;
-  margin: 0px auto;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.11);
-  cursor: pointer;
-  z-index: -10;
-  position: fixed;
-  left: 45%;
-  visibility: hidden;
-}
-
-.scroll-to-top .icon-chevron-up {
-  font-size: 11px;
-  margin-right: 6px;
-  position: relative;
-  bottom: 2px;
-}
-
-.scroll-to-top.visible {
-  visibility: visible;
-  transform: translateY(175%);
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-}
-
-.header {
-  width: 100%;
-  position: fixed;
-  background-color: #17a2b8;
-  top: 0;
-}
-
-.header h1 {
-  text-align: center;
-}
-
-.scrollable {
-  display: flex;
-}
-
-.sidediv,
-.content,
-.more {
-  padding: 10px 15px;
-  z-index: -20;
-}
-
-.sidediv {
-  background-color: palegreen;
-  flex: 2;
-  height: 92vh;
-  position: sticky;
-  left: 0;
-  top: 60px;
-}
-
-.content {
-  background-color: #ff00ff;
-  flex: 3;
-  margin-top: 60px;
-  position: sticky;
-  right: 0;
-  top: 100px;
-}
-
-.content p {
-  color: #000;
-  margin-bottom: 50px;
-}
-
-
 /* Checkbox */
-.checkbox {
-  font-weight: 400;
-}
-.checkbox label:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .checkbox .cr {
-  position: relative;
-  display: block;
-  border: 1px solid #a9a9a9;
-  border-radius: 0.1em;
   width: 1em;
   height: 1em;
-  float: left;
   margin: 0.2em 0.4em;
 }
 
 .checkbox .cr .cr-icon {
-  position: absolute;
   font-size: 1.1em;
-  color: #2874f0;
-  line-height: 0;
-  top: 50%;
-  left: 0%;
 }
 
-.checkbox label input[type="checkbox"] {
-  display: none;
+/****    Media Queries  ****/
+@media screen and (max-width: 1024px) {
+  .product-details {
+    flex-flow: column wrap;
+    align-items: center;
+  }
+  .product-image-wrapper {
+    position: static;
+    width: 500px;
+  }
+
+  .product-image {
+    border: none;
+  }
 }
 
-.checkbox label input[type="checkbox"] + .cr > .cr-icon {
-  opacity: 0;
+@media screen and (max-width: 544px) {
+  .product-image-wrapper {
+    width: 100%;
+  }
+
+  .custom-breadcrumb {
+    display: none;
+  }
+
+  .purchase-btn {
+    margin-left: 0;
+  }
+
+  .purchase-btn button {
+    margin: 10px 5px 10px 3px;
+  }
+
+  .offers ul {
+    font-size: .9em;
+    line-height: 1.5;
+  }
+
+  .offers ul li {
+    margin-top: .5em;
+  }
+
+
 }
 
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
-  opacity: 1;
+@media screen and (max-width: 420px) {
+
 }
-
-

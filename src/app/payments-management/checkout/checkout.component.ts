@@ -36,7 +36,7 @@ export class CheckoutComponent implements OnInit {
   public paymentOptionLoad: boolean = true;
 
   // View Controller
-  public View: string[] = ['UNCHECKED', 'CHANGE', 'CHANGE', 'UNCHECKED'];
+  public View: string[] = ['CHANGE', 'UNCHECKED', 'UNCHECKED', 'UNCHECKED'];
   public show: boolean[] = [false, true];
   public captcha: any;   // captcha
 

@@ -14,9 +14,6 @@ export class ProductDetailsComponent implements OnInit {
   // Product Image
   public img_list: any[];
   public selectedImage: any;
-  public zoomImage: any;
-  public widthOfZoomImage: number;
-  public heightOfZoomImage: number;
 
   public carouselOptions: any;
   public carouselItems: any[];
@@ -52,10 +49,6 @@ export class ProductDetailsComponent implements OnInit {
 
     // set the default image
     this.selectedImage = "/assets/images/" + this.carouselItems[0].fullImg;
-    //this.zoomImage = "/assets/images/" + this.carouselItems[1].fullImg;
-    this.widthOfZoomImage = 480;
-    this.heightOfZoomImage = 1000;
-
 
     // Item details
     this.Item = this._data.Item;

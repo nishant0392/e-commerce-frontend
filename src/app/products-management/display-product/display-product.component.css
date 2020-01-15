@@ -122,6 +122,7 @@
   bottom: 3px;
 }
 
+/**- PAGINATION  -**/
 .pagination {
   display: flex;
   height: 75px;
@@ -186,6 +187,15 @@
   ul.sort {
     margin-right: 0;
     justify-content: space-between;
+  }
+
+  .pagination .page-no {
+    display: none;
+  }
+
+  .pagination .pages {
+    flex: none;
+    margin: auto;
   }
 }
 

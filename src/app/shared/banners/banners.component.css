@@ -16,4 +16,5 @@
 
 .carousel-control-next, .carousel-control-prev {
 	width: 15px;
+	cursor: pointer;
 }

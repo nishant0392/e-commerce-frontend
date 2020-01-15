@@ -10,6 +10,7 @@ export class LoginAndSignupComponent implements OnInit {
 
   public isMobNoValid: boolean = false;
   public errorMsg_Mobno: boolean = false;
+  public isFocused: boolean = false;
 
   constructor(private userService: UserManagementService) { }
 

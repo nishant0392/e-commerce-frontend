@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.mobileview-sidebar .sidebar-btn {
+.sidebar-btn {
   background-color: #17a4b8;
   color: #fff;
   letter-spacing: 2px;
@@ -11,7 +11,7 @@
   position: fixed;
   top: 50%;
   left: -29px;
-  padding: 5px 15px;
+  padding: 7px 15px;
   border-radius: 7px 7px 0 0;
   transform: rotate(90deg);
   cursor: pointer;
@@ -19,8 +19,26 @@
   transition: all .5s ease;
 }
 
-.mobileview-sidebar .sidebar-btn:hover {
+.sidebar-btn span {
+  display: none;
+}
+
+.sidebar-btn:hover {
   opacity: 1;
+}
+
+.sidebar-btn:hover span {
+  display: inline;
+}
+
+.sidebar-btn i {
+  font-size: 1em;
+  position: relative;
+  bottom: 12px;
+}
+
+.sidebar-btn:hover i {
+  display: none;
 }
 
 .mobileview-sidebar .sidebar-content {

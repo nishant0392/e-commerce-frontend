@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserManagementService } from './services/user-management.service';
-import { Router } from '@angular/router';
 import { CartService } from './services/cart.service';
 
 @Component({
@@ -15,8 +13,7 @@ export class AppComponent implements OnInit {
   // Secondary Navbar 
   public navItems: any[] = [];
 
-  constructor(private cartService: CartService,
-    private router: Router) { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
     this.initCountOfCartItems();

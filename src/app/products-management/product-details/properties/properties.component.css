@@ -1,34 +1,40 @@
 .properties-view {
-    width: 100%;
-    padding-top: 3px;
-    margin-top: 25px;
+  width: 100%;
+  padding-top: 3px;
+  margin-top: 25px;
 }
 
 .properties {
-    display: flex;
-    flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .item-property {
-    width: 50%;
-    display: flex;
-    margin-bottom: 1rem;
+  width: 50%;
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 .item-property .left-div {
-    flex-basis: 120px;
-    color: #878787;
+  flex-basis: 120px;
+  color: #878787;
 }
 
 .item-property .right-div {
-    flex: 1;
+  flex: 1;
 }
 
 .custom-width {
-    width: 55%;
-    margin-bottom: 15px;
+  width: 55%;
+  margin-bottom: 15px;
 }
 
 .custom-width-100 {
+  width: 100%;
+}
+
+@media screen and (max-width: 544px) {
+  .item-property {
     width: 100%;
+  }
 }

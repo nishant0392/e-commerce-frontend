@@ -390,6 +390,11 @@ export class DisplayProductComponent implements OnInit {
 
   }
 
+  //--------
+  removeBackground() {
+    console.log('remove ---')
+    return false;
+  }
 
   /* **** Pagination functions **** */
 

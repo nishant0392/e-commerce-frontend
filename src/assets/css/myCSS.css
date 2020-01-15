@@ -221,4 +221,20 @@
 /*---  END: CHECKBOX  ---*/
 
 
+/*---  Blur The Background ---*/
+.blur-background {
+  opacity: 0.3;
+  filter: blur(5px) grayscale(90);
+  -webkit-filter: blur(5px) grayscale(90%);
+}
+
+/*-- Enable/Disable cursor --*/
+.disable-cursor {
+  pointer-events: none;
+}
+
+.enable-cursor {
+  pointer-events: auto;
+}
+
 /*  ****   end: "MISCELLANEOUS"   ****  */
