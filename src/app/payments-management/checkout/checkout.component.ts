@@ -238,6 +238,7 @@ export class CheckoutComponent implements OnInit {
       state: this.state,
       addressType: this.addressType
     };
+    // ---- Uncomment for normal functioning (i.e., when backend is ready)
 /*
     if (this.userService.isAnyPropertyNull(address)) {
       this.missingError = true;

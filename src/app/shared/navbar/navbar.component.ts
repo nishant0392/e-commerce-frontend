@@ -22,7 +22,9 @@ export class NavbarComponent implements OnInit {
   @Input('visible') public visibleItemsIndex: number[] = [];
   @Input('collapsible') public collapsibleItemsIndex: number[] = [];
 
-  //-----------------
+  // count of cart items
+  @Input() public countOfCartItems: number;
+
   constructor(private utilService: UtilityService) {
 
     window.addEventListener('resize', this.utilService.debounce((event) => {

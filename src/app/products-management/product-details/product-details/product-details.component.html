@@ -63,9 +63,9 @@
                 <h5 class="item-title">{{primaryDetailsOfItem.title}}</h5>
                 <p>
                     <star-rating-view [rating]="primaryDetailsOfItem.rating.stars"></star-rating-view>
-                    <span class="text-muted ml-2">{{ primaryDetailsOfItem.rating.ratingsCount | number }} Ratings &amp;
+                    <span class="text-muted ml-2 mr-3">{{ primaryDetailsOfItem.rating.ratingsCount | number }} Ratings &amp;
                         {{ primaryDetailsOfItem.rating.reviewsCount | number }} Reviews</span>
-                    <img *ngIf="primaryDetailsOfItem.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="ml-3" />
+                    <img *ngIf="primaryDetailsOfItem.fAssured" src="../../../assets/images/fa_8b4b59.png" height="21px" class="mt-1" />
                 </p>
             </div>
 

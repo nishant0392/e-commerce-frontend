@@ -1,5 +1,9 @@
 /** --------------------- START: LOGIN & SIGNUP ------------------- **/
 
+#myModal-login, #myModal-signup {
+  z-index: 10000;
+}
+
 #myModal-login .modal-content,
 #myModal-signup .modal-content {
   width: 50% !important;

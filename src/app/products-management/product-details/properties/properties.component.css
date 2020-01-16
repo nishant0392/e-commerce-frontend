@@ -38,3 +38,15 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 440px) {
+ .item-property {
+   display: block;
+   width: auto;
+ }
+
+ .item-property .left-div {
+   margin-bottom: .5em;
+   font-weight: 600;
+ }
+}

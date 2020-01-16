@@ -237,17 +237,30 @@
   }
 
   .offers ul {
-    font-size: .9em;
+    font-size: 0.9em;
     line-height: 1.5;
   }
 
   .offers ul li {
-    margin-top: .5em;
+    margin-top: 0.5em;
   }
-
-
 }
 
 @media screen and (max-width: 420px) {
+  .purchase-btn button {
+    padding: 12px 5px 8px 5px;
+  }
 
+  .purchase-btn .fa-bolt,
+  .purchase-btn .fa-shopping-cart {
+    margin-right: 10px;
+  }
+
+  .item-title {
+    font-size: 1.1em;
+  }
+
+  .details {
+    padding-left: 10px;
+  }
 }

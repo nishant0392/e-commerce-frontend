@@ -3,6 +3,7 @@ import { DataProviderService } from 'src/app/services/data-provider.service';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 
 @Component({
   selector: 'app-product-details',
@@ -39,7 +40,8 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private router: Router,
-    public _data: DataProviderService) { }
+    private _data: DataProviderService,
+    private _data2: DataProvider2Service) { }
 
   ngOnInit() {
 
@@ -152,6 +154,8 @@ export class ProductDetailsComponent implements OnInit {
 
 
   public addToCart() {
+    // UNCOMMENT when backend is ready
+    /*
     this.cartService.addToCart([this.Item], false)
       .subscribe((response: any) => {
         console.log(response)
@@ -160,8 +164,10 @@ export class ProductDetailsComponent implements OnInit {
           // this.changeCountOfCartItems();
           this.router.navigate(['/view-cart'])
         }
-      })
-      this.router.navigate(['/view-cart'])
+      })*/
+
+      this._data2.CartItems.push(this._data2.CartItems[0]);
+      setTimeout(()=>this.router.navigate(['/view-cart']), 1000)
   }
 
 
