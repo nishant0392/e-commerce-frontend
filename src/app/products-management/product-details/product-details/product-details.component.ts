@@ -152,11 +152,36 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
+  public getNewCartItem() {
+
+    let primaryDetails = this.Item.primaryDetailsOfItem;
+
+    let newCartItem = {
+      pid: primaryDetails.pid,
+      title: primaryDetails.title,
+      urlTitle: primaryDetails.urlTitle,
+      image: primaryDetails.image,
+      rating: primaryDetails.rating,
+      features: primaryDetails.features,
+      price: primaryDetails.price,
+      MRP: primaryDetails.MRP,
+      discount: primaryDetails.discount,
+      exchangePrice: primaryDetails.exchangePrice,
+      noCostEMI: primaryDetails.noCostEMI,
+      seller: this.Item.properties.Seller,
+      quantity: 1
+    }
+
+    return newCartItem;
+  }
+
 
   public addToCart() {
+
+    let newCartItem = this.getNewCartItem();
     // UNCOMMENT when backend is ready
     /*
-    this.cartService.addToCart([this.Item], false)
+    this.cartService.addToCart([newCartItem], false)
       .subscribe((response: any) => {
         console.log(response)
         if (!response.error) {
@@ -166,7 +191,8 @@ export class ProductDetailsComponent implements OnInit {
         }
       })*/
 
-      this._data2.CartItems.push(this._data2.CartItems[0]);
+
+      this._data2.CartItems.push(newCartItem);
       setTimeout(()=>this.router.navigate(['/view-cart']), 1000)
   }
 

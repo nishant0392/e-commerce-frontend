@@ -389,12 +389,7 @@ export class DisplayProductComponent implements OnInit {
     console.log('No. of Pages:', this.countOfPages)
 
   }
-
-  //--------
-  removeBackground() {
-    console.log('remove ---')
-    return false;
-  }
+  
 
   /* **** Pagination functions **** */
 

@@ -4,7 +4,7 @@
 
     <div class="items-container" *ngIf="Item">
 
-        <a href="#">{{ Item.seller }}</a> &nbsp;
+        <a href="#">{{ Item.sellerName }}</a> &nbsp;
         <star-rating-view [rating]="Item.rating" [category]="'seller'"></star-rating-view>
         <ul>
             <li *ngFor="let item of Item.items">

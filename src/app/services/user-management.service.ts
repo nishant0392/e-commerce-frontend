@@ -12,28 +12,69 @@ export class UserManagementService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * Sends SMS to a single User after Input Validation.
-   * @param {number} mobileNo Mobile No. of the receiver
-   * @param {string} OPCODE Action to perform (User Mobile verification, Send acknowledgement, etc.)
-   */
-  verifyAndSendSMS(mobileNo: number, OPCODE: string) {
+  validateMobileNumber(mobileNo: number | string) {
+
+    if(!mobileNo) return "";
 
     /* Input Validation of Mobile No. */
     let mobileNo_str = mobileNo.toString(10);
-    console.log(mobileNo)
 
     if (mobileNo_str.length !== 10 || mobileNo_str.match(/\D/)) {
       console.log('Mobile no. is not Valid!')
-      return false;
+      return "";
     }
+
+    return mobileNo_str;
+  }
+
+
+  /**
+   * Sends SMS to a single User after Input Validation.
+   * @param {number} mobileNo Mobile No. of the receiver
+   */
+  validateAndSendOTP(mobileNo: number | string) {
+
+    let mobileNo_str = this.validateMobileNumber(mobileNo);
+
+    if(!mobileNo_str)  return false;
 
     /* Send OTP for User Mobile verification */
     const params = new HttpParams()
-      .set('mobileNo', mobileNo_str)
-      .set('opcode', OPCODE)
+      .set('mobile', mobileNo_str)
 
-    return this.http.post(`${this.baseUrl}/api/v2/users/sendSMS`, params);
+    return this.http.post(`${this.baseUrl}/sendOTP`, params);
+  }
+
+
+  /**
+   * Verify OTP
+   * @param mobileNo Mobile number to verify
+   */
+  verifyOTP(mobileNo: number, OTP: number) {
+
+    let mobileNo_str = mobileNo.toString(10);
+    let OTP_str = OTP.toString(10);
+
+    /* Verify OTP for User Mobile verification */
+    const params = new HttpParams()
+      .set('mobile', mobileNo_str)
+      .set('OTP', OTP_str)
+
+    return this.http.post(`${this.baseUrl}/verifyOTP`, params);
+  }
+
+
+  signup(mobileNo: number | string, password: string) {
+
+    let mobileNo_str = this.validateMobileNumber(mobileNo);
+
+    if (!mobileNo_str) return false;
+
+    const params = new HttpParams()
+      .set('mobile', mobileNo_str)
+      .set('password', password)
+
+    return this.http.post(`${this.baseUrl}/users/signup`, params);
   }
 
 
@@ -59,7 +100,7 @@ export class UserManagementService {
   isAnyPropertyNull(object) {
 
     for (let key in object) {
-      if (!object[key])  return true;
+      if (!object[key]) return true;
     }
 
     return false;

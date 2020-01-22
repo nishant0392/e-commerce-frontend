@@ -75,6 +75,24 @@ export class ViewCartComponent implements OnInit {
 
   }
 
+  /* Merge Cart Items if they are one and the same (same productId and sellerId) */
+  public mergeCartItems(quantity) {
+
+    let len = this.CartItems.length;
+
+    if (len > 1) {
+
+      let countArr = Array(len).fill(0);
+      console.log(countArr)
+      for (let i = 0; i < len; i++) {
+        let item = this.CartItems[i];
+        let pid = item.pid;
+
+        countArr[pid] += item.quantity; 
+      }
+    }
+
+  }
 
   /**
    * Performs the given operation on the corresponding Cart Item. Operations are:  

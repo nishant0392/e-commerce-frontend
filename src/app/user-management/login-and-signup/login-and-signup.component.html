@@ -55,33 +55,46 @@
                     <i class="fas fa-times icon-close" data-dismiss="modal"></i>
                 </div>
 
-                <input #mobNo type="number" placeholder="Enter Mobile Number" style="margin: 0;"
-                    [ngStyle]="addRedBorder()" />
-                <small class="error-msg" *ngIf="errorMsg_Mobno">
-                    Please enter a valid Mobile number
+                <div class="mobile-input" [ngClass]="{ underline: addBlueBorder }" [ngStyle]="addRedBorder()">
+                    <input #mobNo type="number" placeholder="Enter Mobile Number" style="margin: 0;"
+                        [ngClass]="{ 'inputClass': addClass }" (focus)="addBlueBorderFunc(true)"
+                        (focusout)="addBlueBorderFunc(false)" (input)="showCountryCode(mobNo.value)" />
+                    <span class="country-code" [ngClass]="{ 'disp-none': hideCode }">+91 | </span>
+                </div>
+                <small class="error-msg" *ngIf="errorMsg_Mobno !== ''">
+                    {{ errorMsg_Mobno }}
                 </small>
 
                 <div class="signup-otp-pass text-dark mt-4" *ngIf="isMobNoValid">
                     <p>
                         OTP sent to Mobile
-                        <span style="float: right; color: #0d63ee;">Resend?</span>
+                        <span style="float: right; color: #0d63ee;"
+                            (click)="validateAndSendOTP(mobNo.value)">Resend?</span>
                     </p>
 
-                    <input type="number" placeholder="Enter OTP" />
-                    <small class="error-msg" *ngIf="incorrect_OTP">
-                        This OTP is incorrect. You have 9 attempt(s) left.
+                    <div class="OTP-container">
+                        <input #OTP_input type="number" placeholder="Enter OTP" (input)="verifyOTP(OTP_input.value)" />
+                        <small class="OTP-msg" [ngClass]="OTP_class" *ngIf="OTP_related_Msg !== ''">
+                            {{ OTP_related_Msg }}
+                        </small>
+                    </div>
+
+                    <input name="password" [(ngModel)]="password" type="password" placeholder="Set Password"
+                        class="mb-2 mt-2" />
+                    <small class="error-msg" *ngIf="password_msg !== ''">
+                        {{ password_msg }}
                     </small>
 
-                    <input type="password" placeholder="Set Password" class="mb-2 mt-2" />
-                    <small class="error-msg" *ngIf="invalid_Password">
-                        Please enter a valid Password.
-                    </small>
+
                 </div>
 
-                <button type="input" id="signup-continue" (click)="verifyMobileNo(mobNo.value)">
-                    <span *ngIf="!isMobNoValid">Continue</span>
-                    <span *ngIf="isMobNoValid">Signup</span>
-                </button><br /><br />
+                <button type="input" id="signup-continue" *ngIf="!isMobNoValid"
+                    (click)="validateAndSendOTP(mobNo.value)">Continue</button>
+                <button type="input" id="signup-continue" *ngIf="isMobNoValid" 
+                    (click)="goToSignup(mobNo.value)"
+                    [attr.data-dismiss]="closeSignupModal">Signup</button>
+
+                <br /><br />
 
                 <button type="input" id="signup-exst-user" data-toggle="modal" data-dismiss="modal"
                     data-target="#myModal-login">Existing User? Log in</button>

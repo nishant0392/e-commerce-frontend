@@ -134,8 +134,11 @@ export class DataProviderService {
             },
 
             Seller: {
-                seller: 'Flashstar Commerce',
+                sellerName: 'Flashstar Commerce',
+                sellerId: 'seller_x1',
                 rating: 4.9,
+                deliveryFee: 0,
+                deliveryFee_cutOff: 500,
                 items: [
                     {
                         policy: '10 Days Replacement Policy',

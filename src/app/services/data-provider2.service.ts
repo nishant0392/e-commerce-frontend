@@ -27,11 +27,11 @@ export class DataProvider2Service {
         'Brand Warranty of 1 Year Available for Mobile and 6 Months for Accessories'
       ],
       seller: {
-        id: "a1",
+        id: "seller_x1",
         name: "FlashStar Commerce",
+        deliveryFee: 0,
         deliveryFee_cutOff: 500
       },
-      deliveryFee: 0,
       price: 11999,
       MRP: 13999,
       discount: 14,
@@ -63,9 +63,9 @@ export class DataProvider2Service {
       seller: {
         id: "a2",
         name: "FlashStar Arts",
+        deliveryFee: 0,
         deliveryFee_cutOff: 500
       },
-      deliveryFee: 0,
       price: 13999,
       MRP: 15999,
       discount: 12,
@@ -99,9 +99,9 @@ export class DataProvider2Service {
       seller: {
         id: "a1",
         name: "FlashStar Commerce",
+        deliveryFee: 0,
         deliveryFee_cutOff: 500
       },
-      deliveryFee: 0,
       price: 11999,
       MRP: 13999,
       discount: 14,

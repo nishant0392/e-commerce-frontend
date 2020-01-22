@@ -23,7 +23,7 @@
   background-color: #2874f0;
   border-radius: 5px 0 0 5px;
   padding: 3em 2em;
-  background-image: url("https://img1a.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_dec4bf.png");
+  background-image: url("/assets/images/fp-login.png");
   background-position: center 85%;
   background-repeat: no-repeat;
 }
@@ -55,11 +55,32 @@
   outline: none;
 }
 
+.country-code {
+  color: #212121;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.inputClass {
+  width: 75% !important;
+  margin-left: 40px !important;
+}
+
 .login-signup .main input[type="text"],
 .login-signup .main input[type="number"] {
   border-bottom: 1px solid lightgrey;
   margin: 2em 0 2.5em 0;
   width: 100%;
+}
+
+.login-signup .mobile-input {
+  position: relative;
+  border-bottom: 1px solid lightgrey;
+}
+
+.login-signup .mobile-input input {
+  border-bottom: none !important;
 }
 
 .login-signup .main input[type="text"]:focus,
@@ -141,6 +162,19 @@
   color: indianred;
   font-weight: bold;
 }
+
+.OTP-container {
+  position: relative;
+}
+
+.OTP-msg {
+  color: indianred;
+  font-weight: bold;
+  position: absolute;
+  top: 65px;
+  left: 5px;
+}
+
 
 /** -----  Media Queries ----- **/
 @media screen and (min-width: 951px) and (max-width: 1024px) {

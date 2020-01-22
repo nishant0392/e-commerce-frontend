@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cart-items',
@@ -14,6 +15,7 @@ export class CartItemsComponent {
 
   @Output('OutputData') public outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
+  constructor(private router: Router) { }
 
   /**
    * Sends Data to parent component like operation, index of cart item and/or quantity.
@@ -37,35 +39,14 @@ export class CartItemsComponent {
     this.outputEvent.emit(emitData);
   }
 
+  
+  public goToProductDetails(urlTitle: string, productId: string) {
 
-  /*
-  public removeItemFromCart(indexOfItem: number, cartType?: string) {
+    let url = `/${urlTitle}/p/${productId}`;
+    
+    this.router.navigate([url])
 
-    if (cartType === 'savedForLater') {
+  }
 
-      this.countOfSavedForLaterItems -= this.SavedForLaterItems[indexOfItem].quantity;
-
-      this.SavedForLaterItems = this.SavedForLaterItems.filter(
-        (currentValue, index) => {
-          return (indexOfItem !== index);
-        });
-    }
-
-    else {
-      let cartItem = this.CartItems[indexOfItem];
-
-      // Do the Maths
-      this.totalPrice = this.totalPrice - (cartItem.quantity * cartItem.price);
-      this.totalSavings = this.totalSavings - (cartItem.quantity * (cartItem.MRP - cartItem.price));
-      this.countOfCartItems = this.countOfCartItems - cartItem.quantity;
-
-      this.CartItems = this.CartItems.filter(
-        (currentValue, index) => {
-          return (indexOfItem !== index);
-        });
-
-      console.log('cart items:', this.CartItems)
-    }
-  } */
 
 }

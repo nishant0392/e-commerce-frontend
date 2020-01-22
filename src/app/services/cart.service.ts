@@ -48,7 +48,6 @@ export class CartService {
     for (let i = 0; i < Items.length; i++) {
 
       item = Items[i];
-      console.log('sellerId', item)
       sellerId = item.seller.id;
       deliveryFee = item.quantity * (item.deliveryFee || defaultDeliveryFee);
 
