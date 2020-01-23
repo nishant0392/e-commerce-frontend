@@ -12,9 +12,13 @@ export class UserManagementService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Validates the given mobile number. Returns empty space if not valid, the mobile number, otherwise.
+   * @param mobileNo Mobile number
+   */
   validateMobileNumber(mobileNo: number | string) {
 
-    if(!mobileNo) return "";
+    if (!mobileNo) return "";
 
     /* Input Validation of Mobile No. */
     let mobileNo_str = mobileNo.toString(10);
@@ -36,7 +40,7 @@ export class UserManagementService {
 
     let mobileNo_str = this.validateMobileNumber(mobileNo);
 
-    if(!mobileNo_str)  return false;
+    if (!mobileNo_str) return false;
 
     /* Send OTP for User Mobile verification */
     const params = new HttpParams()
@@ -64,6 +68,11 @@ export class UserManagementService {
   }
 
 
+  /**
+   * Function for signup.
+   * @param mobileNo Mobile number
+   * @param password Password
+   */
   signup(mobileNo: number | string, password: string) {
 
     let mobileNo_str = this.validateMobileNumber(mobileNo);
@@ -75,6 +84,46 @@ export class UserManagementService {
       .set('password', password)
 
     return this.http.post(`${this.baseUrl}/users/signup`, params);
+  }
+
+
+  /**
+    * Validates the given email. Returns true if valid, false otherwise.
+    * @param email Email
+    */
+  isEmailValid(email) {
+    
+    if(!email) return false;
+
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    return email.match(emailRegex) ? true : false;
+  }
+
+
+  /**
+   * Function for login.
+   * @param mobileNo Mobile number
+   * @param email Email
+   * @param password Password
+   */
+  login(mobileNo: number | string, email: string, password: string) {
+
+    if (!password || !(mobileNo || email)) return false;
+
+    let params = new HttpParams()
+      .set('password', password)
+
+    let mobileNo_str = this.validateMobileNumber(mobileNo);
+
+    if (mobileNo_str)
+      params = params.set('mobile', mobileNo_str)
+
+    else if (this.isEmailValid(email))
+      params = params.set('email', email)
+
+    else return false;
+
+    return this.http.post(`${this.baseUrl}/users/login`, params);
   }
 
 

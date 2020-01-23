@@ -11,26 +11,32 @@
             </div>
 
             <div class="main">
-                <div class="close-modal">
-                    <i class="fas fa-times icon-close" data-dismiss="modal"></i>
+                <div class="error-msg ml-1" [ngClass]="OTP_class" *ngIf="loginError_msg !== ''">
+                    <small><b>{{ loginError_msg }}</b></small>
+                </div>    
+
+                <div id="close-modal-login" class="close-modal" data-dismiss="modal">
+                    <i class="fas fa-times icon-close"></i>
                 </div>
 
-                <input type="text" placeholder="Enter Email / Mobile Number" />
+                <input type="text" placeholder="Enter Email / Mobile Number" name="emailOrMobile"
+                   [(ngModel)]="emailOrMobile" />
 
                 <div class="pass" [ngClass]="isFocused ? 'underline' : ''">
 
                     <input type="password" placeholder="Enter Password" (focus)="isFocused = true"
-                        (focusout)="isFocused = false" />
+                        (focusout)="isFocused = false" name="login_pass" [(ngModel)]="login_pass" />
 
                     <a href='/forgot_password'>Forgot ?</a>
                 </div>
 
-                <button type="input" id="login">Login</button>
+                <button type="input" id="login" (click)="goToLogin()">Login</button>
                 <p id="or">OR</p>
                 <button type="input" id="request-otp">Request OTP</button>
 
                 <a class="cur-p" id="signup" data-toggle="modal" data-dismiss="modal" data-target="#myModal-signup">New
                     to Flipkart? Create an account</a>
+
             </div>
         </div>
     </div>
@@ -51,8 +57,8 @@
             </div>
 
             <div class="main">
-                <div class="close-modal">
-                    <i class="fas fa-times icon-close" data-dismiss="modal"></i>
+                <div id="close-modal-signup" class="close-modal" data-dismiss="modal">
+                    <i class="fas fa-times icon-close"></i>
                 </div>
 
                 <div class="mobile-input" [ngClass]="{ underline: addBlueBorder }" [ngStyle]="addRedBorder()">
@@ -91,8 +97,7 @@
                 <button type="input" id="signup-continue" *ngIf="!isMobNoValid"
                     (click)="validateAndSendOTP(mobNo.value)">Continue</button>
                 <button type="input" id="signup-continue" *ngIf="isMobNoValid" 
-                    (click)="goToSignup(mobNo.value)"
-                    [attr.data-dismiss]="closeSignupModal">Signup</button>
+                    (click)="goToSignup(mobNo.value)">Signup</button>
 
                 <br /><br />
 

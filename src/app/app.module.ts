@@ -23,7 +23,7 @@ import { DataProviderService } from './services/data-provider.service';
 import { WebComponentsService } from './services/web-components.service';
 import { PaymentService } from './services/payment.service';
 import { UtilityService } from './services/utility.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -46,7 +46,8 @@ import { UtilityService } from './services/utility.service';
     DataProviderService, 
     WebComponentsService,
     PaymentService,
-    UtilityService
+    UtilityService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
