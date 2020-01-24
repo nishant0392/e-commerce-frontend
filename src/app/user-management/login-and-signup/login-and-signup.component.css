@@ -158,6 +158,12 @@
   border-bottom: 1px solid #0d63ee !important;
 }
 
+.signup-otp-pass p span {
+  float: right;
+  color: #0d63ee; 
+  cursor: pointer;
+}
+
 .error-msg {
   color: indianred;
   font-weight: bold;

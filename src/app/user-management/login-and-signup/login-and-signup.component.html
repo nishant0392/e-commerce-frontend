@@ -74,8 +74,7 @@
                 <div class="signup-otp-pass text-dark mt-4" *ngIf="isMobNoValid">
                     <p>
                         OTP sent to Mobile
-                        <span style="float: right; color: #0d63ee;"
-                            (click)="validateAndSendOTP(mobNo.value)">Resend?</span>
+                        <span (click)="validateAndSendOTP(mobNo.value)">Resend?</span>
                     </p>
 
                     <div class="OTP-container">

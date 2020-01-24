@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataProviderService } from 'src/app/services/data-provider.service';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { DataProviderService } from 'src/app/services/data-provider.service';
 import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 
 @Component({
@@ -40,6 +41,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private router: Router,
+    private cookie: CookieService,
     private _data: DataProviderService,
     private _data2: DataProvider2Service) { }
 
@@ -179,21 +181,19 @@ export class ProductDetailsComponent implements OnInit {
   public addToCart() {
 
     let newCartItem = this.getNewCartItem();
-    // UNCOMMENT when backend is ready
-    /*
-    this.cartService.addToCart([newCartItem], false)
-      .subscribe((response: any) => {
-        console.log(response)
-        if (!response.error) {
-          // emit count of Cart items
-          // this.changeCountOfCartItems();
+    let userId = this.cookie.get('userId');
+
+    this.cartService.saveCart(userId, [newCartItem], null, false)
+      .subscribe((apiResponse: any) => {
+        console.log(apiResponse)
+        if (!apiResponse.error) {
           this.router.navigate(['/view-cart'])
         }
-      })*/
+        else {
+          console.log('Some error occurred')
+        }
+      })
 
-
-      this._data2.CartItems.push(newCartItem);
-      setTimeout(()=>this.router.navigate(['/view-cart']), 1000)
   }
 
 

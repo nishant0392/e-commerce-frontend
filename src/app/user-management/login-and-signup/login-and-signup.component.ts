@@ -16,7 +16,6 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
   public OTP_related_Msg: string = "";
   public OTP_class: string = "";
-  public attempts_left: number = 3;  // attempts left for user (saved on server)
   public password: string = "";
   public password_msg: string = "";
 
@@ -115,6 +114,8 @@ export class LoginAndSignupComponent implements AfterViewInit {
           this.isMobNoValid = true;
           this.errorMsg_Mobno = "";
           this.mobileNo = mobileNo;  // hold the value until browser gets refreshed
+          this.OTP_related_Msg = "OTP has been sent to " + mobileNo;
+          this.OTP_class = "text-info";
         }
       },
         (error) => {
@@ -161,8 +162,8 @@ export class LoginAndSignupComponent implements AfterViewInit {
               break;
 
             case 404:
-              this.attempts_left = this.attempts_left ? (this.attempts_left - 1) : 0;
-              this.OTP_related_Msg = `This OTP is incorrect. You have ${this.attempts_left} attempt(s) left.`;
+	      let attemptsRemaining = apiResponse.data.attemptsRemaining || 0;
+              this.OTP_related_Msg = `This OTP is incorrect. You have ${attemptsRemaining} attempt(s) left.`;
               break;
 
             default:

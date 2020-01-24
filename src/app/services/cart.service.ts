@@ -93,7 +93,7 @@ export class CartService {
 
     for (let i = 0; i < CartItems.length; i++) {
       let item = CartItems[i];
-      totalPrice += item.price;
+      totalPrice += item.price * item.quantity;
       totalSavings += (item.MRP - item.price);
       countOfCartItems += item.quantity;
     }
@@ -252,8 +252,8 @@ export class CartService {
       }
 
       case 'REMOVE': {
-        if (data.cartType === 'CART') 
-          this.removeItemFromCart(CartItems, indexOfItem, 'CART', CartRelatedData); 
+        if (data.cartType === 'CART')
+          this.removeItemFromCart(CartItems, indexOfItem, 'CART', CartRelatedData);
 
         if (data.cartType === 'SAVED_FOR_LATER')
           this.removeItemFromCart(SavedForLaterItems, indexOfItem, 'SAVED_FOR_LATER');
@@ -296,16 +296,39 @@ export class CartService {
   }
 
 
-  public addToCart(cartItems: any[], overWrite: boolean) {
-    
-    let _cartItems = JSON.stringify(cartItems);
-    let _overWrite = overWrite ? 'true' : 'false';
-  
-    let params = new HttpParams()
-    .set('cartItems', _cartItems)
-    .set('overWrite', _overWrite)
+  /**
+   * Save Cart/'Saved For Later' items on database. 
+   * @param userId userId
+   * @param cartItems Cart items
+   * @param savedForLaterItems "Saved For Later" items
+   * @param overWrite whether to overwrite or not
+   */
+  public saveCart(userId: string, cartItems: any[], savedForLaterItems: any[], overWrite: boolean) {
 
-    return this.http.post(this.baseUrl+'/cart/add', params);
+    let _cartItems = JSON.stringify(cartItems);
+    let _savedForLaterItems = JSON.stringify(savedForLaterItems);
+    let _overWrite = overWrite ? 'true' : 'false';
+
+    let params = new HttpParams()
+      .set('userId', userId)
+      .set('overWrite', _overWrite)
+
+    if (cartItems)
+      params = params.set('cartItems', _cartItems)
+
+    if (savedForLaterItems)
+      params = params.set('savedForLaterItems', _savedForLaterItems)
+
+    return this.http.post(this.baseUrl + '/cart/add', params);
+  }
+
+
+  /**
+   * Fetch User Cart.
+   * @param userId userId
+   */
+  public fetchCart(userId: string) {
+    return this.http.get(`${this.baseUrl}/cart/items?userId=${userId}`);
   }
 
 } // END

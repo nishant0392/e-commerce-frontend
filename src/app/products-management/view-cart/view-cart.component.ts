@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-view-cart',
@@ -11,13 +14,20 @@ import { Cart } from 'src/app/interfaces/cart.interface';
 export class ViewCartComponent implements OnInit {
 
   constructor(private cartService: CartService,
+    private cookie: CookieService,
+    private router: Router,
+    private utilityService: UtilityService,
     private data: DataProvider2Service) { }
 
+  public userId: string;
+  public authToken: string;
   public CartItems: any[] = [];
   public CartRelatedData: Cart;
 
   public SavedForLaterItems: any[] = [];
   public countOfSavedForLaterItems: number = 0;
+
+  public enableSave: boolean = true;
 
   public paymentInfo = [
     {
@@ -31,8 +41,41 @@ export class ViewCartComponent implements OnInit {
   ];
 
   ngOnInit() {
-    // Initialize Cart
-    this.initCart();
+    // fetch authorization details from cookie
+    this.userId = this.cookie.get('userId');
+    this.authToken = this.cookie.get('authToken');
+
+    if (!this.userId || !this.authToken)
+      this.router.navigate(['/'])
+
+    this.CartRelatedData = {
+      countOfItems: 0, totalPrice: 0, totalPayable: 0, totalSavings: 0, deliveryFee: 0
+    };
+
+    // Fetch Cart
+    this.fetchCart();
+  }
+
+  /**
+   * Fetch User Cart.
+   */
+  public fetchCart() {
+
+    this.cartService.fetchCart(this.userId)
+      .subscribe((apiResponse: any) => {
+
+        if (apiResponse.status === 200) {
+          // set the CART items and "SAVED FOR LATER" items
+          this.CartItems = apiResponse.data.cartItems || [];
+          this.SavedForLaterItems = apiResponse.data.savedForLaterItems || [];
+
+          // Do initialization
+          this.initCart();
+        }
+
+      }, (error) => {
+        console.log(error)
+      })
   }
 
 
@@ -40,10 +83,6 @@ export class ViewCartComponent implements OnInit {
    * Initialize Cart
    */
   public initCart() {
-
-    // get the CART items and "SAVED FOR LATER" items
-    this.CartItems = this.data.CartItems;
-    this.SavedForLaterItems = this.data.SavedForLaterItems;
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
@@ -75,24 +114,6 @@ export class ViewCartComponent implements OnInit {
 
   }
 
-  /* Merge Cart Items if they are one and the same (same productId and sellerId) */
-  public mergeCartItems(quantity) {
-
-    let len = this.CartItems.length;
-
-    if (len > 1) {
-
-      let countArr = Array(len).fill(0);
-      console.log(countArr)
-      for (let i = 0; i < len; i++) {
-        let item = this.CartItems[i];
-        let pid = item.pid;
-
-        countArr[pid] += item.quantity; 
-      }
-    }
-
-  }
 
   /**
    * Performs the given operation on the corresponding Cart Item. Operations are:  
@@ -109,6 +130,35 @@ export class ViewCartComponent implements OnInit {
 
     // update count for "SAVED FOR LATER" Items
     this.countOfSavedForLaterItems = this.cartService.countOfSavedForLaterItems;
+
+    // Save on database
+    let operation = data.operation;
+    let cartItems = null, savedForLaterItems = null;
+
+    let saveCart = () => {
+      this.cartService.saveCart(this.userId, cartItems, savedForLaterItems, true)
+        .subscribe((apiResponse) => {
+          console.log(apiResponse)
+        })
+    }
+
+    if (operation === 'UPDATE_QUANTITY') 
+      cartItems = this.CartItems;
+     
+    else if (operation === 'REMOVE') {
+
+      if (data.cartType === 'CART') cartItems = this.CartItems;
+
+      if (data.cartType === 'SAVED_FOR_LATER') savedForLaterItems = this.SavedForLaterItems;
+
+    }
+
+    else {
+      cartItems = this.CartItems;
+      savedForLaterItems = this.SavedForLaterItems;
+    }
+
+    saveCart();
 
   } // END operationOnCartItem()
 
