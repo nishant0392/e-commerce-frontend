@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataProviderService {
 
-    public Item = { 
+    public Item = {
 
         primaryDetailsOfItem: {
             pid: 'MOBF1',
@@ -258,59 +258,45 @@ export class DataProviderService {
 
         MPI_Info: {
             //url: ''
-        }
+        },
+
+        carouselItems: [
+
+            {
+                img: "mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd-thumbnail.jpeg",
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7742in-original-imafgzbd8rvyf7ms-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7742in-original-imafgzbd8rvyf7ms.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghukgt6fapxv-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukgt6fapxv.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghukh85tt6yh-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukh85tt6yh.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghuku3rz7uvu-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghuku3rz7uvu.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghukryzhfzun-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukryzhfzun.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghukhedmm7pu-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukhedmm7pu.jpeg'
+            },
+            {
+                img: 'mi-redmi-note-7s-mzb7745in-original-imafghuh2zxfzpwg-thumbnail.jpeg',
+                fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghuh2zxfzpwg.jpeg'
+            }
+
+        ]
 
     }; // Item
 
-
-    public carouselOptions = {
-        subitems_count: 6,
-        widthOfCarousel: "75px",
-        heightOfCarousel: "66vh",
-        heightOfSubitemDiv: "11vh",
-        widthOfSubitem: "auto",
-        heightOfSubitem: "auto",
-        cycle: false,
-        relativePath: "/assets/images/"
-    };
-
-
-    public carouselItems = [
-
-        {
-            img: "mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd-thumbnail.jpeg",
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7742in-original-imafgzbd8rvyf7ms-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7742in-original-imafgzbd8rvyf7ms.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghukgt6fapxv-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukgt6fapxv.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghukh85tt6yh-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukh85tt6yh.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghuku3rz7uvu-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghuku3rz7uvu.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghukryzhfzun-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukryzhfzun.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghukhedmm7pu-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghukhedmm7pu.jpeg'
-        },
-        {
-            img: 'mi-redmi-note-7s-mzb7745in-original-imafghuh2zxfzpwg-thumbnail.jpeg',
-            fullImg: 'mi-redmi-note-7s-mzb7745in-original-imafghuh2zxfzpwg.jpeg'
-        }
-
-    ];
-
-    constructor() { }
 }

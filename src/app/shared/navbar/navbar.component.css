@@ -75,6 +75,10 @@ a[data-target="#myModal-signup"] {
   margin: 5px 10px;
 }
 
+.login-signup-text {
+  margin-top: 5px !important;
+}
+
 /**-  Search Form  -**/
 .search-form {
   position: relative;
@@ -107,11 +111,7 @@ a[data-target="#myModal-signup"] {
   color: #343a40;
 }
 
-.icon-bell,
-.icon-briefcase,
-.icon-question,
-.icon-ad,
-.icon-download {
+.menu-icon {
   color: blue;
   margin-right: 15px;
 }

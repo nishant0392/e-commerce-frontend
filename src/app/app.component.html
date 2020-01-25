@@ -1,6 +1,6 @@
 <!-- ===========================   START: Main Navigation bar   ============================= -->
 
-<navbar [countOfCartItems]="countOfCartItems"></navbar>
+<navbar [loggedIn]="loggedIn" [userName]="userName" [countOfCartItems]="countOfCartItems"></navbar>
 
 <!-- =============================   END: Main Navigation bar   ============================= -->
 
@@ -17,7 +17,7 @@
 
 <!-- ************   START: Login & Signup Modals  **************** -->
 
-<login-and-signup></login-and-signup>
+<login-and-signup (loggedIn)="afterLogin()"></login-and-signup>
 
 <!-- ************   END: Login & Signup Modals    **************** -->
 

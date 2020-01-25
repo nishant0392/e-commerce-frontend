@@ -19,18 +19,25 @@
                     <i class="fas fa-times icon-close"></i>
                 </div>
 
-                <input type="text" placeholder="Enter Email / Mobile Number" name="emailOrMobile"
-                   [(ngModel)]="emailOrMobile" />
+                <div class="mobile-input" [ngClass]="{ underline: addBlueBorder }" [ngStyle]="addRedBorder('LOGIN')">
+                    <input #mobNo_email type="text" placeholder="Enter Email / Mobile Number" style="margin: 0"
+                        [ngClass]="{ 'inputClass': addClass }" (focus)="addBlueBorderFunc('LOGIN', true)"
+                        (focusout)="addBlueBorderFunc('LOGIN', false)" (input)="showCountryCode(mobNo_email.value)" 
+                    />
+                    <span class="country-code" [ngClass]="{ 'disp-none': hideCode }">+91 | </span>
+                </div>
 
-                <div class="pass" [ngClass]="isFocused ? 'underline' : ''">
+                <div class="pass mt-5" [ngClass]="isFocused ? 'underline' : ''">
 
                     <input type="password" placeholder="Enter Password" (focus)="isFocused = true"
-                        (focusout)="isFocused = false" name="login_pass" [(ngModel)]="login_pass" />
+                        (focusout)="isFocused = false" name="login_pass" [(ngModel)]="login_pass" 
+                        (keyup.enter)="goToLogin(mobNo_email.value)"
+                    />
 
                     <a href='/forgot_password'>Forgot ?</a>
                 </div>
 
-                <button type="input" id="login" (click)="goToLogin()">Login</button>
+                <button type="input" id="login" (click)="goToLogin(mobNo_email.value)">Login</button>
                 <p id="or">OR</p>
                 <button type="input" id="request-otp">Request OTP</button>
 
@@ -61,10 +68,10 @@
                     <i class="fas fa-times icon-close"></i>
                 </div>
 
-                <div class="mobile-input" [ngClass]="{ underline: addBlueBorder }" [ngStyle]="addRedBorder()">
+                <div class="mobile-input" [ngClass]="{ underline: addBlueBorder }" [ngStyle]="addRedBorder('SIGNUP')">
                     <input #mobNo type="number" placeholder="Enter Mobile Number" style="margin: 0;"
-                        [ngClass]="{ 'inputClass': addClass }" (focus)="addBlueBorderFunc(true)"
-                        (focusout)="addBlueBorderFunc(false)" (input)="showCountryCode(mobNo.value)" />
+                        [ngClass]="{ 'inputClass': addClass }" (focus)="addBlueBorderFunc('SIGNUP', true)"
+                        (focusout)="addBlueBorderFunc('SIGNUP', false)" (input)="showCountryCode(mobNo.value)" />
                     <span class="country-code" [ngClass]="{ 'disp-none': hideCode }">+91 | </span>
                 </div>
                 <small class="error-msg" *ngIf="errorMsg_Mobno !== ''">

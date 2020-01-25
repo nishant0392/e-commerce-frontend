@@ -28,6 +28,8 @@ export class DisplayProductComponent implements OnInit {
   public countOfItemsPerPage: number;
   public counterForItems: number[];
   public counterForItemsPerPage: number[];
+  public firstItemOfPage: number;
+  public lastItemOfPage: number;
 
   constructor(private router: Router) {
 
@@ -346,7 +348,11 @@ export class DisplayProductComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.displayItems(5);
+    this.firstItemOfPage = this.counterForItemsPerPage[0] + 1;
+    this.lastItemOfPage = this.counterForItemsPerPage[this.counterForItemsPerPage.length - 1] + 1;
+
     this.propertiesList = [
       {
         property: 'AVAILABILITY',
@@ -381,15 +387,11 @@ export class DisplayProductComponent implements OnInit {
      */
   displayItems(countOfItemsPerPage: number) {
 
-    let len = this.Items.length;
-
     // create an array [0,1,2,...,countOfItemsPerPage-1] for Items per page
     this.counterForItemsPerPage = <Array<number>>Array(countOfItemsPerPage).fill(0).map((val, idx) => idx);
 
-    console.log('No. of Pages:', this.countOfPages)
-
   }
-  
+
 
   /* **** Pagination functions **** */
 

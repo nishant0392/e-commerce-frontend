@@ -55,6 +55,23 @@
   outline: none;
 }
 
+.login-signup .main input[type="text"],
+.login-signup .main input[type="number"] {
+  border-bottom: 1px solid lightgrey;
+  margin: 2em 0 2.5em 0;
+  width: 100%;
+}
+
+/** Display country code **/
+.login-signup .mobile-input {
+  position: relative;
+  border-bottom: 1px solid lightgrey;
+}
+
+.login-signup .mobile-input input {
+  border-bottom: none !important;
+}
+
 .country-code {
   color: #212121;
   position: absolute;
@@ -65,22 +82,6 @@
 .inputClass {
   width: 75% !important;
   margin-left: 40px !important;
-}
-
-.login-signup .main input[type="text"],
-.login-signup .main input[type="number"] {
-  border-bottom: 1px solid lightgrey;
-  margin: 2em 0 2.5em 0;
-  width: 100%;
-}
-
-.login-signup .mobile-input {
-  position: relative;
-  border-bottom: 1px solid lightgrey;
-}
-
-.login-signup .mobile-input input {
-  border-bottom: none !important;
 }
 
 .login-signup .main input[type="text"]:focus,

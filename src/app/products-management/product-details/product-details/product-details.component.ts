@@ -4,7 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DataProviderService } from 'src/app/services/data-provider.service';
-import { DataProvider2Service } from 'src/app/services/data-provider2.service';
+import { UserManagementService } from 'src/app/services/user-management.service';
 
 @Component({
   selector: 'app-product-details',
@@ -42,29 +42,40 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private cartService: CartService,
     private router: Router,
     private cookie: CookieService,
-    private _data: DataProviderService,
-    private _data2: DataProvider2Service) { }
+    private userService: UserManagementService,
+    private _data: DataProviderService) { }
 
   ngOnInit() {
+    
+    // Item details
+    this.Item = this._data.Item;
 
-    // Item carousel display
-    this.carouselOptions = this._data.carouselOptions;
-    this.carouselItems = this._data.carouselItems;
+    // Item carousel display options
+    this.carouselOptions = {
+      subitems_count: 6,
+      widthOfCarousel: "75px",
+      heightOfCarousel: "66vh",
+      heightOfSubitemDiv: "11vh",
+      widthOfSubitem: "auto",
+      heightOfSubitem: "auto",
+      cycle: false,
+      relativePath: "/assets/images/"
+    };
+
+    // Carousel Items (images)
+    this.carouselItems = this.Item.carouselItems;
 
     // set the default image
     this.selectedImage = "/assets/images/" + this.carouselItems[0].fullImg;
-
-    // Item details
-    this.Item = this._data.Item;
 
     // Item related offers
     this.offers = this.Item.offers;
     this.setInitialCounterForOffers();
 
     // Item Properties
-    this.primaryDetailsOfItem = this._data.Item.primaryDetailsOfItem;
-    this.item_properties = this._data.Item.properties;
-    this.listOfProperties = this._data.Item.listOfProperties;
+    this.primaryDetailsOfItem = this.Item.primaryDetailsOfItem;
+    this.item_properties = this.Item.properties;
+    this.listOfProperties = this.Item.listOfProperties;
     this.options_galleryView = {
       width: '50px',
       height: '50px'
@@ -75,8 +86,8 @@ export class ProductDetailsComponent implements OnInit {
     };
 
     // Item Specifications
-    this.item_specifications = this._data.Item.specifications;
-    this.MPI_Info = this._data.Item.MPI_Info;
+    this.item_specifications = this.Item.specifications;
+    this.MPI_Info = this.Item.MPI_Info;
 
     // Ratings and Reviews
     this.ratingCircleOptions = {
@@ -114,7 +125,6 @@ export class ProductDetailsComponent implements OnInit {
    * @param {any} data Data from Carousel Component (child component)
    */
   public onHoverOverSubitem(data) {
-    console.log('data from Carousel Component:', data)
 
     data = data.replace("-thumbnail.", ".");
 
@@ -180,14 +190,22 @@ export class ProductDetailsComponent implements OnInit {
 
   public addToCart() {
 
+    // Check user login status
+    let userId = this.cookie.get('userId'), authToken = this.cookie.get('authToken');
+    if(!userId || !authToken) {
+      this.userService.initializeModal().openLogin();
+    }
+
     let newCartItem = this.getNewCartItem();
-    let userId = this.cookie.get('userId');
 
     this.cartService.saveCart(userId, [newCartItem], null, false)
       .subscribe((apiResponse: any) => {
         console.log(apiResponse)
         if (!apiResponse.error) {
-          this.router.navigate(['/view-cart'])
+          this.router.navigate(['/view-cart']);
+
+          // fetch updated cart and pass to all subscribers
+          this.cartService.fetchCart(userId);
         }
         else {
           console.log('Some error occurred')

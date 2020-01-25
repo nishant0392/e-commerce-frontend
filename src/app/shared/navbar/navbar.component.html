@@ -24,9 +24,23 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal-signup">Login &amp;
+                <li class="nav-item login-signup-text" *ngIf="!loggedIn">
+                    <a class="nav-link" data-toggle="modal" data-target="#myModal-login">Login &amp;
                         Signup</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="loggedIn">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ userName }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle menu-icon"></i>My Profile</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-wallet menu-icon"></i>Orders</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-heart menu-icon"></i>Wishlist</a>
+                        <a class="dropdown-item" href="#"><i class="far fa-comments menu-icon"></i>My Chats</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-bell menu-icon"></i>Notifications</a>
+                        <a class="dropdown-item" href="/logout"><i class="fas fa-power-off menu-icon"></i>Logout</a>
+                    </div>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -35,14 +49,14 @@
                         More
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class="fas fa-bell icon-bell"></i>Notification
+                        <a class="dropdown-item" href="#"><i class="fas fa-bell menu-icon"></i>Notification
                             Preferences</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-briefcase icon-briefcase"></i>Sell on
+                        <a class="dropdown-item" href="#"><i class="fas fa-briefcase menu-icon"></i>Sell on
                             Flipkart</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-question-circle icon-question"></i>24 x 7
+                        <a class="dropdown-item" href="#"><i class="fas fa-question-circle menu-icon"></i>24 x 7
                             Customer Care</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-ad icon-ad"></i>Advertise</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-download icon-download"></i>Download App</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-ad menu-icon"></i>Advertise</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-download menu-icon"></i>Download App</a>
                     </div>
                 </li>
 

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-view-cart',
@@ -15,9 +13,7 @@ export class ViewCartComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private cookie: CookieService,
-    private router: Router,
-    private utilityService: UtilityService,
-    private data: DataProvider2Service) { }
+    private router: Router) { }
 
   public userId: string;
   public authToken: string;
@@ -26,8 +22,6 @@ export class ViewCartComponent implements OnInit {
 
   public SavedForLaterItems: any[] = [];
   public countOfSavedForLaterItems: number = 0;
-
-  public enableSave: boolean = true;
 
   public paymentInfo = [
     {
@@ -53,29 +47,24 @@ export class ViewCartComponent implements OnInit {
     };
 
     // Fetch Cart
-    this.fetchCart();
+    setTimeout(() => this.fetchCart(), 0);
   }
+
 
   /**
    * Fetch User Cart.
    */
   public fetchCart() {
 
-    this.cartService.fetchCart(this.userId)
-      .subscribe((apiResponse: any) => {
+    this.cartService.CartAndSavedItems$.subscribe((data) => {
 
-        if (apiResponse.status === 200) {
-          // set the CART items and "SAVED FOR LATER" items
-          this.CartItems = apiResponse.data.cartItems || [];
-          this.SavedForLaterItems = apiResponse.data.savedForLaterItems || [];
+      this.CartItems = data.cartItems;
+      this.SavedForLaterItems = data.savedForLaterItems;
 
-          // Do initialization
-          this.initCart();
-        }
+      // Do initialization
+      this.initCart();
+    })
 
-      }, (error) => {
-        console.log(error)
-      })
   }
 
 
@@ -142,9 +131,9 @@ export class ViewCartComponent implements OnInit {
         })
     }
 
-    if (operation === 'UPDATE_QUANTITY') 
+    if (operation === 'UPDATE_QUANTITY')
       cartItems = this.CartItems;
-     
+
     else if (operation === 'REMOVE') {
 
       if (data.cartType === 'CART') cartItems = this.CartItems;

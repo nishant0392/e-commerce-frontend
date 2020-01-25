@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserManagementService } from 'src/app/services/user-management.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -20,7 +20,6 @@ export class LoginAndSignupComponent implements AfterViewInit {
   public password_msg: string = "";
 
   // Login parameters
-  public emailOrMobile: string;
   public login_pass: string;
   public loginError_msg: string = "";
 
@@ -28,6 +27,8 @@ export class LoginAndSignupComponent implements AfterViewInit {
   public hideCode: boolean = true;
   public addBlueBorder: boolean = false;
   public addClass: boolean = false;
+
+  @Output('loggedIn') loggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Login & Signup Modal 
   public Modal: { openLogin(), openSignup(), closeLogin(), closeSignup() };
@@ -37,47 +38,18 @@ export class LoginAndSignupComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.Modal = this.initializeModal();
-  }
-
-  /**
-   * Initialize Modal(Login & Signup)
-   */
-  public initializeModal() {
-
-    let triggerClick = (element: HTMLElement) => {
-      if (element)
-        element.click();
-    }
-
-    var open_loginModal = document.getElementById('signup-exst-user');
-    var open_signupModal = document.getElementById('signup');
-    var close_loginModal = document.getElementById('close-modal-login');
-    var close_signupModal = document.getElementById('close-modal-signup');
-
-    let openLogin = () => { triggerClick(open_loginModal) }
-
-    let openSignup = () => { triggerClick(open_signupModal) }
-
-    let closeLogin = () => { triggerClick(close_loginModal) }
-
-    let closeSignup = () => { triggerClick(close_signupModal) }
-
-    let modalOperations = {
-      openLogin: openLogin,
-      openSignup: openSignup,
-      closeLogin: closeLogin,
-      closeSignup: closeSignup
-    }
-
-    return modalOperations;
+    this.Modal = this.userService.initializeModal();
   }
 
 
-  /* Show country code (+91) on input field */
+  /* Show country code (+91) on input field when input is a number */
   showCountryCode(inputValue) {
 
-    if (inputValue.length > 0) {
+    // check if it contains any character
+    let containsChar = inputValue.match(/[^0-9]/) ? true : false;
+
+    // if it contains only digits
+    if (inputValue.length > 0 && !containsChar) {
       if (this.hideCode || !this.addClass) {
         this.hideCode = false;
         this.addClass = true;
@@ -162,7 +134,7 @@ export class LoginAndSignupComponent implements AfterViewInit {
               break;
 
             case 404:
-	      let attemptsRemaining = apiResponse.data.attemptsRemaining || 0;
+              let attemptsRemaining = apiResponse.data.attemptsRemaining || 0;
               this.OTP_related_Msg = `This OTP is incorrect. You have ${attemptsRemaining} attempt(s) left.`;
               break;
 
@@ -252,11 +224,11 @@ export class LoginAndSignupComponent implements AfterViewInit {
   /**
    * Function to Login.
    */
-  goToLogin() {
+  goToLogin(emailOrMobile: string) {
 
     this.loginError_msg = "";
 
-    if (!this.emailOrMobile)
+    if (!emailOrMobile)
       this.loginError_msg = "Please fill in Email/Mobile field";
 
     else if (!this.login_pass)
@@ -264,14 +236,14 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
     else {
 
-      let identity = this.identifyEmailOrMobile(this.emailOrMobile);
+      let identity = this.identifyEmailOrMobile(emailOrMobile);
       let response;
 
       if (identity == "EMAIL")
-        response = this.userService.login(null, this.emailOrMobile, this.login_pass);
+        response = this.userService.login(null, emailOrMobile, this.login_pass);
 
       else if (identity == "MOBILE")
-        response = this.userService.login(this.emailOrMobile, null, this.login_pass);
+        response = this.userService.login(emailOrMobile, null, this.login_pass);
 
 
       if (response === false)
@@ -279,19 +251,24 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
       else {
         response.subscribe((apiResponse: any) => {
-          console.log('**', apiResponse)
+
           switch (apiResponse.status) {
 
             case 200:
               this.OTP_class = "text-success";
               this.loginError_msg = "Login Successful";
               setTimeout(() => this.Modal.closeLogin(), 2000);
+
               // Set Cookies
               let data = apiResponse.data;
               this.cookie.set('userId', data.userId);
               this.cookie.set('firstName', data.userName.firstName);
               this.cookie.set('lastName', data.userName.lastName);
-              this.cookie.set('authToken', data.authToken)
+              this.cookie.set('authToken', data.authToken);
+
+              // emit login status to parent
+              this.loggedIn.emit(true);
+
               break;
 
             case 404:
@@ -313,24 +290,24 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
 
   /* Adds blue border at bottom */
-  addBlueBorderFunc(add: boolean) {
+  addBlueBorderFunc(modalType: string, add: boolean) {
 
-    this.addBlueBorder = (add && !this.errorMsg_Mobno) ? true : false;
+    let errorMsg = (modalType === 'SIGNUP') ? this.errorMsg_Mobno : this.loginError_msg;
 
+    this.addBlueBorder = (add && !errorMsg) ? true : false;
   }
 
 
   /* Adds red border at bottom */
-  addRedBorder() {
+  addRedBorder(modalType: string) {
 
-    if (this.errorMsg_Mobno) {
+    let errorMsg = (modalType === 'SIGNUP') ? this.errorMsg_Mobno : this.loginError_msg;
 
+    if (errorMsg && !this.OTP_class) {
       this.addBlueBorder = false;
-
-      return {
-        'border-bottom-color': 'indianred'
-      };
+      return { 'border-bottom-color': 'indianred' };
     }
+
   }
 
 }

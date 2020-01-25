@@ -17,6 +17,9 @@ export class NavbarComponent implements OnInit {
   // Navbar type
   @Input('navbar') public navbar: string = 'MAIN_NAV';
 
+  @Input('loggedIn') public loggedIn: boolean = false;
+  @Input('userName') public userName: string = "My Account";
+
   // Nav items
   @Input('Items') public navItems: any[] = [];
   @Input('visible') public visibleItemsIndex: number[] = [];
@@ -31,7 +34,7 @@ export class NavbarComponent implements OnInit {
       console.log(event);
       this.initNavbar();
     }, 1000));
-    
+ 
   }
 
   ngOnInit() {

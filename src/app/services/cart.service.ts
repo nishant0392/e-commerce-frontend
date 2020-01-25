@@ -16,6 +16,10 @@ export class CartService {
   private initCart_data_Source = new BehaviorSubject<any>({});
   public initCart_data$ = this.initCart_data_Source.asObservable();
 
+  // Cart and 'Saved For Later' Items
+  private CartAndSavedItems_Source = new BehaviorSubject<any>({});
+  public CartAndSavedItems$ = this.CartAndSavedItems_Source.asObservable();
+
   // count of Cart Items
   private countOfCartItems_Source = new BehaviorSubject<any>({});
   public countOfCartItems$ = this.countOfCartItems_Source.asObservable();
@@ -24,6 +28,10 @@ export class CartService {
 
   public changeInitCart_data(data: {}) {
     this.initCart_data_Source.next(data);
+  }
+
+  public changeCartAndSavedItems_data(data: { cartItems: any[], savedForLaterItems: any[] }) {
+    this.CartAndSavedItems_Source.next(data);
   }
 
   public changeCountOfCartItems(count: number) {
@@ -328,7 +336,25 @@ export class CartService {
    * @param userId userId
    */
   public fetchCart(userId: string) {
-    return this.http.get(`${this.baseUrl}/cart/items?userId=${userId}`);
+    this.http.get(`${this.baseUrl}/cart/items?userId=${userId}`)
+      .subscribe((apiResponse: any) => {
+
+        if (apiResponse.status === 200) {
+          // set the CART items and "SAVED FOR LATER" items and pass to all subscribers
+          let _cartItems = apiResponse.data.cartItems || [];
+          let _savedForLaterItems = apiResponse.data.savedForLaterItems || [];
+
+          this.changeCartAndSavedItems_data({ cartItems: _cartItems, savedForLaterItems: _savedForLaterItems });
+
+          // set count of cart items and pass to all subscribers
+          let countOfCartItems = this.calculateCountOfItems(_cartItems);
+          this.changeCountOfCartItems(countOfCartItems);
+        }
+
+      }, (error) => {
+        console.log(error)
+      })
+
   }
 
 } // END

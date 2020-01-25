@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { ApiResponse } from '../interfaces/apiResponse.interface';
 
 
 @Injectable({
@@ -11,6 +11,40 @@ export class UserManagementService {
   private baseUrl = isDevMode() ? 'http://localhost:3000/api/v2' : 'http://api.nkart.nishant-kumar.com/api/v2';
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Initialize Modal(Login & Signup)
+   */
+  initializeModal() {
+
+    let triggerClick = (element: HTMLElement) => {
+      if (element)
+        element.click();
+    }
+
+    var open_loginModal = document.getElementById('signup-exst-user');
+    var open_signupModal = document.getElementById('signup');
+    var close_loginModal = document.getElementById('close-modal-login');
+    var close_signupModal = document.getElementById('close-modal-signup');
+
+    let openLogin = () => { triggerClick(open_loginModal) }
+
+    let openSignup = () => { triggerClick(open_signupModal) }
+
+    let closeLogin = () => { triggerClick(close_loginModal) }
+
+    let closeSignup = () => { triggerClick(close_signupModal) }
+
+    let modalOperations = {
+      openLogin: openLogin,
+      openSignup: openSignup,
+      closeLogin: closeLogin,
+      closeSignup: closeSignup
+    }
+
+    return modalOperations;
+  }
+
 
   /**
    * Validates the given mobile number. Returns empty space if not valid, the mobile number, otherwise.
@@ -92,8 +126,8 @@ export class UserManagementService {
     * @param email Email
     */
   isEmailValid(email) {
-    
-    if(!email) return false;
+
+    if (!email) return false;
 
     let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
     return email.match(emailRegex) ? true : false;
@@ -124,6 +158,16 @@ export class UserManagementService {
     else return false;
 
     return this.http.post(`${this.baseUrl}/users/login`, params);
+  }
+
+
+  /**
+   * Function for logout.
+   * @param userId User ID
+   * @param authToken Authorization token
+   */
+  logout(authToken: string) {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/users/logout?authToken=${authToken}`);
   }
 
 

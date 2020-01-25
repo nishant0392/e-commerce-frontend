@@ -42,7 +42,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
     // Get the carousel using the renderer2 in Angular
     this.carousel = this.renderer.selectRootElement(this.carouselElement).nativeElement;
-    console.log('carousel:', this.carousel);
 
     this.setAndPlayCarousel();
   }
@@ -98,7 +97,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   public makeSubitemActive(DOM_element) {
 
     var carousel__item = DOM_element.parentElement;
-    console.log('corresponding carousel item:', carousel__item)
 
     // Remove 'toActive' class from the subitem of the corresponding carousel item
     var activeSubitem = carousel__item.getElementsByClassName("toActive")[0];
@@ -125,8 +123,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     if (subitems_count > 0) {
 
       carousel_subitems[0].className += " toActive";
-
-      console.log('carousel subitems:', carousel_subitems)
 
       for (let j = 0; j < subitems_count; j++) {
 
@@ -166,7 +162,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
     if (carousel) {
 
-      console.log('carousel in setAndPlayCarousel', carousel)
       setCarousel(carousel, itemClassName, carouselOptions);
 
       this.addEventListenerToSubitems(carousel);
@@ -182,7 +177,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     function setCarousel(carousel, itemClassName, carouselOptions) {
 
       let items = carousel.getElementsByClassName(itemClassName);
-      console.log('items in setCarousel', items)
 
       let next = carousel.getElementsByClassName('carousel__button--next')[0],
         prev = carousel.getElementsByClassName('carousel__button--prev')[0];

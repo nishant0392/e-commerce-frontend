@@ -25,11 +25,12 @@
             <p>
                 <span class="prod-category">Mi Mobiles </span>
                 <span class="products-per-page text-muted">
-                    <small>(Showing 1-24 products of {{countOfItems}} products)</small></span>
+                    <small>(Showing {{ firstItemOfPage }}-{{ lastItemOfPage }} products of {{countOfItems}} products)</small>
+                </span>
             </p>
 
-            <strong class="fs-14">Sort By</strong>
-            <ul class="sort mb-1">
+            <strong class="fs-14 mr-3">Sort By</strong>
+            <ul class="sort">
                 <li>Popularity</li>
                 <li>Price -- Low to High</li>
                 <li>Price -- High to Low</li>

@@ -9,10 +9,12 @@ import { UserReviewsComponent } from './user-management/user-reviews/user-review
 import { ViewCartComponent } from './products-management/view-cart/view-cart.component';
 import { CheckoutComponent } from './payments-management/checkout/checkout.component';
 import { OrderResponseComponent } from './payments-management/order-response/order-response.component';
+import { NotFoundComponent } from './user-management/not-found/not-found.component';
+import { LogoutComponent } from './user-management/logout/logout.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, pathMatch: 'full' },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'checkout/init', component: CheckoutComponent },
   { path: ':product_category/:product_brand/pr', component: DisplayProductComponent, pathMatch: 'full' },
   { path: ':product_name/p/:pid', component: ProductDetailsComponent, pathMatch: 'full' },
@@ -21,8 +23,8 @@ const routes: Routes = [
   { path: 'review-purchases', component: UserReviewsComponent },
   { path: 'view-cart', component: ViewCartComponent },
   { path: 'orderresponse', component: OrderResponseComponent },
-  { path: '*', component: HomeComponent },
-  { path: '**', component: HomeComponent }
+  { path: 'logout', component: LogoutComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
