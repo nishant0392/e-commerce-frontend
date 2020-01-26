@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,24 @@ export class AppComponent implements OnInit {
   public userName: string = "My Account";  // in case, userName is empty
   public authToken: string;
 
-  constructor(private cartService: CartService, private cookie: CookieService) { }
+  // Custom message Modal 
+  public message_header: string = "";
+  public display_duration: number = 3000;
+  public message_category: string = "default";
+
+  constructor(private cartService: CartService, private cookie: CookieService,
+    private modalService: ModalService) { }
 
   ngOnInit() {
+    // initialize Navbar
     this.initNavbar();
+
+    // subscribe to modal data
+    this.modalService.customModal_data$
+    .subscribe((modal_data) => {
+      this.message_header = modal_data.header || "";
+      this.message_category = modal_data.category;
+    })
   }
 
 

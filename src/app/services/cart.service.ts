@@ -1,5 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Cart } from '../interfaces/cart.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
 

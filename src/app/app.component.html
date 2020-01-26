@@ -15,11 +15,17 @@
 <!-- ==========================  END: Categories Navigation bar   ============================ -->
 
 
-<!-- ************   START: Login & Signup Modals  **************** -->
+<!-- ************   START: Login, Signup & "Custom Message" Modals  **************** -->
 
 <login-and-signup (loggedIn)="afterLogin()"></login-and-signup>
 
-<!-- ************   END: Login & Signup Modals    **************** -->
+<custom-message-modal 
+   [header]="message_header" 
+   [category]="message_category"
+>
+</custom-message-modal>
+
+<!-- ************    END: Login, Signup & "Custom Message" Modals    *************** -->
 
 
 <!-- ********************************    START: CONTENT    ******************************** -->
@@ -27,9 +33,9 @@
 <div class="container-fluid">
 
         <router-outlet></router-outlet>
-
+<!--
         <Footer></Footer>
-
+-->
 </div>
 
 <!-- ********************************    END: CONTENT    ******************************** -->

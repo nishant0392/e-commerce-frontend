@@ -1,0 +1,61 @@
+#myModal-display-message {
+  z-index: 10500;
+}
+
+#myModal-display-message .modal-content {
+  width: fit-content !important;
+  max-width: 70%;
+  margin: 78px auto;
+}
+
+#myModal-display-message .myModal-custom-content {
+  width: 100%;
+}
+
+#myModal-display-message .content {
+  position: relative;
+  color: #fff;
+  background-color: #343a40;
+  padding: 15px 25px;
+}
+
+.content .close-modal {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.content:hover .close-modal {
+  opacity: 1;
+}
+
+#open-modal-customMsg {
+  visibility: hidden;
+  z-index: -100;
+  position: absolute;
+}
+
+.icon-close {
+  font-size: 14px !important;
+}
+
+.custom-message i {
+  margin-right: 10px;
+  font-size: 20px;
+  position: relative;
+  top: 1px;
+}
+
+
+@media screen and (max-width: 440px) {
+  #myModal-display-message .modal-content {
+    max-width: 90%;
+    margin: 110px auto;
+  }
+
+  #myModal-display-message .content {
+    padding: 10px;
+  }
+}

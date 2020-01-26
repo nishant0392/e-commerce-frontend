@@ -23,6 +23,7 @@ import { DataProviderService } from './services/data-provider.service';
 import { WebComponentsService } from './services/web-components.service';
 import { PaymentService } from './services/payment.service';
 import { UtilityService } from './services/utility.service';
+import { ModalService } from './services/modal.service';
 import { CookieService } from 'ngx-cookie-service';
 
 
@@ -47,6 +48,7 @@ import { CookieService } from 'ngx-cookie-service';
     WebComponentsService,
     PaymentService,
     UtilityService,
+    ModalService,
     CookieService
   ],
   bootstrap: [AppComponent]

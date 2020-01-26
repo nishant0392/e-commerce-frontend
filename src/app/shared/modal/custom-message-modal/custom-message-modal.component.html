@@ -1,0 +1,27 @@
+<!-- START: Modal for Message Display -->
+
+<div id="myModal-display-message" class="modal custom-message">
+    <div class="modal-content">
+
+        <div class="myModal-custom-content">
+
+            <div class="content">
+
+                <div id="close-modal-customMsg" class="close-modal" data-dismiss="modal">
+                    <i class="fas fa-times icon-close"></i>
+                </div>
+
+                <div class="custom-message" *ngIf="message_header !== ''">
+                    <i [ngClass]="addClass()"></i><span>{{ message_header }}</span>
+                </div>
+                
+                <ng-content></ng-content>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- END: Modal for Message Display -->
+
+<a id="open-modal-customMsg" data-toggle="modal" data-target="#myModal-display-message">Show Modal</a>

@@ -17,6 +17,7 @@ import { QuantityComponent } from './quantity/quantity.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavMenusComponent } from './navbar/nav-menus/nav-menus.component';
+import { CustomMessageModalComponent } from './modal/custom-message-modal/custom-message-modal.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NavMenusComponent } from './navbar/nav-menus/nav-menus.component';
     QuantityComponent,
     NavbarComponent,
     FooterComponent,
-    NavMenusComponent
+    NavMenusComponent,
+    CustomMessageModalComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { NavMenusComponent } from './navbar/nav-menus/nav-menus.component';
     QuantityComponent,
     NavbarComponent,
     FooterComponent,
+    CustomMessageModalComponent,
     CommonModule,
     FormsModule,
     RouterModule
