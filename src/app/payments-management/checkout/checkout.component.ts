@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, isDevMode } from '@angular/core';
-import { DataProvider2Service } from 'src/app/services/data-provider2.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { PaymentService, PayUMoneyParams } from 'src/app/services/payment.service';
@@ -17,8 +16,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private userService: UserManagementService,
     private cartService: CartService,
-    private paymentService: PaymentService,
-    private data: DataProvider2Service
+    private paymentService: PaymentService
   ) { }
 
   // 'Go To Cart' Modal
@@ -55,9 +53,23 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
-    // Initialize Checkout
-    this.initCheckout();
+    // Fetch Cart Items and initialize checkout
+    this.fetchCartItems();
 
+    // Fetch Checkout Related Data
+    this.fetchCheckoutRelatedData();
+  }
+
+  public fetchCartItems() {
+    // get the CART items into checkout
+    this.cartService.CartAndSavedItems$
+      .subscribe((cartAndSavedItems) => {
+        this.CheckoutItems = cartAndSavedItems.cartItems;
+        this.initCheckout();
+      })
+  }
+
+  public fetchCheckoutRelatedData() {
     this.CheckoutRelatedData.email = "nishkr0392@gmail.com";
     this.CheckoutRelatedData.mobile = 7204190121;
     this.CheckoutRelatedData.userName = { firstName: 'Nishant', lastName: 'Kumar' };
@@ -65,14 +77,10 @@ export class CheckoutComponent implements OnInit {
     this.editAddress = true;
   }
 
-
   /**
    * Initialize Checkout
    */
   public initCheckout() {
-
-    // get the CART items into checkout
-    this.CheckoutItems = this.data.CartItems;
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
@@ -136,7 +144,7 @@ export class CheckoutComponent implements OnInit {
 
     // generate Captcha
     this.paymentService.getCaptcha()
-      .subscribe((captcha: any) => {
+      .subscribe((captcha) => {
         this.captcha = captcha;
         document.getElementById('COD-captcha').innerHTML = this.captcha;
       },
@@ -158,16 +166,14 @@ export class CheckoutComponent implements OnInit {
     }
 
     switch (paymentMode) {
-      case 'card': {
+      case 'card':
         setFlags(0);
         break;
-      }
 
-      case 'COD': {
+      case 'COD':
         setFlags(1);
         this.getCaptcha();
         break;
-      }
     }
 
   } // END selectPaymentMode()
@@ -196,7 +202,7 @@ export class CheckoutComponent implements OnInit {
         };
         this.paymentOptionLoad = false;
         this.paymentService.makePaymentRequest_PayUMoney(request_data)
-          .subscribe((response: any) => {
+          .subscribe((response) => {
 
             console.log(response)
             if (response.status === 200) {
@@ -213,10 +219,9 @@ export class CheckoutComponent implements OnInit {
         break;
       }
 
-      case 'COD': {
-
+      case 'COD':
         break;
-      }
+
     }
   }
 
@@ -238,8 +243,7 @@ export class CheckoutComponent implements OnInit {
       state: this.state,
       addressType: this.addressType
     };
-    // ---- Uncomment for normal functioning (i.e., when backend is ready)
-/*
+
     if (this.userService.isAnyPropertyNull(address)) {
       this.missingError = true;
       return;
@@ -253,8 +257,8 @@ export class CheckoutComponent implements OnInit {
         console.log(apiResponse)
         if (!apiResponse.error)
           this.continueCheckout(1);
-      })*/
-      this.continueCheckout(1);
+      })
+
   } // END saveAddressAndContinue()
 
 

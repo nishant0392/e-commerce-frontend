@@ -3,8 +3,9 @@ import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { DataProviderService } from 'src/app/services/data-provider.service';
 import { UserManagementService } from 'src/app/services/user-management.service';
+import { ProductManagementService } from 'src/app/services/product-management.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   public carouselItems: any[];
 
   public Item: any;
-  public primaryDetailsOfItem = {}; // primary details of Item
+  public primaryDetailsOfItem; // primary details of Item
   public offers: any;      // a reference to Item.offers
   public initialCountForOffers: number = 4;
   public offersToDisplay_counter: number[] = [];
@@ -33,6 +34,8 @@ export class ProductDetailsComponent implements OnInit {
   public MPI_Info: any;
 
   public ratingCircleOptions: RatingCircle;
+  public ratingData;
+  public _ratingData;
 
   // View Options to be passed
   public options_galleryView = {};
@@ -40,15 +43,39 @@ export class ProductDetailsComponent implements OnInit {
   public options_bulletsView = {};
 
   constructor(private cartService: CartService,
-    private router: Router,
-    private cookie: CookieService,
+    private productService: ProductManagementService,
     private userService: UserManagementService,
-    private _data: DataProviderService) { }
+    private modalService: ModalService,
+    private cookie: CookieService,
+    private router: Router) { }
+
+  // extract from route
+  public category;
+  public brand;
+  public productId;
 
   ngOnInit() {
-    
+    this.fetchProductDetails();
+  }
+
+  public fetchProductDetails() {
+    this.productService.getSingleItem(this.category, this.brand, this.productId)
+      .subscribe((apiResponse) => {
+        if (apiResponse.status === 200) {
+          this.Item = apiResponse.data;
+          this.initializeProductDetails();
+        }
+        else {
+          let modal = this.modalService.getCustomMessageModal(
+            { header: 'Some error occurred. Please try again.', category: 'error' });
+          if(modal) modal.openModalWithAutoClose(3000);  
+        }  
+    })
+  }
+
+  public initializeProductDetails() {
     // Item details
-    this.Item = this._data.Item;
+    // this.Item = this._data.Item;
 
     // Item carousel display options
     this.carouselOptions = {
@@ -90,10 +117,34 @@ export class ProductDetailsComponent implements OnInit {
     this.MPI_Info = this.Item.MPI_Info;
 
     // Ratings and Reviews
+    this.ratingData = this.primaryDetailsOfItem.rating;
     this.ratingCircleOptions = {
       rating: 50
     }
 
+    this._ratingData = {
+      avgRating: this.ratingData.stars,
+      ratingsCount: this.ratingData.ratingsCount,
+      reviewsCount: this.ratingData.reviewsCount,
+      paramWiseRating: [
+        {
+          param: 'Camera',
+          rating: 4.2
+        },
+        {
+          param: 'Battery',
+          rating: 3.3
+        },
+        {
+          param: 'Display',
+          rating: 3.9
+        },
+        {
+          param: 'Value for Money',
+          rating: 4.9
+        }
+      ]
+    }
   }
 
 
@@ -192,23 +243,24 @@ export class ProductDetailsComponent implements OnInit {
 
     // Check user login status
     let userId = this.cookie.get('userId'), authToken = this.cookie.get('authToken');
-    if(!userId || !authToken) {
+    if (!userId || !authToken) {
       this.userService.initializeModal().openLogin();
     }
 
     let newCartItem = this.getNewCartItem();
 
     this.cartService.saveCart(userId, [newCartItem], null, false)
-      .subscribe((apiResponse: any) => {
-        console.log(apiResponse)
+      .subscribe((apiResponse) => {
+
         if (!apiResponse.error) {
+
           this.router.navigate(['/view-cart']);
 
           // fetch updated cart and pass to all subscribers
           this.cartService.fetchCart(userId);
         }
         else {
-          console.log('Some error occurred')
+          console.log('Some error occurred', apiResponse)
         }
       })
 

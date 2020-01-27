@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router'
 export class RatingsAndReviewsComponent implements OnInit {
 
   public ratingOptions: RatingCircle;
-  public ratingData;
+  @Input('ratingData') public ratingData;
 
   constructor(private router: Router,
     private route: ActivatedRoute) { }
@@ -20,29 +20,6 @@ export class RatingsAndReviewsComponent implements OnInit {
       rating: 2.5
     };
 
-    this.ratingData = {
-      avgRating: 4.4,
-      ratingsCount: 311663,
-      reviewsCount: 25766,
-      paramWiseRating: [
-        {
-          param: 'Camera',
-          rating: 4.2
-        },
-        {
-          param: 'Battery',
-          rating: 3.3
-        },
-        {
-          param: 'Display',
-          rating: 3.9
-        },
-        {
-          param: 'Value for Money',
-          rating: 4.9
-        }
-      ]
-    }
   }
 
   public getProductReviews() {

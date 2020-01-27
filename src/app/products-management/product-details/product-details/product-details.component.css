@@ -33,6 +33,7 @@
   cursor: crosshair !important;
   margin: auto;
   max-width: 95%;
+  max-height: 95%;
 }
 
 .purchase-btn {

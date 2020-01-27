@@ -2,6 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Cart } from '../interfaces/cart.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ApiResponse } from '../interfaces/apiResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -327,7 +328,7 @@ export class CartService {
     if (savedForLaterItems)
       params = params.set('savedForLaterItems', _savedForLaterItems)
 
-    return this.http.post(this.baseUrl + '/cart/add', params);
+    return this.http.post<ApiResponse>(this.baseUrl + '/cart/add', params);
   }
 
 
@@ -336,8 +337,8 @@ export class CartService {
    * @param userId userId
    */
   public fetchCart(userId: string) {
-    this.http.get(`${this.baseUrl}/cart/items?userId=${userId}`)
-      .subscribe((apiResponse: any) => {
+    this.http.get<ApiResponse>(`${this.baseUrl}/cart/items?userId=${userId}`)
+      .subscribe((apiResponse) => {
 
         if (apiResponse.status === 200) {
           // set the CART items and "SAVED FOR LATER" items and pass to all subscribers

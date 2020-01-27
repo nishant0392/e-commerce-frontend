@@ -8,7 +8,7 @@ export class DataProviderService {
     public Item = {
 
         primaryDetailsOfItem: {
-            pid: 'MOBF1',
+            pid: 'N0NMOBF0',
             title: 'RedMi Note 7S (Sapphire Blue, 64 GB)',
             urlTitle: 'redmi-note-7s-sapphire-blue-64-gb',
             image: 'mi-redmi-note-7s-mzb7745in-original-imafe48ru3s66sjd.jpeg',

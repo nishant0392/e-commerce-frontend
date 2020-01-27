@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-product',
@@ -31,7 +30,7 @@ export class DisplayProductComponent implements OnInit {
   public firstItemOfPage: number;
   public lastItemOfPage: number;
 
-  constructor(private router: Router) {
+  constructor() {
 
     // Set count for no. of items to display per page
     this.countOfItemsPerPage = 5;
@@ -457,13 +456,6 @@ export class DisplayProductComponent implements OnInit {
     let product = this.Items[indexOfSelectedItem];
     console.log('selected item:', product)
 
-    this.router.navigate([`/${product.urlTitle}/p/${product.pid}`])
-      .then((resolveVal) => {
-        if (resolveVal) {
-          console.log("Navigation is successful!");
-        } else {
-          console.log("Navigation has failed!");
-        }
-      })
+    window.open(`/${product.urlTitle}/p/${product.pid}`, '_blank')
   }
 }
