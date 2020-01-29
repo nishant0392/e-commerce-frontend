@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
 
   // Custom message Modal 
   public message_header: string = "";
-  public display_duration: number = 3000;
   public message_category: string = "default";
 
   constructor(private cartService: CartService, private cookie: CookieService,

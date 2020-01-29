@@ -20,7 +20,6 @@ import { AppComponent } from './app.component';
 import { UserManagementService } from './services/user-management.service';
 import { ProductManagementService } from './services/product-management.service'
 import { CartService } from './services/cart.service';
-import { DataProviderService } from './services/data-provider.service';
 import { WebComponentsService } from './services/web-components.service';
 import { PaymentService } from './services/payment.service';
 import { UtilityService } from './services/utility.service';
@@ -45,8 +44,7 @@ import { CookieService } from 'ngx-cookie-service';
   providers: [
     UserManagementService,
     ProductManagementService,
-    CartService, 
-    DataProviderService, 
+    CartService,
     WebComponentsService,
     PaymentService,
     UtilityService,

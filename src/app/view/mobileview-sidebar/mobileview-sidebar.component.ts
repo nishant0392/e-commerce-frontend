@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { UtilityService } from 'src/app/services/utility.service';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'mobileview-sidebar',
@@ -20,7 +19,6 @@ export class MobileviewSidebarComponent implements OnInit {
   @HostListener('click')
   clickedInside() {
     this.wasInside = true;
-    console.log('***clicked inside***')
   }
   
   @HostListener('document:click')
@@ -29,7 +27,6 @@ export class MobileviewSidebarComponent implements OnInit {
       this.removeAnimation();
     }
     this.wasInside = false;
-    console.log('***clicked outside***')
   }
 
   constructor(private util: UtilityService) { }

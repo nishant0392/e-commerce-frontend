@@ -1,7 +1,7 @@
 <!-- ****************   START: Carousel with subitems(vertical)   ********************* -->
 
 <div #myCarousel class="carousel-wrapper">
-    <div class="carousel" [ngStyle]="setWidthAndHeight('carousel')">
+    <div class="carousel" [ngStyle]="setWidthAndHeight('carousel')" *ngIf="carouselItems  && carouselOptions">
 
         <!--  Carousel items  -->
         <div class="carousel__item" *ngFor="let slideIndex of slidesCounter">

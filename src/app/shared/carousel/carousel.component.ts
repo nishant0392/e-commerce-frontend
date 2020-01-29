@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Renderer2, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Renderer2, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'carousel',
@@ -43,8 +43,9 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     // Get the carousel using the renderer2 in Angular
     this.carousel = this.renderer.selectRootElement(this.carouselElement).nativeElement;
 
-    this.setAndPlayCarousel();
+    this.setAndPlayCarousel(); 
   }
+
 
   /**
    * Set width and height of the carousel and it's elements.
@@ -73,6 +74,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
    * Initialize the counters for rendering the Carousel View.
    */
   public initCarouselView() {
+
+    if(!this.carouselItems) return;
 
     let items_count = this.carouselItems.length,
       subitems_count = this.carouselOptions.subitems_count,
@@ -160,7 +163,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     var carousel = this.carousel;
     var carouselOptions = this.carouselOptions;
 
-    if (carousel) {
+    if (carousel && carouselOptions) {
 
       setCarousel(carousel, itemClassName, carouselOptions);
 

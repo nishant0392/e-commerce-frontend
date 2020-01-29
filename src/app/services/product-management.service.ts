@@ -11,11 +11,11 @@ export class ProductManagementService {
   
   constructor(private http: HttpClient) { }
 
-  public getItems(category: string, brand: string) {   
-    return this.http.get<ApiResponse>(`${this.baseUrl}/category/product/all?category=${category}&brand=${brand}`);
+  public getItems(listId: string) {   
+    return this.http.get<ApiResponse>(`${this.baseUrl}/category/product/all?listId=${listId}`);
   }
 
-  public getSingleItem(category: string, brand: string, productId: string) {   
-    return this.http.get<ApiResponse>(`${this.baseUrl}/category/product?category=${category}&brand=${brand}&productId=${productId}`);
+  public getSingleItem(listId: string, productId: string) {   
+    return this.http.get<ApiResponse>(`${this.baseUrl}/category/product?listId=${listId}&pid=${productId}`);
   }
 }

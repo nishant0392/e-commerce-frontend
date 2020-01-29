@@ -9,8 +9,9 @@ import { Options } from 'ng5-slider';
 export class SidebarComponent implements OnInit {
 
   // Product configuration
-  public category: string;
-  public sub_categories: string[];
+  @Input() public category: string;
+  @Input('selected_subcategory') public selected_subcategory: string;
+  @Input('subcategories') public sub_categories: string[];
 
   // Item Properties
   @Input() public propertiesList: any[];
@@ -33,16 +34,6 @@ export class SidebarComponent implements OnInit {
     ceil: 1000
   };
 
-  constructor() {
-
-    this.category = 'Mobiles & Accessories';
-    this.sub_categories = [
-      'Mobiles',
-      'Tablets',
-      'Mobile Accessories'
-    ];
-   
-  }
 
   ngOnInit() {
     this.chev_arrow = this.chev_left_arrow;
@@ -57,8 +48,6 @@ export class SidebarComponent implements OnInit {
 
     // Set selected 'show' flags to true (for expanded version)
     this.fillSelected([0, 2]);
-    console.log(this.show)
-
   }
 
 

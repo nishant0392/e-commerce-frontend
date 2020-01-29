@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 import { CartService } from 'src/app/services/cart.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserManagementService } from 'src/app/services/user-management.service';
 import { ProductManagementService } from 'src/app/services/product-management.service';
@@ -42,41 +42,52 @@ export class ProductDetailsComponent implements OnInit {
   public options_boxView = {};
   public options_bulletsView = {};
 
+  // Route parameters
+  public listId;
+  public productId;
+
   constructor(private cartService: CartService,
     private productService: ProductManagementService,
     private userService: UserManagementService,
     private modalService: ModalService,
     private cookie: CookieService,
-    private router: Router) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
 
-  // extract from route
-  public category;
-  public brand;
-  public productId;
+    // extract productId and listId from url
+    this.activatedRoute.queryParams
+      .subscribe((queryParams) => {
+        this.listId = queryParams.lid;
+      })
+
+    this.activatedRoute.params
+      .subscribe((routeParams) => {
+        this.productId = routeParams.pid;
+      })
+  }
+
 
   ngOnInit() {
     this.fetchProductDetails();
   }
 
+
   public fetchProductDetails() {
-    this.productService.getSingleItem(this.category, this.brand, this.productId)
+
+    this.productService.getSingleItem(this.listId, this.productId)
       .subscribe((apiResponse) => {
         if (apiResponse.status === 200) {
-          this.Item = apiResponse.data;
-          this.initializeProductDetails();
+          this.initializeProductDetails(apiResponse.data);
         }
         else {
           let modal = this.modalService.getCustomMessageModal(
             { header: 'Some error occurred. Please try again.', category: 'error' });
-          if(modal) modal.openModalWithAutoClose(3000);  
-        }  
-    })
+          if (modal) modal.openModalWithAutoClose(3000);
+        }
+      })
   }
 
-  public initializeProductDetails() {
-    // Item details
-    // this.Item = this._data.Item;
-
+  public initializeCarousel() {
     // Item carousel display options
     this.carouselOptions = {
       subitems_count: 6,
@@ -94,6 +105,15 @@ export class ProductDetailsComponent implements OnInit {
 
     // set the default image
     this.selectedImage = "/assets/images/" + this.carouselItems[0].fullImg;
+  }
+
+
+  public initializeProductDetails(itemDetails) {
+    // Item details
+    this.Item = itemDetails;
+
+    // Initialize carousel
+    this.initializeCarousel();
 
     // Item related offers
     this.offers = this.Item.offers;

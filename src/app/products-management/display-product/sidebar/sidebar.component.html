@@ -1,5 +1,5 @@
 <!-- ================  START: Sidebar  =================== -->
-<div class="sidebar">
+<div class="sidebar" *ngIf="selected_subcategory">
     <h5 class="sidebar-header">Filters</h5>
 
     <!-- *****  CATEGORIES Section  ***** -->
@@ -8,7 +8,8 @@
         <p>CATEGORIES</p>
         <ul><i (click)="toggleCategories()" [ngClass]="chev_arrow"></i>&nbsp;&nbsp;{{category}}
             <div *ngIf="!isCollapsed">
-                <li *ngFor="let sub_category of sub_categories">{{sub_category}}</li>
+                <li *ngFor="let sub_category of sub_categories" 
+                    [ngClass]="{'txt-blue': (sub_category === selected_subcategory)}">{{sub_category}}</li>
             </div>
         </ul>
 

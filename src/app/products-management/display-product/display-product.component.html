@@ -6,11 +6,21 @@
 
     <div class="sidebar-container">
 
-        <sidebar class="desktopview-sidebar" [propertiesList]="propertiesList" [ItemFilterProperties]="ItemFilterProperties">
+        <sidebar class="desktopview-sidebar" 
+           [category]="category"
+           [selected_subcategory]="subcategory"
+           [subcategories]="sub_categories"
+           [propertiesList]="propertiesList" 
+           [ItemFilterProperties]="ItemFilterProperties">
         </sidebar>
 
         <mobileview-sidebar [buttonName]="'Filters'" [containerToHide]="'product-content'">
-            <sidebar [propertiesList]="propertiesList" [ItemFilterProperties]="ItemFilterProperties">
+            <sidebar 
+                [category]="category"
+                [selected_subcategory]="subcategory"
+                [subcategories]="sub_categories"
+                [propertiesList]="propertiesList" 
+                [ItemFilterProperties]="ItemFilterProperties">
             </sidebar>
         </mobileview-sidebar>
         
@@ -20,7 +30,7 @@
 
 
     <!-- =====================================  START: Content  ===================================== -->
-    <div class="product-content" id="product-content">
+    <div class="product-content" id="product-content" *ngIf="Items">
         <div class="prod-header">
             <p>
                 <span class="prod-category">Mi Mobiles </span>
