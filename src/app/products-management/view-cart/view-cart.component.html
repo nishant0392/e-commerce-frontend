@@ -1,6 +1,6 @@
 <!-- **********************   View Cart   ********************** -->
 
-<div class="view-cart">
+<div class="view-cart" *ngIf="CartRelatedData; else loading">
     <div class="view-cart-container">
 
         <div class="non-empty-cart" *ngIf="CartRelatedData.countOfItems">
@@ -75,3 +75,14 @@
 
 </div>
 <!-- ********  end: SAVED FOR LATER  ******** -->
+
+<!--  Wait while loading...  -->
+<ng-template #loading>
+
+    <div class="my-spinner">
+        <div class="spinner-border txt-blue" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+</ng-template>

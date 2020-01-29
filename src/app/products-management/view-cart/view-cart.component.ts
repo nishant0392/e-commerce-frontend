@@ -3,6 +3,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-view-cart',
@@ -13,7 +14,8 @@ export class ViewCartComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private cookie: CookieService,
-    private router: Router) { }
+    private router: Router,
+    private modalService: ModalService) { }
 
   public userId: string;
   public authToken: string;
@@ -39,8 +41,18 @@ export class ViewCartComponent implements OnInit {
     this.userId = this.cookie.get('userId');
     this.authToken = this.cookie.get('authToken');
 
-    if (!this.userId || !this.authToken)
-      this.router.navigate(['/'])
+    // if authorization details are missing, redirect to homepage
+    if (!this.userId || !this.authToken) {
+
+      setTimeout(() => {
+        let modal = this.modalService.getCustomMessageModal(
+          { header: 'Bad Request!! Authorization Token Missing.', category: 'error' });
+  
+        if (modal) modal.openModal();   
+      })
+      this.router.navigate(['/']);
+      return;
+    }
 
     this.CartRelatedData = {
       countOfItems: 0, totalPrice: 0, totalPayable: 0, totalSavings: 0, deliveryFee: 0

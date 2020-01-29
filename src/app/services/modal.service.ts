@@ -17,10 +17,10 @@ export class ModalService {
   }
 
   constructor() {
-    setTimeout(() => {
-      this.customMessageModal = this.init_CustomMessageModal();
-      console.log(this.customMessageModal)
-    }, 0)
+    setTimeout(
+      () => {
+        this.customMessageModal = this.init_CustomMessageModal();
+      }, 0)
   }
 
 

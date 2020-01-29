@@ -261,10 +261,10 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
               // Set Cookies
               let data = apiResponse.data;
-              this.cookie.set('userId', data.userId);
-              this.cookie.set('firstName', data.userName.firstName);
-              this.cookie.set('lastName', data.userName.lastName);
-              this.cookie.set('authToken', data.authToken);
+              this.cookie.set('userId', data.userId, 1, '/');
+              this.cookie.set('firstName', data.userName.firstName, 1, '/');
+              this.cookie.set('lastName', data.userName.lastName, 1, '/');
+              this.cookie.set('authToken', data.authToken, 1, '/');
 
               // emit login status to parent
               this.loggedIn.emit(true);

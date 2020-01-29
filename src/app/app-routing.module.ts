@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './products-management/home/home.component';
 import { DisplayProductComponent } from './products-management/display-product/display-product.component';
-import { ProductDetailsComponent } from './products-management/product-details/product-details/product-details.component';
+import { ProductDetailsComponent } from './products-management/product-details/product-details.component';
 import { GetUserRatingsAndReviewsComponent } from './products-management/product-details/get-user-ratings-and-reviews/get-user-ratings-and-reviews.component';
 import { UserReviewsComponent } from './user-management/user-reviews/user-reviews.component';
 import { ViewCartComponent } from './products-management/view-cart/view-cart.component';
