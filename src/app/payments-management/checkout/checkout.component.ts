@@ -4,6 +4,8 @@ import { Cart } from 'src/app/interfaces/cart.interface';
 import { PaymentService, PayUMoneyParams } from 'src/app/services/payment.service';
 import { Router } from '@angular/router';
 import { UserManagementService } from 'src/app/services/user-management.service';
+import { CookieService } from 'ngx-cookie-service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,14 +18,22 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private userService: UserManagementService,
     private cartService: CartService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private cookieService: CookieService,
+    private modalService: ModalService
   ) { }
 
   // 'Go To Cart' Modal
-  @ViewChild('modal_GoToCart', { static: true }) modal_GoToCart: ElementRef<HTMLElement>
+  @ViewChild('modal_GoToCart', { static: true }) modal_GoToCart: ElementRef<HTMLElement>;
+
+  public userId: string;
+  public authToken: string;
+
+  public loadUserDetails: boolean = false;
+  public card_payment_msg: string = `You will be redirected to PayUMoney page where you can pay using card.`;
 
   // replica of the cart items
-  public CheckoutItems: any[] = [];
+  public CheckoutItems: any[];
   public CheckoutRelatedData: Cart;
 
   public paymentInfo = {
@@ -31,14 +41,13 @@ export class CheckoutComponent implements OnInit {
     billingAddress: `Sri Balaji Boys PG, New BEL Road`
   }
 
-  public paymentOptionLoad: boolean = true;
-
   // View Controller
   public View: string[] = ['CHANGE', 'UNCHECKED', 'UNCHECKED', 'UNCHECKED'];
-  public show: boolean[] = [false, true];
+  public show: boolean[] = [true, false];
   public captcha: any;   // captcha
+  public captcha_msg: string = '';
 
-  public editAddress: boolean;
+  public editAddress: boolean = false;
   public missingError: boolean = false;
 
   // Edit address details
@@ -53,34 +62,54 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
-    // Fetch Cart Items and initialize checkout
-    this.fetchCartItems();
 
-    // Fetch Checkout Related Data
-    this.fetchCheckoutRelatedData();
+    this.userId = this.cookieService.get('userId');
+    this.authToken = this.cookieService.get('authToken');
+
+    // Fetch Checkout Items from CART and initialize checkout
+    this.fetchCheckoutItems();
+    this.fetchUserDetails();
   }
 
-  public fetchCartItems() {
+  // Fetch Checkout items
+  public fetchCheckoutItems() {
     // get the CART items into checkout
     this.cartService.CartAndSavedItems$
       .subscribe((cartAndSavedItems) => {
-        this.CheckoutItems = cartAndSavedItems.cartItems;
-        this.initCheckout();
+        if (cartAndSavedItems.cartItems) {
+          this.CheckoutItems = cartAndSavedItems.cartItems;
+          this.setCheckoutData();
+        }
+        else {
+          this.cartService.fetchCart(this.userId);
+        }
       })
   }
 
-  public fetchCheckoutRelatedData() {
-    this.CheckoutRelatedData.email = "nishkr0392@gmail.com";
-    this.CheckoutRelatedData.mobile = 7204190121;
-    this.CheckoutRelatedData.userName = { firstName: 'Nishant', lastName: 'Kumar' };
+  // Fetch User details
+  public fetchUserDetails() {
 
-    this.editAddress = true;
+    this.userService.getUserDetails(this.userId)
+      .subscribe((apiResponse) => {
+        console.log(apiResponse)
+        if (apiResponse.status === 200) {
+          let userDetails = apiResponse.data;
+          this.CheckoutRelatedData.userName = userDetails.userName;
+          this.CheckoutRelatedData.mobile = userDetails.mobile;
+          this.CheckoutRelatedData.email = userDetails.email;
+          this.CheckoutRelatedData.deliveryAddress = userDetails.addressList[0];
+
+          // user details could be loaded now
+          this.loadUserDetails = true;
+        }
+      })
   }
 
+
   /**
-   * Initialize Checkout
-   */
-  public initCheckout() {
+  * Initialize Checkout
+  */
+  public setCheckoutData() {
 
     // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
     // on CART items.
@@ -88,14 +117,14 @@ export class CheckoutComponent implements OnInit {
 
     // Get the Checkout Related Data
     this.cartService.initCart_data$.subscribe(
-      (initCheckout_result) => {
+      (setCheckoutData) => {
 
         this.CheckoutRelatedData = {
-          totalPrice: initCheckout_result.totalPrice,
-          deliveryFee: initCheckout_result.deliveryFee,
-          totalPayable: initCheckout_result.totalPayable,
-          totalSavings: initCheckout_result.totalSavings,
-          countOfItems: initCheckout_result.countOfCartItems
+          totalPrice: setCheckoutData.totalPrice,
+          deliveryFee: setCheckoutData.deliveryFee,
+          totalPayable: setCheckoutData.totalPayable,
+          totalSavings: setCheckoutData.totalSavings,
+          countOfItems: setCheckoutData.countOfCartItems
         };
 
       },
@@ -103,7 +132,7 @@ export class CheckoutComponent implements OnInit {
       (err) => console.log(err)
     );
 
-  } // END initCheckout()
+  } // END setCheckoutData()
 
 
   /**
@@ -126,7 +155,11 @@ export class CheckoutComponent implements OnInit {
 
 
   public changeView(index: number) {
+
     this.View[index] = 'CHANGE';
+
+    for (let i = index + 1; i < 4; i++)
+      this.View[i] = 'UNCHECKED';
   }
 
 
@@ -143,15 +176,40 @@ export class CheckoutComponent implements OnInit {
   public getCaptcha() {
 
     // generate Captcha
-    this.paymentService.getCaptcha()
-      .subscribe((captcha) => {
-        this.captcha = captcha;
-        document.getElementById('COD-captcha').innerHTML = this.captcha;
+    this.paymentService.getOrVerifyCaptcha(this.userId, 'GET')
+      .subscribe((apiResponse) => {
+        if (apiResponse.status === 200) {
+          this.captcha = apiResponse.data;
+          document.getElementById('COD-captcha').innerHTML = this.captcha;
+        }
+        else {
+          this.captcha_msg = apiResponse.message;
+        }
       },
         (error) => {
           console.log(error)
         });
   }
+
+
+  public verifyCaptcha() {
+    if (!this.captcha) return;
+
+    this.paymentService.getOrVerifyCaptcha(this.userId, 'VERIFY', this.captcha)
+      .subscribe((apiResponse) => {
+        console.log(apiResponse)
+        if (apiResponse.status === 200) {
+          // captcha verified
+          // save checkout related data in browser history before navigation 
+          this.router.navigate(['/orderresponse'], { state: { data: this.CheckoutRelatedData } })
+        }
+        else {
+          // captcha not verified
+          this.captcha_msg = apiResponse.message;
+        }
+      })
+  }
+
 
   public selectPaymentMode(paymentMode: string) {
 
@@ -191,19 +249,26 @@ export class CheckoutComponent implements OnInit {
 
       case 'card': {
 
+        let nameArr = this.CheckoutRelatedData.userName.split(' ');
+
         let request_data: PayUMoneyParams = {
 
           amount: this.CheckoutRelatedData.totalPayable,
           productinfo: productInfo,
-          firstname: this.CheckoutRelatedData.userName.firstName,
-          lastname: this.CheckoutRelatedData.userName.lastName,
+          firstname: nameArr[0],
+          lastname: nameArr[1],
           email: this.CheckoutRelatedData.email,
           phone: this.CheckoutRelatedData.mobile
         };
-        this.paymentOptionLoad = false;
+
+        // check if user is online
+        if (!navigator.onLine) {
+          this.card_payment_msg = "You seem to be offline. Please check your internet connection.";
+          return;
+        }
+
         this.paymentService.makePaymentRequest_PayUMoney(request_data)
           .subscribe((response) => {
-
             console.log(response)
             if (response.status === 200) {
               // redirect to payment link
@@ -212,9 +277,13 @@ export class CheckoutComponent implements OnInit {
             else {
               console.log(response.error)
               // couldn't load payment option
-              this.paymentOptionLoad = false;
+              this.card_payment_msg = 'Sorry!! Something went wrong.';
             }
-          })
+          },
+            (err) => {
+              this.card_payment_msg = 'Server seems to be down.';
+              console.log(err)
+            })
 
         break;
       }
@@ -252,14 +321,37 @@ export class CheckoutComponent implements OnInit {
     this.missingError = false;
 
     console.log(address)
-    this.userService.saveUserAddress(address)
-      .subscribe((apiResponse: any) => {
+    this.userService.saveUserAddress(this.userId, address)
+      .subscribe((apiResponse) => {
         console.log(apiResponse)
-        if (!apiResponse.error)
+        if (!apiResponse.error) {
+          this.CheckoutRelatedData.deliveryAddress = address;
           this.continueCheckout(1);
+        }
       })
 
   } // END saveAddressAndContinue()
+
+
+  public logoutAndRedirect() {
+    let authToken = this.cookieService.get('authToken');
+    this.userService.logout(authToken)
+      .subscribe((apiResponse) => {
+        if (apiResponse.status === 200) {
+          this.router.navigate['/logout'];
+        }
+        else {
+          console.log(apiResponse)
+        }
+      },
+        (error) => {
+          /* let modal = this.modalService.getCustomMessageModal({
+            header: 'Server seems to be down.',
+            category: 'error'
+          })
+         if(modal) modal.openModalWithAutoClose(3000) */
+        })
+  }
 
 
 }

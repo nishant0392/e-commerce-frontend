@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'custom-message-modal',
@@ -11,6 +11,12 @@ export class CustomMessageModalComponent {
   @Input('category') public category: string = "";    // category of message
 
   public icon_class: string = "disp-none";
+
+ /*  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    this.message_header = changes.message_header.currentValue;
+    this.addClass()
+  } */
 
   public addClass() {
 

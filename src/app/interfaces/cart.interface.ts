@@ -5,11 +5,17 @@ export interface Cart {
     deliveryFee: number,
     totalPayable: number,
     totalSavings: number,
-    userName?: {
-        firstName: string,
-        lastName: string
-    },
-    deliveryAddress?: any
+    userName?: string,
     email?: string,
-    mobile?: number
+    mobile?: number,
+    deliveryAddress?: {
+        name: string,
+        mobile: number,
+        areaAndStreet: string,
+        locality: string,
+        cityOrDistrictOrTown: string,
+        state: string,
+        pincode: string,
+        addressType: string
+    }
 }

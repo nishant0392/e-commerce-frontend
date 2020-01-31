@@ -80,7 +80,7 @@ export class UserManagementService {
     const params = new HttpParams()
       .set('mobile', mobileNo_str)
 
-    return this.http.post(`${this.baseUrl}/sendOTP`, params);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/sendOTP`, params);
   }
 
 
@@ -98,7 +98,7 @@ export class UserManagementService {
       .set('mobile', mobileNo_str)
       .set('OTP', OTP_str)
 
-    return this.http.post(`${this.baseUrl}/verifyOTP`, params);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/verifyOTP`, params);
   }
 
 
@@ -117,7 +117,7 @@ export class UserManagementService {
       .set('mobile', mobileNo_str)
       .set('password', password)
 
-    return this.http.post(`${this.baseUrl}/users/signup`, params);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/users/signup`, params);
   }
 
 
@@ -157,7 +157,7 @@ export class UserManagementService {
 
     else return false;
 
-    return this.http.post(`${this.baseUrl}/users/login`, params);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/users/login`, params);
   }
 
 
@@ -175,14 +175,24 @@ export class UserManagementService {
    * Save user address.
    * @param address Address 
    */
-  saveUserAddress(address: any) {
+  saveUserAddress(userID: string, address: any) {
 
     let _address = JSON.stringify(address);
 
     let params = new HttpParams()
+      .set('userId', userID)
       .set('address', _address)
 
-    return this.http.post(this.baseUrl + '/users/userAddresses', params);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/users/userAddress`, params);
+  }
+
+
+  /**
+   * Get user details.
+   * @param userID User ID 
+   */
+  getUserDetails(userID: string) {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/users/details?userId=${userID}`);
   }
 
 

@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderResponseComponent implements OnInit {
 
-  public countOfItems: number = 1;
-  public totalPrice: number = 422;
   public deliveryDate: Date = new Date();
-
-  public recipient: string = "Nishant Kumar";
-  public billingAddress: string = `D-28, P.C. COLONY, KANKARBAGH,
-                                      Patna - 800020`;
-  public mobileNo: number = 7204190121;
-
-  constructor() { }
+  public postCheckoutData;
 
   ngOnInit() {
+    this.deliveryDate.setDate(this.deliveryDate.getDate() + 1);
+
+    this.postCheckoutData = history.state.data;
+
+    if (this.postCheckoutData)
+      sessionStorage.setItem('postCheckoutData', JSON.stringify(this.postCheckoutData));
+    else
+      this.postCheckoutData = JSON.parse(sessionStorage.getItem('postCheckoutData'));
   }
 
 }

@@ -29,11 +29,19 @@ export class PaymentService {
 
 
   /**
-   * Returns Captcha in form of SVG data.
+   * Returns Captcha in form of SVG data or verifies captcha.
+   * @param userID User ID
+   * @param opcode GET/VERIFY
+   * @param text Captcha text to verify
    */
-  public getCaptcha() {
+  public getOrVerifyCaptcha(userID: string, opcode: string, text?: string) {
+    let url;
+    
+    if (opcode === 'VERIFY') url = `${this.baseUrl}/captcha/verify?userId=${userID}&captcha=${text}`;
 
-    return this.http.get(this.baseUrl+'/getCaptcha');
+    else url = `${this.baseUrl}/captcha/get?userId=${userID}`;
+
+    return this.http.get<ApiResponse>(url);
   }
 
 
@@ -52,7 +60,7 @@ export interface PayUMoneyParams {
   udf4?: any,
   udf5?: any,
   firstname: string,
-  lastname?: string, 
+  lastname?: string,
   email: string,
   phone: number | string,
   surl?: string,     // on server side

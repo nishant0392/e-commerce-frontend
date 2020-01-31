@@ -1,16 +1,24 @@
-<div class="order-response">
+<div class="order-response" *ngIf="postCheckoutData">
 
     <div class="first-div">
-        <h4>Order placed for ₹{{ totalPrice }}!</h4>
-        <p class="fs-14">Your {{ countOfItems }} item<span *ngIf="countOfItems > 1">s</span>
-            will be delivered by <span class="font-600">{{ deliveryDate | date:'fullDate' }}.</span></p>
+        <h4>Order placed for ₹{{ postCheckoutData.totalPrice }}!</h4>
+        <p class="fs-14">Your {{ postCheckoutData.countOfItems }} item<span *ngIf="postCheckoutData.countOfItems > 1">s</span>
+            will be delivered by <span class="font-600">{{ deliveryDate | date:'fullDate' }}.</span>
+        </p>
     </div>
 
     <div class="second-div">
         <p class="font-600">Delivery Address</p>
-        <p class="font-600 fs-14">{{ recipient }}</p>
-        <p class="fs-14">{{ billingAddress }}</p>
-        <p class="fs-14"><span class="font-600">Phone number</span> {{ mobileNo }}</p>
+        <p class="font-600 fs-14">{{ postCheckoutData.deliveryAddress.name }}</p>
+        <span class="fs-14">
+            <span class="area-street">{{ postCheckoutData.deliveryAddress.areaAndStreet }}, </span>
+            <span class="landmark">{{ postCheckoutData.deliveryAddress.locality }}, </span>
+            <span>{{ postCheckoutData.deliveryAddress.cityOrDistrictOrTown }}, {{ postCheckoutData.deliveryAddress.state }} - </span>
+            <span class="pincode">{{ postCheckoutData.deliveryAddress.pincode }}</span>
+        </span>
+        <p class="fs-14">
+            <span class="font-600">Phone number</span> {{ postCheckoutData.deliveryAddress.mobile }}
+        </p>
     </div>
 
 </div>

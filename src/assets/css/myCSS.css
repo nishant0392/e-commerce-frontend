@@ -242,7 +242,6 @@
 .my-spinner {
   background-color: #ffffff;
   display: flex;
-  position: fixed;
   width: 100%;
   height: 85vh;
 }

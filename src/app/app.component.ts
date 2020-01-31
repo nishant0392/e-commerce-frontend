@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalService } from './services/modal.service';
+import { UserManagementService } from './services/user-management.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
   public message_category: string = "default";
 
   constructor(private cartService: CartService, private cookie: CookieService,
-    private modalService: ModalService) { }
+    private modalService: ModalService, private userService: UserManagementService) { }
 
   ngOnInit() {
     // initialize Navbar
@@ -35,10 +36,10 @@ export class AppComponent implements OnInit {
 
     // subscribe to modal data
     this.modalService.customModal_data$
-    .subscribe((modal_data) => {
-      this.message_header = modal_data.header || "";
-      this.message_category = modal_data.category;
-    })
+      .subscribe((modal_data) => {
+        this.message_header = modal_data.header || "";
+        this.message_category = modal_data.category;
+      })
   }
 
 
@@ -49,15 +50,15 @@ export class AppComponent implements OnInit {
     this.userId = this.cookie.get('userId');
     this.userName = (_userName == ' ') ? "My Account" : _userName;
     this.authToken = this.cookie.get('authToken');
-    
+
     if (this.userId && this.authToken) {
       // switch main navbar to "loggedIn" state
       this.loggedIn = true;
-  
+
       // fetch Cart Items and calculate count of cart items
       this.cartService.fetchCart(this.userId);
     }
-      
+
     setTimeout(() => {
       // Subscribe for count of Cart Items
       this.cartService.countOfCartItems$
@@ -76,9 +77,11 @@ export class AppComponent implements OnInit {
       { name: 'Offer Zone', type: 'link' }
     ];
 
+    // open login modal at startup if not already logged in
+  //  if (!this.loggedIn) this.userService.initializeModal().openLogin();
   }
 
-
+  
   afterLogin() {
     this.initNavbar();
   }

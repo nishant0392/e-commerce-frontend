@@ -54,12 +54,8 @@ export class ViewCartComponent implements OnInit {
       return;
     }
 
-    this.CartRelatedData = {
-      countOfItems: 0, totalPrice: 0, totalPayable: 0, totalSavings: 0, deliveryFee: 0
-    };
-
     // Fetch Cart
-    setTimeout(() => this.fetchCart(), 0);
+    setTimeout(() => this.fetchCart());
   }
 
 

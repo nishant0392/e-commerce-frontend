@@ -1,6 +1,6 @@
 <!-- *******************  START: CHECKOUT  ******************* -->
 
-<div class="checkout">
+<div class="checkout" *ngIf="CheckoutRelatedData; else loading">
 
   <!-- ********  start: CHECKOUT DETAILS  ******** -->
   <div class="checkout-details-container">
@@ -25,33 +25,47 @@
           <span class="text-white fs-12 font-600">LOGIN</span>
         </div>
 
-        <div class="login-info">
+        <div *ngIf="loadUserDetails; else loading">
+          <div class="login-info">
 
-          <div class="login-details">
-            <p class="fs-12 mb-2">
-              <span class="txt-lightgrey">Name</span>&nbsp;<span class="font-600 ml-3">Flipkart Customer</span>
-            </p>
+            <div class="login-details">
+              <p class="fs-12 mb-2">
+                <span class="txt-lightgrey">Name</span>&nbsp;<span class="font-600 ml-3">{{ CheckoutRelatedData.userName }}</span>
+              </p>
 
-            <p class="fs-12 mb-2">
-              <span class="txt-lightgrey">Phone</span><span class="font-600 ml-3">+917204190121</span>
-            </p>
+              <p class="fs-12 mb-2">
+                <span class="txt-lightgrey">Phone</span><span class="font-600 ml-3">+91{{ CheckoutRelatedData.mobile }}</span>
+              </p>
 
-            <a href="#">Logout &amp; Sign in to another account</a> <br>
+              <a class="cur-p text-primary" (click)="logoutAndRedirect()">Logout &amp; Sign in to another account</a>
+              <br>
 
-            <button type="button" class="button-lg" (click)="continueCheckout(0)">CONTINUE CHECKOUT</button>
+              <button type="button" class="button-lg" (click)="continueCheckout(0)">CONTINUE CHECKOUT</button>
+            </div>
+
+            <div class="login-ad">
+              <p class="txt-lightgrey">Advantages of our secure login</p>
+              <p><i class="fa fa-truck ad-icon"></i>Easily Track Orders, Hassle free Returns</p>
+              <p><i class="fa fa-bell ad-icon"></i> Get Relevant Alerts and Recommendation</p>
+              <p><span class="icon-star ad-icon"></span> Wishlist, Reviews, Ratings and more.</p>
+            </div>
           </div>
 
-          <div class="login-ad">
-            <p class="txt-lightgrey">Advantages of our secure login</p>
-            <p><i class="fa fa-truck ad-icon"></i>Easily Track Orders, Hassle free Returns</p>
-            <p><i class="fa fa-bell ad-icon"></i> Get Relevant Alerts and Recommendation</p>
-            <p><span class="icon-star ad-icon"></span> Wishlist, Reviews, Ratings and more.</p>
-          </div>
+          <p class="warning">Please note that upon clicking "Logout" you will lose all items
+            in cart and will be redirected to N-Kart home page.
+          </p>
         </div>
 
-        <p class="warning">Please note that upon clicking "Logout" you will lose all items
-          in cart and will be redirected to N-Kart home page.
-        </p>
+        <!--  Wait while loading...  -->
+        <ng-template #loading>
+
+          <div class="my-spinner" style="height: 300px;">
+            <div class="spinner-border text-warning" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
+        </ng-template>
       </div>
       <!-- end: CHANGE View -->
 
@@ -63,8 +77,8 @@
           <span class="title">LOGIN</span>
           <i class="fa fa-check icon-check"></i>
           <p class="fs-12">
-            <span class="font-600 mr-2">Flipkart Customer</span>
-            <span class="fs-14">+917204190121</span>
+            <span class="font-600 mr-2">{{ CheckoutRelatedData.userName }}</span>
+            <span class="fs-14">+91{{ CheckoutRelatedData.mobile }}</span>
           </p>
         </div>
 
@@ -103,24 +117,26 @@
 
             <radio-button [value]="'NISHANT'" [selected]="true" (selectedValue)="selectAddress($event)"></radio-button>
 
-            <div class="ml-3" *ngIf="!editAddress">
+            <div class="ml-3" *ngIf="!editAddress && CheckoutRelatedData.deliveryAddress">
               <p class="fs-12 mb-2">
 
-                <span class="font-600 mr-2">NISHANT KUMAR</span>
-                <span class="font-600 mr-2">7204190121</span>
+                <span class="font-600 mr-2">{{ CheckoutRelatedData.deliveryAddress.name }}</span>
+                <span class="font-600 mr-2">{{ CheckoutRelatedData.deliveryAddress.mobile }}</span>
                 <span class="txt-blue" (click)="editAddress=true">EDIT</span>
               </p>
 
               <span class="fs-14">
-                <span class="area-street">B-11, Sri Balaji Boys PG, New BEL Road, Devasandra, </span>
-                <span class="landmark">Opposite to HP Petrol Pump, </span>
-                <span>Bangalore, Karnataka-</span>
-                <span class="pincode fs-12 font-600">560054</span>
+                <span class="area-street">{{ CheckoutRelatedData.deliveryAddress.areaAndStreet }}, </span>
+                <span class="landmark">{{ CheckoutRelatedData.deliveryAddress.locality }}, </span>
+                <span>{{ CheckoutRelatedData.deliveryAddress.cityOrDistrictOrTown }}, {{ CheckoutRelatedData.deliveryAddress.state }} - </span>
+                <span class="pincode fs-12 font-600">{{ CheckoutRelatedData.deliveryAddress.pincode }}</span>
               </span>
             </div>
 
             <div class="edit-address ml-3" *ngIf="editAddress">
-              <p class="fs-12 mb-2 font-600 txt-blue">EDIT ADDRESS</p>
+              <p class="fs-12 mb-2 font-600 txt-blue">EDIT ADDRESS
+                <span class="txt-blue pull-right mr-4" (click)="editAddress=false">CANCEL</span>
+              </p>
 
               <div class="address-buttons">
 
@@ -138,8 +154,8 @@
               <div class="address-buttons">
 
                 <div class="address-textarea">
-                  <input-button [placeholder]="'Address (Area and Street)'" (value)="areaAndStreet=$event"
-                    [rows]="3" [type]="'textarea'">
+                  <input-button [placeholder]="'Address (Area and Street)'" (value)="areaAndStreet=$event" [rows]="3"
+                    [type]="'textarea'">
                   </input-button>
                 </div>
 
@@ -175,7 +191,7 @@
 
           </div>
 
-          <div class="address-type fs-12 radio-button-group">
+          <div class="address-type fs-12 radio-button-group" *ngIf="editAddress">
 
             <p class="text-muted mb-2">Address Type</p>
 
@@ -212,12 +228,12 @@
           <span class="title">DELIVERY ADDRESS</span>
           <i class="fa fa-check icon-check"></i>
           <p class="fs-12">
-            <span class="font-600 mr-2">NISHANT KUMAR</span>
+            <span class="font-600 mr-2">{{ CheckoutRelatedData.deliveryAddress.name }}</span>
             <span class="fs-14">
-              <span class="area-street">B-11, Sri Balaji Boys PG, New BEL Road, Devasandra, </span>
-              <span class="landmark">Opposite to HP Petrol Pump, </span>
-              <span>Bangalore, Karnataka-</span>
-              <span class="pincode fs-12 font-600">560054</span>
+              <span class="area-street">{{ CheckoutRelatedData.deliveryAddress.areaAndStreet }}, </span>
+              <span class="landmark">{{ CheckoutRelatedData.deliveryAddress.locality }}, </span>
+              <span>{{ CheckoutRelatedData.deliveryAddress.cityOrDistrictOrTown }}, {{ CheckoutRelatedData.deliveryAddress.state }} - </span>
+              <span class="pincode fs-12 font-600">{{ CheckoutRelatedData.deliveryAddress.pincode }}</span>
             </span>
           </p>
         </div>
@@ -321,29 +337,30 @@
           <div class="radio-button-group">
 
             <div class="radio-button" [ngClass]="{'active': show[0]}">
-              <radio-button [value]="'card'" (selectedValue)="selectPaymentMode($event)"></radio-button>
+              <radio-button [value]="'card'" [selected]="true" (selectedValue)="selectPaymentMode($event)"></radio-button>
               <span class="radio-btn-text">Credit / Debit / ATM Card</span>
               <div *ngIf="show[0]">
                 <p class="mt-3 fs-14 ml-4 text-dark font-600">&nbsp;
-                  <span *ngIf="paymentOptionLoad">You will be redirected to PayUMoney page where you can pay using
-                    card.</span>
-                  <span *ngIf="!paymentOptionLoad">Sorry!! Something went wrong.</span></p>
+                  <span *ngIf="card_payment_msg !== ''">{{ card_payment_msg }}</span>
+                </p>
                 <button class="button-md bg-Red" (click)="goToPayment('card')">GO TO PAYMENT</button>
               </div>
             </div>
 
             <div class="radio-button" [ngClass]="{'active': show[1]}">
-              <radio-button [value]="'COD'" [selected]="true" (selectedValue)="selectPaymentMode($event)">
+              <radio-button [value]="'COD'" (selectedValue)="selectPaymentMode($event)">
               </radio-button>
               <span class="radio-btn-text">Cash on Delivery</span>
+              
+              <div class="text-danger" *ngIf="captcha_msg !== ''"><small>{{ captcha_msg }}</small></div>
 
               <div class="COD" *ngIf="show[1]">
                 <div class="captcha">
                   <div id="COD-captcha" class="captcha-text"></div>
                   <i class="fa fa-redo icon-refresh" (click)="getCaptcha()"></i>
                 </div>
-                <input-button [maxlength]="6"></input-button>
-                <button class="button-md bg-Red ml-5" [routerLink]="['/orderresponse']">CONFIRM ORDER</button>
+                <input-button [maxlength]="6" (value)="captcha=$event"></input-button>
+                <button class="button-md bg-Red ml-5" (click)="verifyCaptcha()">CONFIRM ORDER</button>
               </div>
 
             </div>
@@ -420,3 +437,14 @@
 
 
 <!-- END: 'GO TO CART' Modal  -->
+
+ <!--  Wait while loading...  -->
+ <ng-template #loading>
+
+  <div class="my-spinner">
+    <div class="spinner-border txt-blue" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+</ng-template>
