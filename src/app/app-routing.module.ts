@@ -11,6 +11,7 @@ import { CheckoutComponent } from './payments-management/checkout/checkout.compo
 import { OrderResponseComponent } from './payments-management/order-response/order-response.component';
 import { NotFoundComponent } from './user-management/not-found/not-found.component';
 import { LogoutComponent } from './user-management/logout/logout.component';
+import { DocumentationComponent } from './user-management/documentation/documentation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'view-cart', component: ViewCartComponent },
   { path: 'orderresponse', component: OrderResponseComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'documentation', component: DocumentationComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

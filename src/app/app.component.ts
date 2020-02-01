@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
     ];
 
     // open login modal at startup if not already logged in
-  //  if (!this.loggedIn) this.userService.initializeModal().openLogin();
+    if (!this.loggedIn) this.userService.initializeModal().openLogin();
   }
 
   
@@ -94,7 +94,6 @@ export class AppComponent implements OnInit {
   search(query) {
     console.log('Search Query:', query)
     return false;
-    // this.router.navigate(['/assets/images/Nishant.JPG'])
   }
 
 

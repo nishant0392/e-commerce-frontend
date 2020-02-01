@@ -1,0 +1,11 @@
+#documentary {
+    background-color: #fff;
+    padding: 5px 10px;
+    color: #343a40;
+}
+
+.app-name {
+    text-align: center;
+    color: rgb(7, 73, 158);
+    font-weight: bold;
+}

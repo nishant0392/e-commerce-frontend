@@ -7,11 +7,12 @@ import { UserReviewsComponent } from './user-reviews/user-reviews.component';
 import { LoginAndSignupComponent } from './login-and-signup/login-and-signup.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 
 
 @NgModule({
-  declarations: [UserReviewsComponent, LoginAndSignupComponent, LogoutComponent, NotFoundComponent],
+  declarations: [UserReviewsComponent, LoginAndSignupComponent, LogoutComponent, NotFoundComponent, DocumentationComponent],
   imports: [
     CommonModule,
     FormsModule,

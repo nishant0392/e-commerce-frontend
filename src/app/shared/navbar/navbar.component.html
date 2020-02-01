@@ -5,7 +5,7 @@
     <nav class="custom-main-nav navbar navbar-expand-xl navbar-dark bg-primary fixed-top p-0 pr-2"
         *ngSwitchCase="'MAIN_NAV'">
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" [routerLink]="['/documentation']">
             <i class="fas fa-store-alt icon-store" aria-hidden="true"></i>
             <span class="brand-name txt-shadow"> N-Kart</span>
         </a>
