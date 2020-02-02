@@ -5,7 +5,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   templateUrl: './custom-message-modal.component.html',
   styleUrls: ['./custom-message-modal.component.css']
 })
-export class CustomMessageModalComponent {
+export class CustomMessageModalComponent { 
 
   @Input('header') public message_header: string = '';  // message header to display
   @Input('category') public category: string = "";    // category of message

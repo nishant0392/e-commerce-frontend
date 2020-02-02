@@ -33,9 +33,9 @@ export class LoginAndSignupComponent implements AfterViewInit {
   // Login & Signup Modal 
   public Modal: { openLogin(), openSignup(), closeLogin(), closeSignup() };
 
-  constructor(private userService: UserManagementService,
-    private cookie: CookieService) {
-  }
+  constructor(
+    private userService: UserManagementService,
+    private cookie: CookieService) { }
 
   ngAfterViewInit() {
     this.Modal = this.userService.initializeModal();

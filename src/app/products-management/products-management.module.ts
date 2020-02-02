@@ -7,7 +7,7 @@ import { ViewModule } from '../view/view.module';
 
 
 /** -------  Components here   ------- **/
-import { DisplayProductComponent } from './display-product/display-product.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PropertiesComponent } from './product-details/properties/properties.component';
@@ -16,12 +16,12 @@ import { RatingsAndReviewsComponent } from './product-details/ratings-and-review
 import { GetUserRatingsAndReviewsComponent } from './product-details/get-user-ratings-and-reviews/get-user-ratings-and-reviews.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
 import { CartItemsComponent } from './view-cart/cart-items/cart-items.component';
-import { SidebarComponent } from './display-product/sidebar/sidebar.component';
+import { SidebarComponent } from './product-list/sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
-    DisplayProductComponent,
+    ProductListComponent,
     HomeComponent,
     ProductDetailsComponent,
     PropertiesComponent, 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './mobileview-sidebar.component.html',
   styleUrls: ['./mobileview-sidebar.component.css']
 })
-export class MobileviewSidebarComponent implements OnInit {
+export class MobileviewSidebarComponent {
 
   @Input('buttonName') public sidebarButtonName: string = "";
   @Input('containerToHide') public containerToHideID: string = "";
@@ -15,12 +15,12 @@ export class MobileviewSidebarComponent implements OnInit {
 
   // Mechanism to detect whether click was inside or outside of the component
   private wasInside = false;
-  
+
   @HostListener('click')
   clickedInside() {
     this.wasInside = true;
   }
-  
+
   @HostListener('document:click')
   clickedOutside() {
     if (!this.wasInside) {
@@ -31,33 +31,36 @@ export class MobileviewSidebarComponent implements OnInit {
 
   constructor(private util: UtilityService) { }
 
-  ngOnInit() {
-  }
 
-
+  // Add animation to sidebar
   public addAnimation() {
+
     // disable cursor for background div
-    this.util.addOrRemoveClass(this.containerToHideID, 'disable-cursor', 'ADD');
-    
-    this.changeBackground('ADD');
+    this.util.addRemoveReplaceClass(this.containerToHideID, 'enable-cursor', 'REMOVE'); // remove if any
+    this.util.addRemoveReplaceClass(this.containerToHideID, 'disable-cursor', 'ADD');
+
+    // blur the background
+    this.util.addRemoveReplaceClass(this.containerToHideID, 'blur-background', 'ADD');
+
     this.showSidebar = true;
     this.toggleSidebar = "displaySidebar";
   }
 
+
+  // Remove animation from sidebar
   public removeAnimation() {
     this.toggleSidebar = "hideSidebar";
-    this.changeBackground('REMOVE');
 
-    // enable cursor for background div
-    this.util.addOrRemoveClass(this.containerToHideID, 'disable-cursor', 'REMOVE');
-    this.util.addOrRemoveClass(this.containerToHideID, 'enable-cursor', 'ADD');
+    // remove blur from background
+    this.util.addRemoveReplaceClass(this.containerToHideID, 'blur-background', 'REMOVE');
 
+    // enable cursor for background div after a small delay so that first click removes animation only
+    // and not click the background div simultaneously
+    setTimeout(() => {
+      this.util.addRemoveReplaceClass(this.containerToHideID, 'disable-cursor', 'REPLACE', 'enable-cursor');
+    }, 500)
+   
     setTimeout(() => this.showSidebar = false, 750)
-  }
-
-  public changeBackground(operation: string) {
-    if (operation === 'ADD' || operation === 'REMOVE')
-      this.util.addOrRemoveClass(this.containerToHideID, 'blur-background', operation);
   }
 
 }

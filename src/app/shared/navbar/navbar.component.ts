@@ -28,10 +28,9 @@ export class NavbarComponent implements OnInit {
   // count of cart items
   @Input() public countOfCartItems: number;
 
-  constructor(private utilService: UtilityService) {
+  constructor(private utilService: UtilityService) { 
 
     window.addEventListener('resize', this.utilService.debounce((event) => {
-      console.log(event);
       this.initNavbar();
     }, 1000));
  

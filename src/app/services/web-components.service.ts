@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class WebComponentsService {
+export class WebComponentsService { constructor() { console.log('Web Service called') }
 
   /**
    * Finds the specified ancestor of the element.

@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductManagementService } from 'src/app/services/product-management.service';
 
 @Component({
-  selector: 'app-display-product',
-  templateUrl: './display-product.component.html',
-  styleUrls: ['./display-product.component.css']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
-export class DisplayProductComponent implements OnInit {
+export class ProductListComponent implements OnInit {
 
   // Product Items
   public Items: any[];
@@ -32,6 +32,10 @@ export class DisplayProductComponent implements OnInit {
   public counterForItemsPerPage: number[];
   public firstItemOfPage: number;
   public lastItemOfPage: number;
+
+  // Others
+  public compareBtnClicked: boolean = false;
+  public loadItems: boolean = false;
 
   constructor(private productService: ProductManagementService,
     private activatedRoute: ActivatedRoute) {
@@ -88,6 +92,7 @@ export class DisplayProductComponent implements OnInit {
       .subscribe((apiResponse) => {
         if (apiResponse.status === 200) {
           this.initializeItems(apiResponse.data);
+          this.loadItems = true;
         }
       })
   }
@@ -125,6 +130,23 @@ export class DisplayProductComponent implements OnInit {
     // update the first item and last item
     this.firstItemOfPage = this.counterForItemsPerPage[0] + 1;
     this.lastItemOfPage = this.counterForItemsPerPage[this.counterForItemsPerPage.length - 1] + 1;
+  }
+
+
+  /**
+   * Navigates to product details page.
+   * @param indexOfSelectedItem Index of the selected Item.
+   */
+  goToProductDetails(indexOfSelectedItem) {
+
+    if (this.compareBtnClicked) this.compareBtnClicked = false;
+
+    else {
+      // proceed if compare button is not clicked
+      let product = this.Items[indexOfSelectedItem];
+
+      window.open(`/${product.urlTitle}/p/${product.pid}?lid=${this.listId}`, '_blank')
+    }
   }
 
 
@@ -178,16 +200,4 @@ export class DisplayProductComponent implements OnInit {
 
   } // END fillCounterForPagination()
 
-
-  /**
-   * Navigates to product details page.
-   * @param indexOfSelectedItem Index of the selected Item.
-   */
-  goToProductDetails(indexOfSelectedItem) {
-
-    let product = this.Items[indexOfSelectedItem];
-    console.log('selected item:', product)
-
-    window.open(`/${product.urlTitle}/p/${product.pid}?lid=${this.listId}`, '_blank')
-  }
 }

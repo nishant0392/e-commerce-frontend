@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "bundle-report": "webpack-bundle-analyzer dist3/stats-es2015.json"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +23,6 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "ng5-slider": "^1.2.4",
-    "ngx-cookie": "^4.1.2",
     "ngx-cookie-service": "^2.3.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.4.0",
@@ -49,6 +49,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "typescript": "~3.4.3",
+    "webpack-bundle-analyzer": "^3.6.0"
   }
 }

@@ -6,7 +6,7 @@ import { ApiResponse } from '../interfaces/apiResponse.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class UserManagementService {
+export class UserManagementService { 
 
   private baseUrl = isDevMode() ? 'http://localhost:3000/api/v2' : 'http://api.nkart.nishant-kumar.com/api/v2';
 

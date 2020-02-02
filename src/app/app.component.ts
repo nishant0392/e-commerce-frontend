@@ -27,8 +27,12 @@ export class AppComponent implements OnInit {
   public message_header: string = "";
   public message_category: string = "default";
 
-  constructor(private cartService: CartService, private cookie: CookieService,
-    private modalService: ModalService, private userService: UserManagementService) { }
+  constructor(
+    private cartService: CartService,
+    private modalService: ModalService,
+    private userService: UserManagementService,
+    private cookie: CookieService
+  ) { }
 
   ngOnInit() {
     // initialize Navbar
@@ -44,7 +48,7 @@ export class AppComponent implements OnInit {
 
 
   initNavbar() {
-
+console.log('app ngOnInit()')
     let _userName = this.cookie.get('firstName') + ' ' + this.cookie.get('lastName');
 
     this.userId = this.cookie.get('userId');
@@ -78,10 +82,11 @@ export class AppComponent implements OnInit {
     ];
 
     // open login modal at startup if not already logged in
-    if (!this.loggedIn) this.userService.initializeModal().openLogin();
+    if (!this.loggedIn && (document.URL === document.baseURI))
+     this.userService.initializeModal().openLogin();
   }
 
-  
+
   afterLogin() {
     this.initNavbar();
   }
