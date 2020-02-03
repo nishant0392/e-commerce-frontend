@@ -1,6 +1,11 @@
 <!-- ===========================   START: Main Navigation bar   ============================= -->
 
-<navbar [loggedIn]="loggedIn" [userName]="userName" [countOfCartItems]="countOfCartItems"></navbar>
+<navbar 
+   [loggedIn]="loggedIn" 
+   (clickEvent)="goToCart()" 
+   [userName]="userName" 
+   [countOfCartItems]="countOfCartItems">
+</navbar>
 
 <!-- =============================   END: Main Navigation bar   ============================= -->
 
@@ -17,7 +22,7 @@
 
 <!-- ************   START: Login, Signup & "Custom Message" Modals  **************** -->
 
-<login-and-signup (loggedIn)="afterLogin()"></login-and-signup>
+<login-and-signup (loggedIn)="initNavbar()"></login-and-signup>
 
 <custom-message-modal
    [header]="message_header" 

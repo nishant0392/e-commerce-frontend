@@ -46,11 +46,13 @@ export class ProductDetailsComponent implements OnInit {
   public listId;
   public productId;
 
+  // Others
+  public serverError: boolean = false;
+
   constructor(private cartService: CartService,
     private productService: ProductManagementService,
     private userService: UserManagementService,
     private modalService: ModalService,
-    private cookie: CookieService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
 
@@ -79,12 +81,17 @@ export class ProductDetailsComponent implements OnInit {
         if (apiResponse.status === 200) {
           this.initializeProductDetails(apiResponse.data);
         }
-        else {
-          let modal = this.modalService.getCustomMessageModal(
-            { header: 'Some error occurred. Please try again.', category: 'error' });
-          if (modal) modal.openModalWithAutoClose(3000);
+        else if (apiResponse.status === 500) {
+          this.serverError = true;
         }
-      })
+        else {
+          this.modalService.showCustomMessageModal('open', apiResponse.message, 'error');
+        }
+      },
+        (error) => {
+          console.log(error)
+          this.serverError = true;
+        })
   }
 
   public initializeCarousel() {
@@ -259,32 +266,49 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-  public addToCart() {
+  /**
+   * Add the selected item to Cart and proceed to CART/CHECKOUT based on selection.
+   * @param proceedTo CART or CHECKOUT
+   */
+  public addToCart(proceedTo: string) {
 
-    // Check user login status
-    let userId = this.cookie.get('userId'), authToken = this.cookie.get('authToken');
-    if (!userId || !authToken) {
+    // Check if user is logged in
+    if (!this.userService.isLoggedIn()) {
       this.userService.initializeModal().openLogin();
+      return;
     }
 
-    let newCartItem = this.getNewCartItem();
+    let newCartItem = this.getNewCartItem(), userId = this.userService.getUserID();
 
     this.cartService.saveCart(userId, [newCartItem], null, false)
       .subscribe((apiResponse) => {
 
-        if (!apiResponse.error) {
+        if (apiResponse.status === 200) {
 
-          this.router.navigate(['/view-cart']);
+          let data = {
+            cartItems: apiResponse.data.cartItems,
+            savedForLaterItems: apiResponse.data.savedForLaterItems
+          }
+          // push updated cart and pass to all subscribers
+          this.cartService.changeCartAndSavedItems_data(data);
 
-          // fetch updated cart and pass to all subscribers
-          this.cartService.fetchCart(userId);
+          if (proceedTo === 'CART')
+            this.router.navigate(['/view-cart']);
+
+          else
+            this.router.navigate(['/checkout/init']);
         }
+
         else {
-          console.log('Some error occurred', apiResponse)
+          console.log(apiResponse)
+          this.modalService.showCustomMessageModal('open', apiResponse.message, 'error');
         }
-      })
+      },
+        (error) => {
+          console.log(error)
+          this.modalService.showCustomMessageModal('open', 'Server did not respond !! Please try again later.', 'error');
+        })
 
-  }
-
+  } // END addToCart()
 
 }

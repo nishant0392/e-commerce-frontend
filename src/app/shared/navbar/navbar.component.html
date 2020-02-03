@@ -64,7 +64,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/view-cart']">
+                    <a class="nav-link" (click)="clickEvent.emit()">
                         <span class="icon-shopping-cart">
                             <span class="icon-quantity" *ngIf="countOfCartItems">{{ countOfCartItems }}</span>
                             <i class="fa fa-shopping-cart icon-cart" aria-hidden="true"></i>

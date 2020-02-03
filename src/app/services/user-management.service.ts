@@ -1,16 +1,17 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiResponse } from '../interfaces/apiResponse.interface';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserManagementService { 
+export class UserManagementService {
 
   private baseUrl = isDevMode() ? 'http://localhost:3000/api/v2' : 'http://api.nkart.nishant-kumar.com/api/v2';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   /**
    * Initialize Modal(Login & Signup)
@@ -43,6 +44,20 @@ export class UserManagementService {
     }
 
     return modalOperations;
+  }
+
+  /** Check user login status. */
+  isLoggedIn() {
+    let userId = this.cookieService.get('userId'), authToken = this.cookieService.get('authToken');
+
+    if (!userId || !authToken) return false;
+    
+    return true;
+  }
+
+  /** Get User ID */
+  getUserID() {
+    return this.cookieService.get('userId');
   }
 
 

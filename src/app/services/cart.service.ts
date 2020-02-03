@@ -14,15 +14,15 @@ export class CartService {
   public countOfSavedForLaterItems: number = 0;
 
   // data for initialization of Cart
-  private initCart_data_Source = new BehaviorSubject<any>({});
+  private initCart_data_Source = new BehaviorSubject<any>(null);
   public initCart_data$ = this.initCart_data_Source.asObservable();
 
   // Cart and 'Saved For Later' Items
-  private CartAndSavedItems_Source = new BehaviorSubject<any>({});
+  private CartAndSavedItems_Source = new BehaviorSubject<any>(null);
   public CartAndSavedItems$ = this.CartAndSavedItems_Source.asObservable();
 
   // count of Cart Items
-  private countOfCartItems_Source = new BehaviorSubject<any>({});
+  private countOfCartItems_Source = new BehaviorSubject<any>(null);
   public countOfCartItems$ = this.countOfCartItems_Source.asObservable();
 
   private defaultDeliveryFee: number = 40;  // Default delivery fee fixed by Flipkart.
@@ -102,7 +102,7 @@ export class CartService {
     for (let i = 0; i < CartItems.length; i++) {
       let item = CartItems[i];
       totalPrice += item.price * item.quantity;
-      totalSavings += (item.MRP - item.price);
+      totalSavings += (item.MRP - item.price) * item.quantity;
       countOfCartItems += item.quantity;
     }
 
@@ -116,7 +116,7 @@ export class CartService {
       totalPayable: totalPayable,
       countOfCartItems: countOfCartItems
     };
-
+    
     // Store the 'initCart' data
     this.changeInitCart_data(result);
 
@@ -333,7 +333,7 @@ export class CartService {
 
   /**
    * Fetch User Cart.
-   * @param userId userId
+   * @param userId User ID
    */
   public fetchCart(userId: string) {
     this.http.get<ApiResponse>(`${this.baseUrl}/cart/items?userId=${userId}`)

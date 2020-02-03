@@ -24,9 +24,9 @@
         </div>
 
         <div class="purchase-btn">
-            <button type="button" class="add-to-cart" (click)="addToCart()">
+            <button type="button" class="add-to-cart" (click)="addToCart('CART')">
                 <i class="fa fa-shopping-cart"></i>ADD TO CART</button>
-            <button type="button" class="buy-now">
+            <button type="button" class="buy-now" (click)="addToCart('CHECKOUT')">
                 <i class="fa fa-bolt"></i>BUY NOW</button>
         </div>
     </div>
@@ -164,9 +164,12 @@
 <ng-template #loading>
 
     <div class="my-spinner">
-        <div class="spinner-border txt-blue" role="status">
+
+        <div class="spinner-border txt-blue" role="status" *ngIf="!serverError">
           <span class="sr-only">Loading...</span>
         </div>
+
+        <img class="img-fluid w-100" src="/assets/images/server-error.png" *ngIf="serverError">
     </div>
 
 </ng-template>

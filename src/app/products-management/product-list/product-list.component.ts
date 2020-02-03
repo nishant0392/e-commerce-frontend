@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductManagementService } from 'src/app/services/product-management.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-product-list',
@@ -36,8 +37,10 @@ export class ProductListComponent implements OnInit {
   // Others
   public compareBtnClicked: boolean = false;
   public loadItems: boolean = false;
+  public serverError: boolean = false;
 
   constructor(private productService: ProductManagementService,
+    private modalService: ModalService,
     private activatedRoute: ActivatedRoute) {
 
     // extract listId from url
@@ -94,7 +97,14 @@ export class ProductListComponent implements OnInit {
           this.initializeItems(apiResponse.data);
           this.loadItems = true;
         }
-      })
+        else if (apiResponse.status === 500)
+          this.serverError = true;
+        else if (apiResponse.status === 404)
+          this.modalService.showCustomMessageModal('open', 'Bad request !! Resource Not Found.', 'error');
+      },
+        (error) => {
+          this.serverError = true;
+        })
   }
 
   public initializeItems(data: { category: string, subcategory: string, items: any[] }) {

@@ -49,6 +49,7 @@ export class CheckoutComponent implements OnInit {
 
   public editAddress: boolean = false;
   public missingError: boolean = false;
+  public serverError: boolean = false;
 
   // Edit address details
   public name;
@@ -62,27 +63,37 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.userId = this.cookieService.get('userId');
     this.authToken = this.cookieService.get('authToken');
 
     // Fetch Checkout Items from CART and initialize checkout
     this.fetchCheckoutItems();
+    this.setCheckoutData();
     this.fetchUserDetails();
+
+    // set timeout of 5 seconds in case server doesn't respond 
+    setTimeout(() => {
+      if (!this.CheckoutItems || (this.CheckoutItems && !this.CheckoutItems.length))
+        this.serverError = true;
+    }, 5000)
   }
+
 
   // Fetch Checkout items
   public fetchCheckoutItems() {
     // get the CART items into checkout
     this.cartService.CartAndSavedItems$
       .subscribe((cartAndSavedItems) => {
-        if (cartAndSavedItems.cartItems) {
+
+        if (cartAndSavedItems && cartAndSavedItems.cartItems) {
           this.CheckoutItems = cartAndSavedItems.cartItems;
-          this.setCheckoutData();
+          // calculate total Price, count of cart items, etc. on CHECKOUT items.
+          this.cartService.calculateTotal(this.CheckoutItems);
         }
         else {
           this.cartService.fetchCart(this.userId);
         }
+
       })
   }
 
@@ -111,22 +122,19 @@ export class CheckoutComponent implements OnInit {
   */
   public setCheckoutData() {
 
-    // calculate total Price, count of cart items, delivery Fees, total amount payable & Savings 
-    // on CART items.
-    this.cartService.calculateTotal(this.CheckoutItems);
-
     // Get the Checkout Related Data
     this.cartService.initCart_data$.subscribe(
       (setCheckoutData) => {
 
-        this.CheckoutRelatedData = {
-          totalPrice: setCheckoutData.totalPrice,
-          deliveryFee: setCheckoutData.deliveryFee,
-          totalPayable: setCheckoutData.totalPayable,
-          totalSavings: setCheckoutData.totalSavings,
-          countOfItems: setCheckoutData.countOfCartItems
-        };
-
+        if (setCheckoutData) {
+          this.CheckoutRelatedData = {
+            totalPrice: setCheckoutData.totalPrice,
+            deliveryFee: setCheckoutData.deliveryFee,
+            totalPayable: setCheckoutData.totalPayable,
+            totalSavings: setCheckoutData.totalSavings,
+            countOfItems: setCheckoutData.countOfCartItems
+          };
+        }
       },
 
       (err) => console.log(err)
@@ -180,6 +188,7 @@ export class CheckoutComponent implements OnInit {
       .subscribe((apiResponse) => {
         if (apiResponse.status === 200) {
           this.captcha = apiResponse.data;
+          this.captcha_msg = "";
           document.getElementById('COD-captcha').innerHTML = this.captcha;
         }
         else {
@@ -188,6 +197,7 @@ export class CheckoutComponent implements OnInit {
       },
         (error) => {
           console.log(error)
+          this.captcha_msg = 'Server seems to be down.';
         });
   }
 

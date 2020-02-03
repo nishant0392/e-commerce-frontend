@@ -124,9 +124,12 @@
 <ng-template #loading>
 
     <div class="my-spinner">
-        <div class="spinner-border txt-blue" role="status">
+
+        <div class="spinner-border txt-blue" role="status" *ngIf="!serverError">
           <span class="sr-only">Loading...</span>
         </div>
-    </div>
 
+        <img class="img-fluid w-100" src="/assets/images/server-error.png" *ngIf="serverError">
+    </div>
+    
 </ng-template>

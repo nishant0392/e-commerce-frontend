@@ -3,6 +3,7 @@ import { CartService } from './services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalService } from './services/modal.service';
 import { UserManagementService } from './services/user-management.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +25,16 @@ export class AppComponent implements OnInit {
   public authToken: string;
 
   // Custom message Modal 
-  public message_header: string = "";
+  public message_header: string = "Some Unknown Error";
   public message_category: string = "default";
+  public serviceType: string = "open_with_auto_close";
+  public message_duration: number = 3000;
 
   constructor(
     private cartService: CartService,
     private modalService: ModalService,
     private userService: UserManagementService,
+    private router: Router,
     private cookie: CookieService
   ) { }
 
@@ -41,36 +45,51 @@ export class AppComponent implements OnInit {
     // subscribe to modal data
     this.modalService.customModal_data$
       .subscribe((modal_data) => {
-        this.message_header = modal_data.header || "";
-        this.message_category = modal_data.category;
+
+        if (modal_data) {
+          // initialize the modal with data received
+          this.serviceType = modal_data.serviceType || this.serviceType;
+          this.message_header = modal_data.header || this.message_header;
+          this.message_category = modal_data.category || this.message_category;
+          this.message_duration = modal_data.message_duration || this.message_duration;
+
+          // trigger the modal
+          this.modalService.customModalService(this.serviceType, { display_duration: this.message_duration });
+        }
+
       })
   }
 
 
   initNavbar() {
-console.log('app ngOnInit()')
-    let _userName = this.cookie.get('firstName') + ' ' + this.cookie.get('lastName');
 
-    this.userId = this.cookie.get('userId');
-    this.userName = (_userName == ' ') ? "My Account" : _userName;
-    this.authToken = this.cookie.get('authToken');
+    let doAuthorization = () => {
 
-    if (this.userId && this.authToken) {
-      // switch main navbar to "loggedIn" state
-      this.loggedIn = true;
+      let _userName = this.cookie.get('firstName') + ' ' + this.cookie.get('lastName');
+      this.userName = (_userName == ' ' || _userName == 'Flipkart Customer') ? "My Account" : _userName;
 
-      // fetch Cart Items and calculate count of cart items
-      this.cartService.fetchCart(this.userId);
+      this.userId = this.cookie.get('userId');
+      this.authToken = this.cookie.get('authToken');
+
+      if (this.userId && this.authToken) {
+        // switch main navbar to "loggedIn" state
+        this.loggedIn = true;
+
+        // fetch Cart Items and calculate count of cart items
+        this.cartService.fetchCart(this.userId); 
+      }
+
     }
 
-    setTimeout(() => {
-      // Subscribe for count of Cart Items
-      this.cartService.countOfCartItems$
-        .subscribe((countOfCartItems) => {
-          if (typeof countOfCartItems === 'number')
-            this.countOfCartItems = countOfCartItems;
+    doAuthorization();
+
+    // subscribe to get count of cart items
+    this.cartService.countOfCartItems$
+      .subscribe((countOfCartItems) => {
+        setTimeout(() => {
+          if (countOfCartItems) this.countOfCartItems = countOfCartItems;
         })
-    })
+      })
 
     // Secondary Navbar Initialization
     this.navItems = [
@@ -83,12 +102,19 @@ console.log('app ngOnInit()')
 
     // open login modal at startup if not already logged in
     if (!this.loggedIn && (document.URL === document.baseURI))
-     this.userService.initializeModal().openLogin();
+      this.userService.initializeModal().openLogin();
   }
 
 
-  afterLogin() {
-    this.initNavbar();
+  goToCart() {
+     // Check if user is logged in. If no, proceed to login.
+     if (!this.userService.isLoggedIn()) {
+      this.userService.initializeModal().openLogin();
+    }
+
+    // If yes, proceed to CART
+    else 
+      this.router.navigate(['/view-cart'])
   }
 
 
@@ -96,11 +122,9 @@ console.log('app ngOnInit()')
    * Searches for the query.
    * @param {string} query Search query 
    */
-  search(query) {
+  search(query: string) {
     console.log('Search Query:', query)
     return false;
   }
-
-
 
 } // END

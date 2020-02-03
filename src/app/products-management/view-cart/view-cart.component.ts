@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
-import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
-import { ModalService } from 'src/app/services/modal.service';
+import { UserManagementService } from 'src/app/services/user-management.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-cart',
@@ -13,9 +12,7 @@ import { ModalService } from 'src/app/services/modal.service';
 export class ViewCartComponent implements OnInit {
 
   constructor(private cartService: CartService,
-    private cookie: CookieService,
-    private router: Router,
-    private modalService: ModalService) { }
+    private userService: UserManagementService) { }
 
   public userId: string;
   public authToken: string;
@@ -24,6 +21,10 @@ export class ViewCartComponent implements OnInit {
 
   public SavedForLaterItems: any[] = [];
   public countOfSavedForLaterItems: number = 0;
+
+  public fetchCart_Subscription: Subscription;
+  public initCart_Subscription: Subscription;
+  public serverError: boolean = false;
 
   public paymentInfo = [
     {
@@ -37,40 +38,65 @@ export class ViewCartComponent implements OnInit {
   ];
 
   ngOnInit() {
-    // fetch authorization details from cookie
-    this.userId = this.cookie.get('userId');
-    this.authToken = this.cookie.get('authToken');
-
-    // if authorization details are missing, redirect to homepage
-    if (!this.userId || !this.authToken) {
-
-      setTimeout(() => {
-        let modal = this.modalService.getCustomMessageModal(
-          { header: 'Bad Request!! Authorization Token Missing.', category: 'error' });
-  
-        if (modal) modal.openModal();   
-      })
-      this.router.navigate(['/']);
-      return;
+    // Check if user is logged in. If no, proceed to login.
+    if (!this.userService.isLoggedIn()) {
+      this.userService.initializeModal().openLogin();
     }
 
-    // Fetch Cart
-    setTimeout(() => this.fetchCart());
+    // If yes, fetch Cart and initialize Cart related data
+    else {
+      this.userId = this.userService.getUserID();
+      this.fetchCart(this.userId);
+      this.initCartRelatedData();
+      // set timeout of 5 seconds in case server doesn't respond 
+      setTimeout(() => {
+        if(!this.CartItems || (this.CartItems && !this.CartItems.length)) this.serverError = true;
+      }, 5000)
+    }
+  }
+
+
+  public initCartRelatedData() {
+    // Get the Cart Related Data
+    this.initCart_Subscription = this.cartService.initCart_data$.subscribe(
+      (initCart_result) => {  
+       
+        if (initCart_result) {
+          this.CartRelatedData = {
+            totalPrice: initCart_result.totalPrice,
+            deliveryFee: initCart_result.deliveryFee,
+            totalPayable: initCart_result.totalPayable,
+            totalSavings: initCart_result.totalSavings,
+            countOfItems: initCart_result.countOfCartItems
+          }
+        }
+      },
+      (err) => console.log(err)
+    );
   }
 
 
   /**
-   * Fetch User Cart.
+   * Fetch Cart for the user with given ID.
+   * @param userID User ID
    */
-  public fetchCart() {
+  public fetchCart(userID: string) {
 
-    this.cartService.CartAndSavedItems$.subscribe((data) => {
+    this.fetchCart_Subscription = this.cartService.CartAndSavedItems$.subscribe((data) => {
+  
+      if (!data) {
+        // fetch updated cart and pass to all subscribers
+        this.cartService.fetchCart(userID);
+      }
 
-      this.CartItems = data.cartItems;
-      this.SavedForLaterItems = data.savedForLaterItems;
+      else {
+        this.CartItems = data.cartItems;
+        this.SavedForLaterItems = data.savedForLaterItems;
 
-      // Do initialization
-      this.initCart();
+        // Do initialization
+        this.initCart();
+      }
+
     })
 
   }
@@ -91,23 +117,6 @@ export class ViewCartComponent implements OnInit {
 
     // save the count in service file  
     this.cartService.countOfSavedForLaterItems = this.countOfSavedForLaterItems;
-
-    // Get the Cart Related Data
-    this.cartService.initCart_data$.subscribe(
-      (initCart_result) => {
-
-        this.CartRelatedData = {
-          totalPrice: initCart_result.totalPrice,
-          deliveryFee: initCart_result.deliveryFee,
-          totalPayable: initCart_result.totalPayable,
-          totalSavings: initCart_result.totalSavings,
-          countOfItems: initCart_result.countOfCartItems
-        };
-
-      },
-
-      (err) => console.log(err)
-    );
 
   }
 
@@ -158,5 +167,11 @@ export class ViewCartComponent implements OnInit {
     saveCart();
 
   } // END operationOnCartItem()
+  
+
+  ngOnDestroy() {
+    this.fetchCart_Subscription.unsubscribe();
+    this.initCart_Subscription.unsubscribe();
+  }
 
 } // END

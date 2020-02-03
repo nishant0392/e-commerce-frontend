@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -27,6 +27,9 @@ export class NavbarComponent implements OnInit {
 
   // count of cart items
   @Input() public countOfCartItems: number;
+
+  // user click event
+  @Output() public clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private utilService: UtilityService) { 
 

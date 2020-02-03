@@ -438,13 +438,16 @@
 
 <!-- END: 'GO TO CART' Modal  -->
 
- <!--  Wait while loading...  -->
- <ng-template #loading>
+<!--  Wait while loading...  -->
+<ng-template #loading>
 
   <div class="my-spinner">
-    <div class="spinner-border txt-blue" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
 
+      <div class="spinner-border txt-blue" role="status" *ngIf="!serverError">
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <img class="img-fluid" src="/assets/images/server-error.png" *ngIf="serverError">
+  </div>
+  
 </ng-template>
