@@ -1,11 +1,29 @@
 #documentary {
-    background-color: #fff;
-    padding: 5px 10px;
-    color: #343a40;
+  background-color: #fff;
+  padding: 5px 10px;
+  color: #343a40;
 }
 
 .app-name {
-    text-align: center;
-    color: rgb(7, 73, 158);
-    font-weight: bold;
+  text-align: center;
+  color: rgb(7, 73, 158);
+  font-weight: bold;
+}
+
+.important-to-know {
+  list-style-image: url("/assets/images/flower-icon.png");
+}
+
+.important-to-know span {
+  font-size: 14px;
+}
+
+.important-to-know li p {
+    position: relative;
+    top: -3px;
+}
+
+.important-to-know .card-details {
+    position: relative;
+    top: -2px;
 }

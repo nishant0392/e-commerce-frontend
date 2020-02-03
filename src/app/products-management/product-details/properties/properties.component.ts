@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.css']
 })
-export class PropertiesComponent implements OnInit {
+export class PropertiesComponent {
 
     /***  Placeholder for properties of the Item (each could have a different view)  ***/ 
 
@@ -16,12 +16,6 @@ export class PropertiesComponent implements OnInit {
     @Input() public options_galleryView = {};
     @Input() public options_boxView = {};
     @Input() public options_bulletsView = {};
-  
-    constructor() {}
-   
-    ngOnInit() {
-      console.log(this.item_properties, this.listOfProperties)
-    }
   
 
     /**

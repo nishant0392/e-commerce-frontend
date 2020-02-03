@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Banner } from '../../shared/interfaces/banner.interface';
 import { UtilityService } from 'src/app/services/utility.service';
 
@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit {
     ];
 
     // For Responsiveness (child component needs to be re-rendered)
-    window.addEventListener('resize', this.utilService.debounce((event) => {
+    window.addEventListener('resize', this.utilService.debounce(() => {
       this.adjustCount();
     }, 1000));
 

@@ -251,7 +251,7 @@ export class LoginAndSignupComponent implements AfterViewInit {
 
       else {
         response.subscribe((apiResponse: any) => {
-
+          console.log(apiResponse)
           switch (apiResponse.status) {
 
             case 200:

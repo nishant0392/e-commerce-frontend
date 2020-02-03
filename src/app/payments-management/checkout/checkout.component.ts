@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, isDevMode } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { PaymentService, PayUMoneyParams } from 'src/app/services/payment.service';
 import { Router } from '@angular/router';
 import { UserManagementService } from 'src/app/services/user-management.service';
 import { CookieService } from 'ngx-cookie-service';
-import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,9 +18,7 @@ export class CheckoutComponent implements OnInit {
     private userService: UserManagementService,
     private cartService: CartService,
     private paymentService: PaymentService,
-    private cookieService: CookieService,
-    private modalService: ModalService
-  ) { }
+    private cookieService: CookieService  ) { }
 
   // 'Go To Cart' Modal
   @ViewChild('modal_GoToCart', { static: true }) modal_GoToCart: ElementRef<HTMLElement>;
@@ -354,7 +351,7 @@ export class CheckoutComponent implements OnInit {
           console.log(apiResponse)
         }
       },
-        (error) => {
+        () => {
           /* let modal = this.modalService.getCustomMessageModal({
             header: 'Server seems to be down.',
             category: 'error'

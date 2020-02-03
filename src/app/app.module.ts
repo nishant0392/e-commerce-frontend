@@ -25,6 +25,7 @@ import { PaymentService } from './services/payment.service';
 import { UtilityService } from './services/utility.service';
 import { ModalService } from './services/modal.service';
 import { CookieService } from 'ngx-cookie-service';
+import { httpInterceptProviders } from './http-interceptors';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
     PaymentService,
     UtilityService,
     ModalService,
-    CookieService
+    CookieService,
+    httpInterceptProviders
   ],
   bootstrap: [AppComponent]
 })

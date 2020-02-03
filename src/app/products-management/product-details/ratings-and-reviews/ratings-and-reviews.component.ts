@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
-import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ratings-and-reviews',

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RatingCircle } from 'src/app/shared/rating/rating-circle/rating-circle.component';
 import { CartService } from 'src/app/services/cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { UserManagementService } from 'src/app/services/user-management.service';
 import { ProductManagementService } from 'src/app/services/product-management.service';
 import { ModalService } from 'src/app/services/modal.service';

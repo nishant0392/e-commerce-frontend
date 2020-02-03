@@ -13,9 +13,6 @@ export class SpecificationsComponent implements OnInit {
   public specifications: any = []; // Temporary Placeholder for item_spefications
   public readMore: boolean = false;
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.specifications.push(this.item_specifications[0]);
   }

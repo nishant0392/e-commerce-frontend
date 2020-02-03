@@ -26,8 +26,6 @@ export class GetUserRatingsAndReviewsComponent {
   public error_name: boolean = false;
   public activeColor_name: string = '';
 
-  constructor() { }
-
 
   /**
    * Saves User rating on database.
